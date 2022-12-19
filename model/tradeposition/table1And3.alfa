@@ -199,7 +199,34 @@ trait emirRefit {
       obligation and both counterparties to the contract are subject to the clearing obligation under Regulation (EU) No 648/2012, 
       as of the time of execution of the contract. Applicable only to OTC derivative contracts. #/
    clearingObligation : enum < TRUE, FLSE, UKWN>?
+
+   /# Indicator of whether the derivative has been cleared by a CCP. 1 alphabetic character:
+      Y= yes, centrally cleared, for beta and gamma transactions. N= no, not centrally cleared. #/
+   cleared : enum < Y, N>?
+
+   /# Time and date when clearing took place. Applicable only to derivatives cleared by a CCP. #/
+   clearingTimestamp : datetime?
+
+   /# Identifier of the central counterparty (CCP) that cleared the transaction. 
+      This data element is not applicable if the value of the data element "Cleared" is "N" ("No, not centrally cleared"). #/
+   centralcounterparty : isoLEI?
+
+   /# Reference to the master agreement type under which the counterparties concluded a derivative. #/
+   masterAgreementType : enum< ISDA, CDEA, EUMA, FPCA, FMAT, DERV, CMOP, CHMA, IDMA, EFMA, GMRA, GMSL, BIAG, OTHR>?
+
+   /# Name of the master agreement. This field shall only be completed where 'OTHR' is reported in field 2.34 (masterAgreementType). #/
+   otherMasterAgreementType : string(1, 50)?
+
+   /# Reference to the year of the master agreement relevant to the reported trade, if applicable. #/
+   masterAgreementVersion : date(*, *, "YYYY")?
+
+   /# Indicates whether the contract was entered into as an intragroup transaction, defined in Article 3 of Regulation (EU) No 648/2012. #/
+   intragroup : boolean?
+
    
+
+
+
 
 
 
