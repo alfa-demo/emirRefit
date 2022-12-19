@@ -4,6 +4,7 @@ typedefs {
     isoISIN      = string
     isoUPI       = string
     isoCFI       = string
+    isoMktId     = native org.iso.MktIdISO10383
 }
 
 /# Canonical ALFA representation of  - ESMA Regulatory Technical Standards (RTS) and  Implementing Technical Standards (ITS) in the Official Journal of the European 
@@ -223,7 +224,59 @@ trait emirRefit {
    /# Indicates whether the contract was entered into as an intragroup transaction, defined in Article 3 of Regulation (EU) No 648/2012. #/
    intragroup : boolean?
 
-   
+   /# Identify whether the contract results from a PTRR operation. Boolean value:
+      TRUE = contract results from a PTRR event
+      FALSE = contract does not result from a PTRR event #/
+   ptrr : boolean?
+
+   /# Indicator of a type of a PTRR operation for the purpose of reporting under EMIR.
+      Portfolio Compression without a third-party service provider: An arrangement to reduce risk in existing portfolios of trades 
+      using non-price forming trades mainly to reduce notional amount outstanding, the number of transactions or otherwise harmonise 
+      the terms, by wholly or partially terminate trades and commonly to replace the terminated derivatives with new replacement trades.
+      Portfolio Compression  with a third-party service provider or CCP: A PTRR service provided by a service provider or CCP to reduce 
+      risk in existing portfolios of trades using non-price forming trades mainly to reduce notional amount outstanding, the number of 
+      transactions or otherwise harmonise the terms, by wholly or partially terminate trades and commonly to replace the terminated 
+      derivatives with new replacement trades.
+      Portfolio Rebalancing/Margin management: A PTRR service provided by a service provider to reduce risk in an existing portfolio 
+      of trades by adding new non-price forming trades and where no existing trades in the portfolio are terminated or replaced and the 
+      notional is increased rather than decreased. Other Portfolio PTTR services: A PTRR service provided by a service provider to reduce 
+      risk in existing portfolios of trades using non-price forming trades and where such service does not qualify as Portfolio Compression  or Portfolio Rebalancing.#/
+   typeOfPtrrTechnique : enum < PWOS, PWAS, PRBM, OTHR >?
+
+   /# LEI identifying the PTRR service provider. #/
+   ptrrServiceProvider : isoLEI?
+
+   /# Identification of the venue where the transaction was executed.
+      Use the ISO 10383 segment MIC for transactions executed on a trading venue, Systematic Internaliser (SI) or organised trading platform outside of the Union. 
+      Where the segment MIC does not exist, use the operating MIC.
+      Use MIC code 'XOFF' for financial instruments admitted to trading, or traded on a trading venue or for which a request for admission was made, 
+      where the transaction on that financial instrument is not executed on a trading venue, SI or organised trading platform outside of the Union, 
+      or where a counterparty does not know it is trading with a counterparty 2 acting as an SI.
+      Use MIC code 'XXXX' for financial instruments that are not admitted to trading or traded on a trading venue or for which no request for admission has 
+      been made and that are not traded on an organised trading platform outside of the Union. #/
+   venueOfExecution : isoMktId?
+
+   /# Date and time a transaction was originally executed, resulting in the generation of a new UTI. This data element remains unchanged throughout the life 
+      of the UTI. For position level reporting it should refer to the time when position was opened for the first time. #/
+   executionTimestamp : datetime?
+
+   /# Unadjusted date at which obligations under the OTC derivative transaction come into effect, as included in the confirmation.
+      If the effective date is not specified as part of the terms of the
+      contract, the counterparties shall report in this field the date of execution of the derivative. #/
+   effectiveDate : date?
+
+   /# Unadjusted date at which obligations under the derivative transaction stop being effective, as included in the confirmation. 
+      Early termination does not affect this data element. #/
+   expirationDate : date?
+
+   /# Effective date of the early termination (expiry) of the reported transaction. This data element is applicable if the termination 
+      of the transaction occurs prior to its maturity due to an ex- interim decision of a counterparty (or counterparties). #/
+   earlyTerminationDate : date?
+
+   /# Unadjusted date as per the contract, by which all transfer of cash or assets should take place and the counterparties should no longer 
+      have any outstanding obligations to each other under that contract. For products that may not have a final contractual settlement 
+      date (eg American options), this data element reflects the date by which the transfer of cash or asset would take place if termination were to occur on the expiration date.#/
+   finalContractualSettlementdate : date?
 
 
 
