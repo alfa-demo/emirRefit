@@ -6,39 +6,43 @@ typedefs {
     isoCFI       = string
 }
 
-# Canonical ALFA representation of  - ESMA Regulatory Technical Standards (RTS) and  Implementing Technical Standards (ITS) in the Official Journal of the European 
-# Union of 07.10.2022-TR depicting one authorative source of data elements across enterprise's multiple source systems. 
-# All systems across the enterprise will use data as defined in this model to produce and consume data, allowing re-use of collected data across the enterprise.    
+/# Canonical ALFA representation of  - ESMA Regulatory Technical Standards (RTS) and  Implementing Technical Standards (ITS) in the Official Journal of the European 
+   Union of 07.10.2022-TR depicting one authorative source of data elements across enterprise's multiple source systems. 
+   All systems across the enterprise will use data as defined in this model to produce and consume data, allowing re-use of collected data across the enterprise. #/
 trait emirRefit {
 
     /# Date and time of the submission of the report to the trade repository.#/
     reportingTimestamp : time
         
-    # In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
-    # has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field.
+    /# In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
+       has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
     reportSubmittingEntityId : isoLEI?
         
-    # Where a financial counterparty  is solely responsible, and legally liable, for reporting on behalf of both counterparties in accordance with Article 9(1)(a) of 
-    # Regulation (EU) No 648/2012 of the Parliament and of the Council and the non-financial counterparty does not decide to report itself the details of its OTC 
-    # derivative contracts with the financial counterparty, the unique code identifying that financial counterparty. Where a management company is responsible, and 
-    # legally liable, for reporting on behalf of an Undertaking for Collective Investment in Transferable Securities (UCITS) in accordance with Article 9(1)(b) of that 
-    # Regulation, the unique code identifying that  management company. Where an Alternative Investment Fund Manager (AIFM) is responsible, and legally liable, for 
-    # reporting on behalf of an Alternative Investment Fund (AIF) in accordance with Article 9(1)(c) of that Regulation, the unique code identifying that AIFM. Where 
-    # an authorised entity that is responsible for managing and acting on be
+    /# Where a financial counterparty  is solely responsible, and legally liable, for reporting on behalf of both counterparties in accordance with Article 9(1)(a) of 
+       Regulation (EU) No 648/2012 of the Parliament and of the Council and the non-financial counterparty does not decide to report itself the details of its OTC 
+       derivative contracts with the financial counterparty, the unique code identifying that financial counterparty. Where a management company is responsible, and 
+       legally liable, for reporting on behalf of an Undertaking for Collective Investment in Transferable Securities (UCITS) in accordance with Article 9(1)(b) of that 
+       Regulation, the unique code identifying that  management company. Where an Alternative Investment Fund Manager (AIFM) is responsible, and legally liable, for 
+       reporting on behalf of an Alternative Investment Fund (AIF) in accordance with Article 9(1)(c) of that Regulation, the unique code identifying that AIFM. Where 
+       an authorised entity that is responsible for managing and acting on be #/
     entityResponsibleForReporting : isoLEI
         
-    # Reporting counterparty. Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
-    # case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported as the counterparty.
+    /# Reporting counterparty. Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
+       case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported as the counterparty. #/
     counterparty1 : isoLEI
         
-    # Indicate if the counterparty 1 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
-    # 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council.
+    /# Indicate if the counterparty 1 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
+       8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
     natureOfCounterparty1 : enum<F, N, C, O>
         
-    # Nature of the counterparty 1's company activities. If the counterparty 1 is a Financial Counterparty, this field shall contain all necessary codes included in the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes shall be populated in order of the relative importance of the corresponding activities.
+    /# Nature of the counterparty 1's company activities. If the counterparty 1 is a Financial Counterparty, this field shall contain all necessary codes included in 
+       the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
+       necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
+       shall be populated in order of the relative importance of the corresponding activities. #/
     corporateSectorOfCounterparty1 : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>
         
-    # Information whether the counterparty 1 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when the transaction was concluded.
+    /# Information whether the counterparty 1 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
+       the transaction was concluded. #/
     clearingThresholdOfCounterparty1 : boolean
         
     # Indicator of whether LEI was used to identify the Counterparty 2.
@@ -50,13 +54,18 @@ trait emirRefit {
     # In case the counterparty 2 is a natural person, the code of country of residence of that person.
     countryOfCounterparty2 : isoCtyCode
         
-    # Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council.
+    /# Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or 
+       points 1, 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
     natureOfCounterparty2 : enum<F, N, C, O>
         
-    # Nature of the counterparty 2's company activities. If the counterparty 2 is a Financial Counterparty, this field shall contain all necessary codes included in the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 2 is a Non-Financial Counterparty, this field shall contain all necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes shall be populated in order of the relative importance of the corresponding activities.
+    /# Nature of the counterparty 2's company activities. If the counterparty 2 is a Financial Counterparty, this field shall contain all necessary codes included in 
+       the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 2 is a Non-Financial Counterparty, this field shall contain all 
+       necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
+       shall be populated in order of the relative importance of the corresponding activities. #/
     corporateSectorOfCounterparty2 : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>
         
-    # Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when the transaction was concluded.
+    /# Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
+       when the transaction was concluded. #/
     clearingThresholdOfCounterparty2 : boolean
         
     # Indicator of whether the counterparty 2 has the reporting obligation under EMIR (irrespective of who is responsible and legally liable for its reporting).
