@@ -194,6 +194,7 @@ trait emirRefit {
       • via a human-readable written document, such as fax, paper or manually processed e-mails (non- electronic).
       Applicable only to OTC derivative contracts not cleared by a CCP. #/
    confirmed : enum < NCNF, ECNF, YCNF>?
+   
 
 
 
