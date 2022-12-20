@@ -276,7 +276,138 @@ trait emirRefit {
    /# Unadjusted date as per the contract, by which all transfer of cash or assets should take place and the counterparties should no longer 
       have any outstanding obligations to each other under that contract. For products that may not have a final contractual settlement 
       date (eg American options), this data element reflects the date by which the transfer of cash or asset would take place if termination were to occur on the expiration date.#/
-   finalContractualSettlementdate : date?
+   finalContractualSettlementdate : date? 
+
+   /# Indicates whether the contract is settled physically or in cash. #/
+   deliveryType : enum < CASH, PHYS, OPTL >?
+
+   /# Price specified in the derivative transaction. It does not include fees, taxes or commissions. 
+      Where the price is not known when a new transaction is reported, the price is updated as it becomes available.
+      For transactions that are part of a package, this data element contains the price of the component transaction where applicable. #/
+   price : decimal(18, 13)?
+
+   /# Currency in which the price is denominated. Price currency is only applicable if price is expressed as monetary value. #/
+   priceCurrency : isoCtyCode?
+
+   /# Fields 50-52 are repeatable and shall be populated in the case of derivatives involving price schedules #/
+
+   /# 
+   Field 2.50
+   Unadjusted effective date of the price. #/
+   unadjustedEffectiveDateOfThePrice : date?
+
+/# 
+   Field 2.51
+   Unadjusted effective date of the price. #/
+   unadjustedEndDateOfThePrice : date?
+
+   /# 
+   Field 2.52
+   Price in effect between the unadjusted effective date and inclusive of the unadjusted end date. #/
+   priceInEffectBetweenTheUnadjustedEffectiveDateAndTheEndDate : decimal(18, 13)?
+
+   /# 
+   Field 2.53
+   Traded price of the entire package in which the reported derivative transaction is a component.
+      This data element is not applicable if
+      • no package is involved, or
+      • package transaction spread is used.
+      Prices and related data elements of the transactions (Price currency) that represent individual components of the package are reported when available.
+      The package transaction price may not be known when a new transaction is reported but may be updated later. #/
+   packageTransactionPrice : decimal(18, 13)?
+
+   /# 
+   Field 2.54
+   Currency in which the Package transaction price is denominated. #/
+   packageTransactionPriceCurrency : isoCtyCode?
+
+   /# 
+   Field 2.55
+   Notional amount of leg 1 as referred to in Article 5 of the [RTS]. #/
+   notionalAmountOfLeg1 : decimal(25,5, 0.0, * )?
+
+   /# 
+   Field 2.56
+   Where applicable: the currency in which the notional amount of leg 1 is denominated. #/
+   notionalCurrency1 : isoCtyCode?
+
+   /# Fields 57-59 are repeatable and shall be populated in the case of derivatives involving notional amount schedules #/
+
+   /# 
+   Field 2.57
+   Unadjusted date on which the associated notional amount of leg 1 becomes effective. #/
+   effectiveDateofTheNotionalAmountOfLeg1 : date?
+
+   /# 
+   Field 2.58
+   Unadjusted end date of the notional amount of leg 1 #/
+   endDateOfTheNotionalAmountOfLeg1 : date?
+
+   /# 
+   Field 2.59
+   Notional amount of leg 1 which becomes effective on the associated unadjusted effective date. #/
+   notionalAmountInEffectOnAssociatedEffectiveDateOfLeg1 : decimal(25,5, 0.0, * )?
+
+   /# 
+   Field 2.60
+   Where applicable: the currency in which the notional amount of leg 1 is denominated. #/
+   totalNotionalQuantityOfLeg1: decimal(25,5, 0.0, * )?
+
+   /# Fields 61-63 are repeatable and shall be populated in the case of derivatives involving notional quantity schedules #/
+
+   /# 
+   Field 2.61
+   Unadjusted date on which the associated notional amount of leg 1 becomes effective. #/
+   effectiveDateOfTheNotionalQuantityOfLeg1 : date?
+
+   /# 
+   Field 2.62
+   Unadjusted end date of the notional quantity of leg 1 #/
+   endDateOfTheNotionalQuantityOfLeg1 : date?
+
+   /# 
+   Field 2.63
+   Notional quantity of leg 1 which becomes effective on the associated unadjusted effective  date. #/
+   notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg1 : decimal(25,5, 0.0, * )?
+
+   /# 
+   Field 2.64
+   Where applicable, notional amount of leg 2 as referred to in Article 5 of the [RTS]. #/
+   notionalAmountOfLeg2 : decimal(25,5, 0.0, * )?
+
+   /# 
+   Field 2.65
+   Where applicable: the currency in which the notional amount of leg 2 is denominated. #/
+   notionalCurrency2 : isoCtyCode?
+
+   /# Fields 66-68 are repeatable and shall be populated in the case of derivatives involving notional amount schedules #/
+
+   /# 
+   Field 2.66
+   Unadjusted date on which the associated notional amount of leg 2 becomes effective. #/
+   effectiveDateOfTheNotionalQuantityOfLeg2 : date?
+
+   /# 
+   Field 2.67
+   Unadjusted end date of the notional amount of leg 2 #/
+   endDateOfTheNotionalQuantityOfLeg2 : date?
+
+   /# 
+   Field 2.68
+   Notional amount of leg 2 which becomes effective on the associated unadjusted effective date. #/
+   notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
+
+   /# 
+   Field 2.69
+   Aggregate Notional quantity of the underlying asset of leg 2 for the term of the transaction.
+      Where the Total notional quantity is not known when a new transaction is reported, the Total notional quantity is updated as it becomes available. #/
+   totalNotionalQuantityOfLeg2: decimal(25,5, 0.0, * )?
+
+
+
+
+
+
 
 
 
