@@ -12,14 +12,20 @@ typedefs {
    All systems across the enterprise will use data as defined in this model to produce and consume data, allowing re-use of collected data across the enterprise. #/
 trait emirRefit {
 
-    /# Date and time of the submission of the report to the trade repository.#/
+    /# 
+    Field 1.1
+    Date and time of the submission of the report to the trade repository.#/
     reportingTimestamp : time
         
-    /# In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
+    /# 
+    Field 1.2
+    In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
        has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
     reportSubmittingEntityId : isoLEI?
         
-    /# Where a financial counterparty  is solely responsible, and legally liable, for reporting on behalf of both counterparties in accordance with Article 9(1)(a) of 
+    /# 
+    Field 1.3
+    Where a financial counterparty  is solely responsible, and legally liable, for reporting on behalf of both counterparties in accordance with Article 9(1)(a) of 
        Regulation (EU) No 648/2012 of the Parliament and of the Council and the non-financial counterparty does not decide to report itself the details of its OTC 
        derivative contracts with the financial counterparty, the unique code identifying that financial counterparty. Where a management company is responsible, and 
        legally liable, for reporting on behalf of an Undertaking for Collective Investment in Transferable Securities (UCITS) in accordance with Article 9(1)(b) of that 
@@ -28,208 +34,320 @@ trait emirRefit {
        an authorised entity that is responsible for managing and acting on be #/
     entityResponsibleForReporting : isoLEI
         
-    /# Reporting counterparty. Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
+    /# 
+    Field 1.4
+    Reporting counterparty. Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
        case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported as the counterparty. #/
     counterparty1 : isoLEI
         
-    /# Indicate if the counterparty 1 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
+    /# 
+    Field 1.5
+    Indicate if the counterparty 1 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
        8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
     natureOfCounterparty1 : enum<F, N, C, O>
         
-    /# Nature of the counterparty 1's company activities. If the counterparty 1 is a Financial Counterparty, this field shall contain all necessary codes included in 
+    /# 
+    Field 1.6
+    Nature of the counterparty 1's company activities. If the counterparty 1 is a Financial Counterparty, this field shall contain all necessary codes included in 
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
     corporateSectorOfCounterparty1 : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>
         
-    /# Information whether the counterparty 1 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
+    /# 
+    Field 1.7
+    Information whether the counterparty 1 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
        the transaction was concluded. #/
     clearingThresholdOfCounterparty1 : boolean
         
-    /# Indicator of whether LEI was used to identify the Counterparty 2.#/
+    /# 
+    Field 1.8
+    Indicator of whether LEI was used to identify the Counterparty 2.#/
     counterparty2IdentifierType : boolean
         
-    /# Identifier of the second counterparty to a derivative transaction.#/
+    /# 
+    Field 1.9
+    Identifier of the second counterparty to a derivative transaction.#/
     counterparty2 : isoLEI 
         
-    /# In case the counterparty 2 is a natural person, the code of country of residence of that person.#/
+    /# 
+    Field 1.10
+    In case the counterparty 2 is a natural person, the code of country of residence of that person.#/
     countryOfCounterparty2 : isoCtyCode
         
-    /# Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or 
+    /# 
+    Field 1.11
+    Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or 
        points 1, 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
     natureOfCounterparty2 : enum<F, N, C, O>
         
-    /# Nature of the counterparty 2's company activities. If the counterparty 2 is a Financial Counterparty, this field shall contain all necessary codes included in 
+    /# 
+    Field 1.12
+    Nature of the counterparty 2's company activities. If the counterparty 2 is a Financial Counterparty, this field shall contain all necessary codes included in 
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 2 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
     corporateSectorOfCounterparty2 : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>
         
-    /# Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
+    /# 
+    Field 1.13
+    Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
        when the transaction was concluded. #/
     clearingThresholdOfCounterparty2 : boolean
         
-    /# Indicator of whether the counterparty 2 has the reporting obligation under EMIR (irrespective of who is responsible and legally liable for its reporting).#/
+    /# 
+    Field 1.14
+    Indicator of whether the counterparty 2 has the reporting obligation under EMIR (irrespective of who is responsible and legally liable for its reporting).#/
     reportingObligationOfCounterparty2 : boolean
         
-    /# In the case a broker acts as intermediary for the counterparty 1 without becoming a counterparty himself, the counterparty 1 shall identify this broker by a unique code.#/
+    /# 
+    Field 1.15
+    In the case a broker acts as intermediary for the counterparty 1 without becoming a counterparty himself, the counterparty 1 shall identify this broker by a unique code.#/
     brokerId : isoLEI 
         
-    /# Identifier of the clearing member through which a derivative transaction was cleared at a central counterparty.#/
+    /# 
+    Field 1.16
+    Identifier of the clearing member through which a derivative transaction was cleared at a central counterparty.#/
     clearingMember : isoLEI 
         
-    /# Indicator of whether the counterparty 1 is the buyer or the seller as determined at the time of the transaction.#/
+    /# 
+    Field 1.17
+    Indicator of whether the counterparty 1 is the buyer or the seller as determined at the time of the transaction.#/
     direction : enum<BYER,SLLR>
         
-    /# Indicator of whether the counterparty 1 is the payer or the receiver of leg 1 as determined at the time of the of the conclusion of the derivative.#/
+    /# 
+    Field 1.18
+    Indicator of whether the counterparty 1 is the payer or the receiver of leg 1 as determined at the time of the of the conclusion of the derivative.#/
     directionOfLeg1 : enum<MAKE,TAKE >
         
-    /# Indicator of whether the counterparty 1 is the payer or the receiver of leg 2 as determined at the time of the conclusion of the derivative.#/
+    /# 
+    Field 1.19
+    Indicator of whether the counterparty 1 is the payer or the receiver of leg 2 as determined at the time of the conclusion of the derivative.#/
     directionOfLeg2 : enum<MAKE,TAKE >
         
-    /#  This field shall be populated only where the counterparty 1 is a non-financial counterparty, as referred to in Article 2 (9) of the Regulation (EU) No 648/2012.#/
+    /#  
+    Field 1.20
+    This field shall be populated only where the counterparty 1 is a non-financial counterparty, as referred to in Article 2 (9) of the Regulation (EU) No 648/2012.#/
     directlyLinkedToCommercialActivityOrTreasuryFinancing : boolean
         
-    /# Unique Trade Identifier as referred to in Article 7 of the [ITS].#/
+    /# 
+    Field 2.1
+    Unique Trade Identifier as referred to in Article 7 of the [ITS].#/
     uti : string(1, 35)?
         
-    /# Where a derivative was executed on a trading venue, a number generated by the trading venue and unique to that execution.#/
+    /# 
+    Field 2.2
+    Where a derivative was executed on a trading venue, a number generated by the trading venue and unique to that execution.#/
     reportTrackingNumber : string("^[A-Z]{1,52}$")?
         
-    /# UTI assigned to the predecessor transaction that has given rise to the reported transaction due to a lifecycle event, in a one-to-one relation between transactions 
+    /# 
+    Field 2.3
+    UTI assigned to the predecessor transaction that has given rise to the reported transaction due to a lifecycle event, in a one-to-one relation between transactions 
        (e.g. in the case of a novation, when a transaction is terminated, and a new transaction is generated) or in a one-to-many relation between transactions 
        (e.g. in clearing or if a transaction is split into several different transactions).
        This data element is not applicable when reporting many-to-one and many-to-many relations between transactions (e.g. in the case of a compression). #/
     priorUti : string("^[A-Z]{1,52}$")?
         
-    /# The UTI of the position in which a derivative is included. This field is applicable only for the reports related to the termination of a derivative due to its inclusion in a position.#/
+    /# 
+    Field 2.4
+    The UTI of the position in which a derivative is included. This field is applicable only for the reports related to the termination of a derivative due to its inclusion in a position.#/
     subsequentPositionUti : string("^[A-Z]{1,52}$")?
         
-    /# Identifier generated by the PTRR service provider or CCP providing the PTRR service in order to connect all derivatives entering  into a given PTRR event and resulting from that PTRR event.#/
+    /# 
+    Field 2.5
+    Identifier generated by the PTRR service provider or CCP providing the PTRR service in order to connect all derivatives entering  into a given PTRR event and resulting from that PTRR event.#/
     postTradeRiskReduction : string("^[A-Z]{1,52}$")?
         
-    /# Identifier (determined by the counterparty  1) in order to connect derivatives in the same package in accordance with Article 1(2)(a). 
+    /# 
+    Field 2.6
+    Identifier (determined by the counterparty  1) in order to connect derivatives in the same package in accordance with Article 1(2)(a). 
        A package may include reportable and non- reportable transactions."#/
     packageIdentifier : string("^[A-Z]{1,35}$")?
         
-    /# ISIN identifying the product if that product is admitted to trading or traded on a regulated market, MTF, OTF or systematic internaliser.#/
+    /# 
+    Field 2.7
+    ISIN identifying the product if that product is admitted to trading or traded on a regulated market, MTF, OTF or systematic internaliser.#/
     iInternationalSecuritiesIdentificationNumber : isoISIN?
         
-    /# UPI identifying the product.#/
+    /# 
+    Field 2.8
+    UPI identifying the product.#/
     uniqueProductIdentifier : isoUPI?
         
-    /# Classification of Financial Instrument (CFI) code pertaining to the instrument.#/
+    /# 
+    Field 2.9
+    Classification of Financial Instrument (CFI) code pertaining to the instrument.#/
     productClassification : isoCFI?
         
-    /# Each reported contract shall be classified according to its type.#/
+    /# 
+    Field 2.10
+    Each reported contract shall be classified according to its type.#/
     contractType : enum<CFDS,FRAS,FUTR,FORW,OPTN,SPDB,SWAP,SWPT,OTHR> 
         
-    /# Each reported contract shall be classified according to the asset class it is based on.#/
+    /# 
+    Field 2.11
+    Each reported contract shall be classified according to the asset class it is based on.#/
     assetClass : enum<COMM,CRDT,CURR,INTR>
 
-   /# Indicator whether the derivative is based on crypto-assets. #/
+   /# 
+   Field 2.12
+   Indicator whether the derivative is based on crypto-assets. #/
    derivativeBasedOnCryptoAssets : boolean
 
-   /# The type of relevant underlying identifier. 1 alphabetic character:I = ISIN,B = Basket,X = Index. #/
+   /# 
+   Field 2.13
+   The type of relevant underlying identifier. 1 alphabetic character:I = ISIN,B = Basket,X = Index. #/
    underlyingIdentificationType : enum< I, B, X >?
 
-   /# The direct underlying shall be identified by using a unique identification for this underlying based on its type.
+   /# 
+   Field 2.14
+   The direct underlying shall be identified by using a unique identification for this underlying based on its type.
       For Credit Default Swaps, the ISIN of the reference obligation should be provided. #/
    underlyingIdentification : isoISIN?
 
-   /# An indication of the underlying index, where available. The indication of the floating rate index. 4 alphabetic characters: #/
+   /# 
+   Field 2.15
+   An indication of the underlying index, where available. The indication of the floating rate index. 4 alphabetic characters: #/
    indicatorOfTheUnderlyingIndex : enum <ESTR,SONA,SOFR,EONA,EONS,EURI,EUUS,EUCH,GCFR,ISDA,LIBI,LIBO,MAAA,PFAN,TIBO,STBO,BBSW,JIBA,BUBO,CDOR,CIBO,MOSP,NIBO,PRBO,TLBO,WIBO,TREA,SWAP,FUSW,EFFR,OBFR>?
 
-   /# The full name of the underlying index as assigned by the index provider. Up to 50 alphanumeric characters. 
+   /# 
+   Field 2.16
+   The full name of the underlying index as assigned by the index provider. Up to 50 alphanumeric characters. 
       Special characters are allowed if they form part of the full name of the index.#/
    nameOfTheUnderlyingIndex : string(1, 50)?
 
-   /# If the derivative transaction is based on a custom basket, unique code assigned by the structurer of the custom basket to link its constituents. #/
+   /# 
+   Field 2.17
+   If the derivative transaction is based on a custom basket, unique code assigned by the structurer of the custom basket to link its constituents. #/
    customBasketCode : string("[A-Z0-9]{18,18}[0-9]{2,2}[A-Z0-9]{52,52}")?
 
-   /# In case of custom baskets composed, among others, of financial instruments traded in a trading venue, only financial instruments traded in a trading venue shall be specified. #/
+   /# 
+   Field 2.18
+   In case of custom baskets composed, among others, of financial instruments traded in a trading venue, only financial instruments traded in a trading venue shall be specified. #/
    identifierOfTheBasketsConstituents : isoISIN?
 
-   /# Currency for the cash settlement of the transaction when applicable. #/
+   /# 
+   Field 2.19
+   Currency for the cash settlement of the transaction when applicable. #/
    settlementCurrency1 : isoCtyCode?
 
-   /# Currency for the cash settlement of the transaction when applicable. #/
+   /# 
+   Field 2.20
+   Currency for the cash settlement of the transaction when applicable. #/
    settlementCurrency2 : isoCtyCode?
 
-   /# Mark-to-market valuation of the contract, or mark­ to-model valuation as referred to in Article 4 of the [RTS]
+   /# 
+   Field 2.21
+   Mark-to-market valuation of the contract, or mark­ to-model valuation as referred to in Article 4 of the [RTS]
       The CCP's valuation to be used for a cleared trade. #/
    valuationAmount : decimal(25,5)?
 
-   /# Currency in which the valuation amount is denominated. #/
+   /# 
+   Field 2.22
+   Currency in which the valuation amount is denominated. #/
    valuationCurrency : isoCtyCode?
 
-   /# Date and time of the last valuation marked to market, provided by the central counterparty (CCP) or calculated using the current or last available market price of the inputs. #/
+   /# 
+   Field 2.23
+   Date and time of the last valuation marked to market, provided by the central counterparty (CCP) or calculated using the current or last available market price of the inputs. #/
    valuationTimestamp : datetime
 
-   /# Source and method used for the valuation of the transaction by the counterparty 1.
+   /# 
+   Field 2.24
+   Source and method used for the valuation of the transaction by the counterparty 1.
       If at least one valuation input is used that is classified as mark-to­ model in the below table, then the whole valuation is classified as mark-to­ model.
       If only inputs are used that are classified as mark-to­ market in the table below, then the whole valuation  is classified as mark-to­ market. #/
    valuationMethod : enum < MTMA, MTMO, CCPV> ?
 
-   /# The ratio of the absolute change in price of a derivative transaction to the change in price of the underlier.
+   /# 
+   Field 2.25
+   The ratio of the absolute change in price of a derivative transaction to the change in price of the underlier.
       This field is applicable only to options and swaptions.
       Updated delta shall be reported on a daily basis by financial counterparties and non-financial counterparties as referred to in Article 1O of Regulation (EU) No 648/2012. #/
    delta : decimal(25,5)?
 
-   /# Indicator of whether the collateralisation was performed on a portfolio basis. Under portfolio, it is understood the set of transactions that are margined together 
+   /# 
+   Field 2.26
+   Indicator of whether the collateralisation was performed on a portfolio basis. Under portfolio, it is understood the set of transactions that are margined together 
       (either on a net or a gross basis) rather than an individual transaction. #/
    collateralPortfolioIndicator : boolean?
 
-   /# If collateral is reported on a portfolio basis, unique code assigned by the counterparty 1 to the portfolio. 
+   /# 
+   Field 2.27
+   If collateral is reported on a portfolio basis, unique code assigned by the counterparty 1 to the portfolio. 
       This data element is not applicable if the collateralisation was performed on a transaction level basis, 
       or if there is no collateral agreement  or if no collateral is posted or received. #/
    collateralPortfolioCode : string(1, 52)?
 
-   /# Date and time of the confirmation, as set out in Article 12 of Commission Delegated Regulation (EU) No 149/2013.
+   /# 
+   Field 2.28
+   Date and time of the confirmation, as set out in Article 12 of Commission Delegated Regulation (EU) No 149/2013.
       Applicable only to OTC derivative contracts not cleared by a CCP. #/
    confirmationTimestamp : datetime?
 
-   /# For new reportable transactions, whether the legally binding terms of an OTC derivatives contract were documented and agreed upon (confirmed) or not (unconfirmed).
+   /# 
+   Field 2.29
+   For new reportable transactions, whether the legally binding terms of an OTC derivatives contract were documented and agreed upon (confirmed) or not (unconfirmed).
       If documented and agreed, whether such confirmation was done:
       • via a shared confirmation facility or platform, or a private/bilateral electronic system (electronic);
       • via a human-readable written document, such as fax, paper or manually processed e-mails (non- electronic).
       Applicable only to OTC derivative contracts not cleared by a CCP. #/
    confirmed : enum < NCNF, ECNF, YCNF>?
    
-   /# Indicates, whether the reported contract belongs to a class of OTC derivatives that has been declared subject to the clearing 
+   /# 
+   Field 2.30
+   Indicates, whether the reported contract belongs to a class of OTC derivatives that has been declared subject to the clearing 
       obligation and both counterparties to the contract are subject to the clearing obligation under Regulation (EU) No 648/2012, 
       as of the time of execution of the contract. Applicable only to OTC derivative contracts. #/
    clearingObligation : enum < TRUE, FLSE, UKWN>?
 
-   /# Indicator of whether the derivative has been cleared by a CCP. 1 alphabetic character:
+   /# 
+   Field 2.31
+   Indicator of whether the derivative has been cleared by a CCP. 1 alphabetic character:
       Y= yes, centrally cleared, for beta and gamma transactions. N= no, not centrally cleared. #/
    cleared : enum < Y, N>?
 
-   /# Time and date when clearing took place. Applicable only to derivatives cleared by a CCP. #/
+   /# 
+   Field 2.32
+   Time and date when clearing took place. Applicable only to derivatives cleared by a CCP. #/
    clearingTimestamp : datetime?
 
-   /# Identifier of the central counterparty (CCP) that cleared the transaction. 
+   /# 
+   Field 2.33
+   Identifier of the central counterparty (CCP) that cleared the transaction. 
       This data element is not applicable if the value of the data element "Cleared" is "N" ("No, not centrally cleared"). #/
    centralcounterparty : isoLEI?
 
-   /# Reference to the master agreement type under which the counterparties concluded a derivative. #/
+   /# 
+   Field 2.34
+   Reference to the master agreement type under which the counterparties concluded a derivative. #/
    masterAgreementType : enum< ISDA, CDEA, EUMA, FPCA, FMAT, DERV, CMOP, CHMA, IDMA, EFMA, GMRA, GMSL, BIAG, OTHR>?
 
-   /# Name of the master agreement. This field shall only be completed where 'OTHR' is reported in field 2.34 (masterAgreementType). #/
+   /# 
+   Field 2.35
+   Name of the master agreement. This field shall only be completed where 'OTHR' is reported in field 2.34 (masterAgreementType). #/
    otherMasterAgreementType : string(1, 50)?
 
-   /# Reference to the year of the master agreement relevant to the reported trade, if applicable. #/
+   /# 
+   Field 2.36
+   Reference to the year of the master agreement relevant to the reported trade, if applicable. #/
    masterAgreementVersion : date(*, *, "YYYY")?
 
-   /# Indicates whether the contract was entered into as an intragroup transaction, defined in Article 3 of Regulation (EU) No 648/2012. #/
+   /# 
+   Field 2.37
+   Indicates whether the contract was entered into as an intragroup transaction, defined in Article 3 of Regulation (EU) No 648/2012. #/
    intragroup : boolean?
 
-   /# Identify whether the contract results from a PTRR operation. Boolean value:
+   /# 
+   Field 2.38
+   Identify whether the contract results from a PTRR operation. Boolean value:
       TRUE = contract results from a PTRR event
       FALSE = contract does not result from a PTRR event #/
    ptrr : boolean?
 
-   /# Indicator of a type of a PTRR operation for the purpose of reporting under EMIR.
+   /# 
+   Field 2.39
+   Indicator of a type of a PTRR operation for the purpose of reporting under EMIR.
       Portfolio Compression without a third-party service provider: An arrangement to reduce risk in existing portfolios of trades 
       using non-price forming trades mainly to reduce notional amount outstanding, the number of transactions or otherwise harmonise 
       the terms, by wholly or partially terminate trades and commonly to replace the terminated derivatives with new replacement trades.
@@ -243,10 +361,14 @@ trait emirRefit {
       risk in existing portfolios of trades using non-price forming trades and where such service does not qualify as Portfolio Compression  or Portfolio Rebalancing.#/
    typeOfPtrrTechnique : enum < PWOS, PWAS, PRBM, OTHR >?
 
-   /# LEI identifying the PTRR service provider. #/
+   /# 
+   Field 2.40
+   LEI identifying the PTRR service provider. #/
    ptrrServiceProvider : isoLEI?
 
-   /# Identification of the venue where the transaction was executed.
+   /# 
+   Field 2.41
+   Identification of the venue where the transaction was executed.
       Use the ISO 10383 segment MIC for transactions executed on a trading venue, Systematic Internaliser (SI) or organised trading platform outside of the Union. 
       Where the segment MIC does not exist, use the operating MIC.
       Use MIC code 'XOFF' for financial instruments admitted to trading, or traded on a trading venue or for which a request for admission was made, 
@@ -256,37 +378,53 @@ trait emirRefit {
       been made and that are not traded on an organised trading platform outside of the Union. #/
    venueOfExecution : isoMktId?
 
-   /# Date and time a transaction was originally executed, resulting in the generation of a new UTI. This data element remains unchanged throughout the life 
+   /# 
+   Field 2.42
+   Date and time a transaction was originally executed, resulting in the generation of a new UTI. This data element remains unchanged throughout the life 
       of the UTI. For position level reporting it should refer to the time when position was opened for the first time. #/
    executionTimestamp : datetime?
 
-   /# Unadjusted date at which obligations under the OTC derivative transaction come into effect, as included in the confirmation.
+   /# 
+   Field 2.43
+   Unadjusted date at which obligations under the OTC derivative transaction come into effect, as included in the confirmation.
       If the effective date is not specified as part of the terms of the
       contract, the counterparties shall report in this field the date of execution of the derivative. #/
    effectiveDate : date?
 
-   /# Unadjusted date at which obligations under the derivative transaction stop being effective, as included in the confirmation. 
+   /# 
+   Field 2.44
+   Unadjusted date at which obligations under the derivative transaction stop being effective, as included in the confirmation. 
       Early termination does not affect this data element. #/
    expirationDate : date?
 
-   /# Effective date of the early termination (expiry) of the reported transaction. This data element is applicable if the termination 
+   /# 
+   Field 2.45
+   Effective date of the early termination (expiry) of the reported transaction. This data element is applicable if the termination 
       of the transaction occurs prior to its maturity due to an ex- interim decision of a counterparty (or counterparties). #/
    earlyTerminationDate : date?
 
-   /# Unadjusted date as per the contract, by which all transfer of cash or assets should take place and the counterparties should no longer 
+   /# 
+   Field 2.46
+   Unadjusted date as per the contract, by which all transfer of cash or assets should take place and the counterparties should no longer 
       have any outstanding obligations to each other under that contract. For products that may not have a final contractual settlement 
       date (eg American options), this data element reflects the date by which the transfer of cash or asset would take place if termination were to occur on the expiration date.#/
    finalContractualSettlementdate : date? 
 
-   /# Indicates whether the contract is settled physically or in cash. #/
+   /# 
+   Field 2.47
+   Indicates whether the contract is settled physically or in cash. #/
    deliveryType : enum < CASH, PHYS, OPTL >?
 
-   /# Price specified in the derivative transaction. It does not include fees, taxes or commissions. 
+   /# 
+   Field 2.48
+   Price specified in the derivative transaction. It does not include fees, taxes or commissions. 
       Where the price is not known when a new transaction is reported, the price is updated as it becomes available.
       For transactions that are part of a package, this data element contains the price of the component transaction where applicable. #/
    price : decimal(18, 13)?
 
-   /# Currency in which the price is denominated. Price currency is only applicable if price is expressed as monetary value. #/
+   /# 
+   Field 2.49
+   Currency in which the price is denominated. Price currency is only applicable if price is expressed as monetary value. #/
    priceCurrency : isoCtyCode?
 
    /# Fields 50-52 are repeatable and shall be populated in the case of derivatives involving price schedules #/
@@ -298,7 +436,8 @@ trait emirRefit {
 
 /# 
    Field 2.51
-   Unadjusted effective date of the price. #/
+   Unadjusted end date of the price (not applicable if the unadjusted end date of a given schedule's period 
+      is back-to-back with the unadjusted effective date of the subsequent period). #/
    unadjustedEndDateOfThePrice : date?
 
    /# 
