@@ -524,23 +524,139 @@ trait emirRefit {
    /# 
    Field 2.66
    Unadjusted date on which the associated notional amount of leg 2 becomes effective. #/
-   effectiveDateOfTheNotionalQuantityOfLeg2 : date?
+   effectiveDateOfTheNotionalAmountOfLeg2 : date?
 
    /# 
    Field 2.67
    Unadjusted end date of the notional amount of leg 2 #/
-   endDateOfTheNotionalQuantityOfLeg2 : date?
+   endDateOfTheNotionalAmountOfLeg2 : date?
 
    /# 
    Field 2.68
    Notional amount of leg 2 which becomes effective on the associated unadjusted effective date. #/
-   notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
+   notionalAmountInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
 
    /# 
    Field 2.69
    Aggregate Notional quantity of the underlying asset of leg 2 for the term of the transaction.
       Where the Total notional quantity is not known when a new transaction is reported, the Total notional quantity is updated as it becomes available. #/
    totalNotionalQuantityOfLeg2: decimal(25,5, 0.0, * )?
+
+   /# Fields 70-72 are repeatable and shall be populated in the case of derivatives involving notional quantity schedules #/
+
+   /# 
+   Field 2.70
+   Unadjusted date on which the associated notional quantity of leg 2 becomes effective. #/
+   effectiveDateOfTheNotionalQuantityOfLeg2 : date?
+
+   /# 
+   Field 2.71
+   Unadjusted end date of the notional quantity of leg 2#/
+   endDateOfTheNotionalQuantityOfLeg2 : date?
+
+   /# 
+   Field 2.72
+   Notional quantity of leg 2 which becomes effective on the associated unadjusted effective date. #/
+   notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
+
+   /# Section of fields 73-78 is repeatable #/
+
+   /#
+   Field 2.73
+   Type of Other payment amount.
+   Option premium payment is not included as a payment type as premiums for option are reported using the option premium dedicated data element.#/
+   otherPaymentType : enum <UFRO, UWIN, PEXH>?
+
+   /# 
+   Field 2.74
+   Payment amounts with corresponding payment types to accommodate requirements of transaction descriptions from different asset classes. #/
+   otherPaymentAmount : decimal(25,5, 0.0, * )?
+
+   /# 
+   Field 2.75
+   Currency in which Other payment amount is denominated. #/
+   otherPaymentCurrency : isoCtyCode?
+
+   /# 
+   Field 2.76
+   Unadjusted date on which the other payment amount is paid. #/
+   otherPaymentDate : date?
+
+   /#
+   Field 2.77
+   Identifier of the payer of Other payment amount. #/
+   otherPaymentPayer : string(1, 72)?
+
+   /#
+   Field 2.78
+   Identifier of the receiver of Other payment amount. #/
+   otherPaymentReceiver : string(1, 72)?
+
+   /# 
+   Field 2.79
+   An indication of the fixed rate leg 1 or coupon used, where applicable.#/
+   fixedRateOfLeg1OrCoupon : decimal(11,10)?
+
+   /#
+   Field 2.80
+   Where applicable: day count convention (often also referred to as day count fraction or day  count basis or day count method) 
+      that determines how interest payments are calculated. It is used to compute the year fraction of the calculation period, and indicates 
+      the number of days in the calculation period divided by the number of days in the year. #/
+   fixedRateOrCouponDayCountConventionLeg1 : enum <A001,A002,A003,A004,A005,A006,A007,A008,A009,A010,A011,A012,A013,A014,A015,A016,A017,A018,A019,NARR>?
+
+   /#
+   Field 2.81
+   Where applicable: time unit associated with the frequency of payments, eg day, week, month, year or term of the stream for the fixed rate of leg 1 or coupon.#/
+   fixedRateOrCouponPaymentFrequencyPeriodLeg1 : enum <DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
+
+   /#
+   Field 2.82
+   Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment dates occur for the fixed rate of leg 1 or coupon.
+   For example, a  transaction with payments occurring every two months is represented with a payment frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
+   This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is "TERM", then the payment frequency period multiplier is 1. If the payment 
+   frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0. #/
+   fixedRateOrCouponPaymentFrequencyPeriodMultiplierLeg1 : int(0,999)?
+
+   /#
+   Field 2.83
+   Where applicable: an identifier of the interest rates used which are reset at predetermined intervals by reference to a market reference rate.#/
+   identifierOfTheFloatingRateOfLeg1 : isoLEI?
+
+   /#
+   Field 2.151
+   • New: A report of a derivative, at a trade or position level, for the first time.
+   • Modify: A modification to the terms or details of a previously reported derivative, at a trade or position level, but not a correction of a report.
+   • Correct: A report correcting the erroneous data fields of a previously submitted report.
+   • Terminate: A Termination of an existing derivative, at a trade or position level.
+   • Error: A cancellation of a wrongly submitted entire report in case the derivative, at a trade or position level, never came into existence or was not subject to Regulation 
+      (EU) No 648/2012 reporting requirements but was reported to a trade repository by mistake or a cancellation of a duplicate report.
+   • Revive: Re-opening of a derivative, at a trade or position level, that was cancelled with action type 'Error' or terminated by mistake.
+   • Valuation: An update of a valuation of a derivative, at a trade or position level
+   • Position component: A report of a new derivative that is included in a separate position report on the same day.#/
+   actionType : enum <NEWT, MODI, CORR, TERM, EROR, REVI, VALU, POSC>
+
+   /#
+   Field 2.252
+   • Trade: Conclusion of a derivative or renegotiation of its terms that does not result in change of a counterparty
+   • Step-in: An event, where part or entirety of the derivative is transferred to a counterparty 2 (and reported as a new derivative) and the existing 
+      derivative is either terminated or its notional is modified.
+   • PTRR: Post-trade risk reduction exercise
+   • Early termination: Termination of a derivative, at a trade or position level
+   • Clearing: Clearing as defined in Article 2(3) of Regulation (EU) No 648/2012
+   • Exercise: The exercise of an option or a swaption by one counterparty of the transaction, fully or partially.
+   • Allocation: Allocation event, where an existing derivative is allocated to different counterparties and reported as new derivatives with reduced notional amounts.
+   • Credit event: Applies only to credit derivatives. A credit event that results in a modification of a derivative, at a trade or position level
+   • Corporate event: A corporate action on equity underlying that impacts the derivatives on that equity
+   • Inclusion in position: Inclusion of CCP-cleared derivative or CFO into a position, where an existing derivative is terminated and either a new position is 
+      created or the notional of an existing position is modified. Update - Update of an outstanding derivative performed during the transition period in order to ensure its conformity with the amended reporting requirements.#/
+   eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT>  
+
+
+
+
+
+
+
 
 
 
