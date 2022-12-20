@@ -649,30 +649,4 @@ trait emirRefit {
    • Corporate event: A corporate action on equity underlying that impacts the derivatives on that equity
    • Inclusion in position: Inclusion of CCP-cleared derivative or CFO into a position, where an existing derivative is terminated and either a new position is 
       created or the notional of an existing position is modified. Update - Update of an outstanding derivative performed during the transition period in order to ensure its conformity with the amended reporting requirements.#/
-   eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+   eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT> 
