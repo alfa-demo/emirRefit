@@ -96,7 +96,7 @@ record interestRates includes emirRefit {
 
    /#
    Field 2.94
-   Where applicable: currency in which the spread of leg 1 is denominated. #/
+   Where applicable: currency in which the spread of leg 1 is denominated. This data element is only applicable if Spread is expressed as monetary amount.#/
    spreadCurrencyOfLeg1 : isoCcy?
 
    /#
@@ -111,20 +111,108 @@ record interestRates includes emirRefit {
     calculation period divided by the number of days in the year.#/
    fixedRateDayCountConventionLeg2 : enum<A001,A002,A003,A004,A005,A006,A007,A008,A009,A010,A011,A012,A013,A014,A015,A016,A017,A018,A019,NARR>?
 
+   /# 
+   Field 2.97
+   Where applicable: time unit associated with the frequency of payments,  eg day, week, month, year or term of the stream for the fixed rate of leg 2.#/
+   fixedRatePaymentFrequencyPeriodLeg2 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
+   /#
+   Field 2.98
+   Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment dates 
+      occur for the fixed rate of leg 2. For example, a transaction with payments occurring every two months is represented with a payment frequency period 
+      of "MNTH" (monthly) and a payment frequency period multiplier of 2.
+   This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is 'TERM", then the payment frequency period 
+      multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
+   fixedRatePaymentFrequencyPeriodMultiplierLeg2 : int(0,999)?
 
+   /#
+   Field 2.99
+   Where applicable: an identifier of the interest rates used which are reset at predetermined intervals by reference to a market reference rate #/
+   identifierOfTheFloatingRateOfLeg2 : isoISIN?
 
+   /# 
+   Field 2.100
+   An indication of the interest rate, where available.#/
+   indicatorOfTheFloatingRateOfLeg2 : enum<ESTR,SONA,SOFR,EONA,EONS,EURI,EUUS,EUCH,GCFR,ISDA,LIBI,LIBO,MAAA,PFAN,TIBO,STBO,BBSW,JIBA,BUBO,CDOR,CIBO,MOSP,NIBO,PRBO,TLBO,WIBO,TREA,SWAP,FUSW,EFFR,OBFR>?
 
+   /#
+   Field 2.101
+   The full name of the interest rate as assigned by the index provider. #/
+   nameOfTheFloatingRateOfLeg2 : string (0, 50)?
 
+   /#
+   Field 2.102
+   Where applicable: day count convention (often also referred to as day count fraction or day count basis or day count method) that determines 
+      how interest payments for the floating rate of leg 2 are calculated. It is used to compute the year fraction of the calculation period, and 
+      indicates the number of days in the calculation period divided by the number of days in the year.#/
+   floatingRateDayCountConventionOfLeg2 : enum<A001,A002,A003,A004,A005,A006,A007,A008,A009,A010,A011,A012,A013,A014,A015,A016,A017,A018,A019,NARR>?
 
+   /#
+   Field 2.103
+   Where applicable: time unit associated with the frequency of payments,  eg day, week, month, year or term of the stream for the floating rate of leg 2.#/
+   floatingRatePaymentFrequencyPeriodOfLeg2 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
+   /#
+   Field 2.104
+   Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment 
+      dates occur for the  floating rate of leg 2. For example, a transaction with payments occurring every two months is represented with a payment 
+      frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
+   This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is "TERM", then the payment frequency 
+      period multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
+   floatingRatePaymentFrequencyPeriodMultiplierOfLeg2 : int(0,999)?
 
+   /#
+   Field 2.105
+   Time period describing the reference period for the floating rate of leg 2.#/
+   floatingRateReferencePeriodOfLeg2TimePeriod : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
+   /# 
+   Field 2.106
+   Multiplier of the time period describing the reference period for the floating rate of leg 2.#/
+   FloatingRateReferencePeriodOfLeg2Multiplier : int(0,999)?
 
+   /#
+   Field 2.107
+   Where applicable: time unit associated with the frequency of payments resets, e.g. day, week, month, year or term of the stream for the floating rate of leg 2.#/
+   floatingRateResetFrequencyPeriodOfLeg2 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
+   /#
+   Field 2.108
+   Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment 
+      resets dates occur for the floating rate of leg 2. For example, a transaction with payments occurring every two months is represented with a payment 
+      frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
+   This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is ''TERM", then the payment frequency 
+      period multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
+   floatingRateResetFrequencyMultiplierOfLeg2 : int(0,999)?
 
+   /#
+   Field 2.109
+   An indication of the spread of leg 2, where applicable: for OTC derivative transactions with periodic payments (e.g. interest rate fixed/float swaps, interest rate basis swaps, commodity swaps),
+      • spread on the individual floating leg(s) index reference price, in the case where there is a spread on a floating leg(s).
+      • difference between the reference prices of the two floating leg indexes.#/
+   spreadOfLeg2 : decimal (18, 13)?
 
+   /#
+   Field 2.110
+   Where applicable: currency in which the spread of leg 2 is denominated. This data element is only applicable if Spread is expressed as monetary amount.#/
+   spreadCurrencyOfLeg2 : isoCcy?
 
+   /#
+   Field 2.111
+   Traded price of the entire package in which the reported derivative transaction is a component of a package transaction.
+   Package transaction price when the price of the package is expressed as a spread, difference between two reference prices.
+   This data element is not applicable if
+      • no package is involved, or
+      • Package transaction price is used
+   Spread and related data elements of the transactions (spread currency) that represent individual components of the package are reported when available.
+   Package transaction spread may not be known when a new transaction is reported but may be updated later.#/
+   packageTransactionSpread : decimal (18, 13)?
 
-
+   /#
+   Field 2.112
+   Currency in which the Package transaction spread is denominated. This data element is not applicable if
+      • no package is involved, or
+      • Package transaction price is used, or
+      • Package transaction spread is expressed as percentage or basis points.#/
+   packageTransactionSpreadCurrency : isoCcy?
 }    
