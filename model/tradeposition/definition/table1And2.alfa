@@ -611,7 +611,7 @@ trait emirRefit {
    actionType : enum <NEWT, MODI, CORR, TERM, EROR, REVI, VALU, POSC>
 
    /#
-   Field 2.252
+   Field 2.152
    • Trade: Conclusion of a derivative or renegotiation of its terms that does not result in change of a counterparty
    • Step-in: An event, where part or entirety of the derivative is transferred to a counterparty 2 (and reported as a new derivative) and the existing 
       derivative is either terminated or its notional is modified.
@@ -625,4 +625,17 @@ trait emirRefit {
    • Inclusion in position: Inclusion of CCP-cleared derivative or CFO into a position, where an existing derivative is terminated and either a new position is 
       created or the notional of an existing position is modified. Update - Update of an outstanding derivative performed during the transition period in order to ensure its conformity with the amended reporting requirements.#/
    eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT>
+
+   /#
+   Field 2.153
+   Date on which the reportable event relating to the derivative contract and captured by the report took place or, in case of a modification when the modification become effective.#/
+   eventDate : date
+
+   /#
+   Field 2.154
+   Indication whether the report is done at trade or position level.
+      Position level report can be used only as a supplement to trade level reporting to report post- trade events and only if individual 
+      trades in fungible products have been replaced by the position.#/
+   level : enum < TCTN, PSTN> 
+
 }
