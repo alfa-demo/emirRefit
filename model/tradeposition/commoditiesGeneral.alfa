@@ -1,0 +1,39 @@
+namespace Model
+
+# The Section 2j - Commodities and emission allowances (General) derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
+record commoditiesGeneral includes emirRefit {
+
+    /# 
+    Field 2.116
+    Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
+    baseProduct : baseProductType?
+
+    /# 
+    Field 2.117
+    Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+    This field requires a specific base product in field.#/
+    #subProduct : subProductType?
+
+    /# 
+    Field 2.118
+    Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+    This field requires a specific base product in field.#/
+    #furtherSubProduct : furtherSubProductType?
+}
+# Defines Classification of Commodities
+record baseProductType {
+    # in case the base product, Agriculture
+    baseProduct: enum <AGRI>
+
+    # Sub-Product 
+    subProduct: enum <GROS, SOFT, POTA, OOLI, DIRY, FRST, SEAF, LSTK, GRIN, OTHR>
+
+    # Sub-Product
+    furtherSubProduct: enum<FWHT> To DO
+
+
+}
+
+
+
+
