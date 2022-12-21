@@ -2,7 +2,7 @@ namespace Model
 
 # The Interest Rates derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
 record interestRates includes emirRefit {
-    /# 
+   /# 
    Field 2.79
    An indication of the fixed rate leg 1 or coupon used, where applicable.#/
    fixedRateOfLeg1OrCoupon : decimal(11,10)?
