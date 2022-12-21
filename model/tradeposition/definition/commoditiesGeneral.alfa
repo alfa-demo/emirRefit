@@ -1,0 +1,49 @@
+namespace Model
+
+# The Section 2j - Commodities and emission allowances (General) derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
+record commoditiesGeneral includes emirRefit {
+
+    /# 
+    Field 2.116
+    Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
+    baseProduct : classificationType?
+
+    /# 
+    Field 2.117
+    Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+    This field requires a specific base product in field.#/
+    subProduct : classificationType?
+
+    /# 
+    Field 2.118
+    Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+    This field requires a specific base product in field.#/
+    furtherSubProduct : classificationType?
+}
+
+# The manner in which commodties are classified in Table 4 of Annex I of the [ITS]
+union classificationType {
+    # in case the base product is Metals
+    baseProduct: enum <METL>
+
+    # the sub product of a base commodity
+    subProduct: enum< preciousSubProductType, nonPreciousSubProductType>
+}
+    # in case the sub product is Precious
+record preciousSubProductType {
+    subProduct: enum <PRME>
+    furtherSubProduct : enum < GOLD, SLVR, PTNM, PLDM, OTHR >
+}
+    # in case the sub product is Non-Precious
+record nonPreciousSubProductType {
+    subProduct: enum <NPRM>
+    furtherSubProduct : enum < ALUM, ALUA, CBLT, COPR, IRON, LEAD, MOLY, NASC, NICK, STEL, TINN, ZINC, OTHR>
+}
+
+
+
+
+
+
+
+
