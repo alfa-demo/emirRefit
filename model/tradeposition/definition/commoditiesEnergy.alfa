@@ -35,6 +35,21 @@ record commoditiesEnergy includes emirRefit {
     Start date of delivery.#/
     deliveryStartDate : contractTradingHoursType
 
+    /#
+    Field 2.225
+    End date of delivery. #/
+    deliveryEndDate : date
+
+    /#
+    Field 2.226
+    The duration of the delivery period. #/
+    duration_ : enum < MNUT, HOUR, DASD, WEEK, MNTH, QURT, SEAS, YEAR, OTHR>
+
+    /#
+    Field 2.227
+    The days of the week of the delivery. #/
+    daysOfTheWeek : list<enum <WDAY, WEND, MOND, TUED, WEDD, THUD, FRID, SATD, SUND, XBHL, IBHL>>
+
 
 
 
