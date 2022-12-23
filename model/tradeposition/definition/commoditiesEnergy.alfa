@@ -1,0 +1,59 @@
+namespace Model
+
+# The Commodities and emission allowances (Energy) derivative contract (traded on trading venues and OTC) data elements capturing all Commodities Energy Trade data related fields.
+record commoditiesEnergy includes emirRefit {
+
+    /# 
+    Field 2.119
+    Delivery point(s) or market area(s).#/
+    deliveryPointOrZone : eicCodeType
+
+    /#
+    Field 2.220
+    Identification of the border(s) or border point(s) of a transportation contract.#/
+    interconnectionPoint : eicCodeType
+
+    /#
+    Field 2.221
+    Identification of the delivery profile.#/
+    loadType : enum < BSLD, PKLD, OFFP, HABH, SHPD, GASD, OTHR>
+
+    /# Section of fields 122-131 is repeatable #/
+
+    /#
+    Field 2.222
+    The start time of the delivery interval for each block or shape.#/
+    deliveryIntervalStartTime : contractTradingHoursType
+
+    /#
+    Field 2.223
+    The end time of the delivery interval for each block or shape.#/
+    deliveryIntervalEndTime : contractTradingHoursType
+
+    /#
+    Field 2.224
+    Start date of delivery.#/
+    deliveryStartDate : contractTradingHoursType
+
+
+
+
+
+
+
+
+
+}
+record eicCodeType {
+    name: eicCode
+    Value : string(16,16)
+    Value : ("[0-9][0-9][XYZTWV].+")
+}
+
+
+record contractTradingHoursType {
+    #in sequence
+    deliveryIntervalStartTime :  datetime
+    deliveryIntervalEndTime : datetime
+    deliveryStartDate : date
+}

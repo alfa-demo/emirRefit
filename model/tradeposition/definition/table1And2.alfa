@@ -6,6 +6,7 @@ typedefs {
     isoCFI       = string
     isoMktId     = native org.iso.MktIdISO10383
     isoCcy       = native org.iso.CcyISO4217
+    eicCode      = native eu.standards.EicCode
 }
 
     /# Canonical ALFA representation of  - ESMA Regulatory Technical Standards (RTS) and  Implementing Technical Standards (ITS) in the Official Journal of the European 
