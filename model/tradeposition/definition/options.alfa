@@ -51,3 +51,27 @@ record options includes emirRefit {
     For foreign exchange options: Currency pair and order in which the strike price is expressed. It is expressed as unit currency/quoted currency.#/
     strikePriceCurrencyCurrencyPair : string (0,7) #TO DO
 
+    /#
+    Field 2.139
+    For options and swaptions of all asset classes, monetary amount paid by the option buyer.
+    This data element is not applicable if the instrument is not an option or does not embed any optionality. #/
+    optionPremiumAmount : decimal(25,5)
+
+    /#
+    Field 2.140
+    For options and swaptions of all asset classes, currency in which the option premium amount is denominated. This data element is not applicable
+    if the instrument is not an option or does not embed any optionality.#/
+    optionPremiumCurrency : isoCcy
+
+    /#
+    Field 2.141
+    Unadjusted date on which the option premium is paid. #/
+    optionPremiumPaymentDate : date
+
+    /#
+    Field 2.242
+    In case of swaptions, maturity date of the underlying swap.#/
+    maturityDateOfTheUnderlying : date
+}
+
+
