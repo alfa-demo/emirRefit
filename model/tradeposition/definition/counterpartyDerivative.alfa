@@ -27,7 +27,7 @@ trait emirRefit {
     Field 1.2
     In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
        has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
-    reportSubmittingEntityId : isoLEI?
+    reportSubmittingEntityId : isoLEI
         
     /# 
     Field 1.3
@@ -38,7 +38,7 @@ trait emirRefit {
        Regulation, the unique code identifying that  management company. Where an Alternative Investment Fund Manager (AIFM) is responsible, and legally liable, for 
        reporting on behalf of an Alternative Investment Fund (AIF) in accordance with Article 9(1)(c) of that Regulation, the unique code identifying that AIFM. Where 
        an authorised entity that is responsible for managing and acting on be #/
-    entityResponsibleForReporting : isoLEI
+    entityResponsibleForReporting : isoLEI?
         
     /# 
     Field 1.4
@@ -50,7 +50,7 @@ trait emirRefit {
     Field 1.5
     Indicate if the counterparty 1 (Reporting counterparty) is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
        8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
-    natureOfReportingCounterparty : enum<F, N, C, O>
+    natureOfReportingCounterparty : enum<F, N, C, O>?
         
     /# 
     Field 1.6
@@ -58,13 +58,13 @@ trait emirRefit {
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    corporateSectorOfReportingCounterparty : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>
+    corporateSectorOfReportingCounterparty : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>?
         
     /# 
     Field 1.7
     Information whether the counterparty 1 (Reporting counterparty) is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
        the transaction was concluded. #/
-    clearingThresholdOfReportingCounterparty : boolean
+    clearingThresholdOfReportingCounterparty : boolean?
         
     /# 
     Field 1.8
@@ -79,13 +79,13 @@ trait emirRefit {
     /# 
     Field 1.10
     In case the counterparty 2 is a natural person, the code of country of residence of that person.#/
-    countryOfCounterparty2 : isoCtyCode
+    countryOfCounterparty2 : isoCtyCode?
         
     /# 
     Field 1.11
     Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or 
        points 1, 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
-    natureOfCounterparty2 : enum<F, N, C, O>
+    natureOfCounterparty2 : enum<F, N, C, O>?
         
     /# 
     Field 1.12
@@ -93,58 +93,58 @@ trait emirRefit {
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 2 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    corporateSectorOfCounterparty2 : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>
+    corporateSectorOfCounterparty2 : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>?
         
     /# 
     Field 1.13
     Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
        when the transaction was concluded. #/
-    clearingThresholdOfCounterparty2 : boolean
+    clearingThresholdOfCounterparty2 : boolean?
         
     /# 
     Field 1.14
     Indicator of whether the counterparty 2 has the reporting obligation under EMIR (irrespective of who is responsible and legally liable for its reporting).#/
-    reportingObligationOfCounterparty2 : boolean
+    reportingObligationOfCounterparty2 : boolean?
         
     /# 
     Field 1.15
     In the case a broker acts as intermediary for the counterparty 1 without becoming a counterparty himself, the counterparty 1 shall identify this broker by a unique code.#/
-    brokerId : isoLEI 
+    brokerId : isoLEI?
         
     /# 
     Field 1.16
     Identifier of the clearing member through which a derivative transaction was cleared at a central counterparty.#/
-    clearingMember : isoLEI 
+    clearingMember : isoLEI?
         
     /# 
     Field 1.17
     Indicator of whether the counterparty 1 is the buyer or the seller as determined at the time of the transaction.#/
-    direction : enum<BYER,SLLR>
+    direction : enum<BYER,SLLR>?
         
     /# 
     Field 1.18
     Indicator of whether the counterparty 1 is the payer or the receiver of leg 1 as determined at the time of the of the conclusion of the derivative.#/
-    directionOfLeg1 : enum<MAKE,TAKE >
+    directionOfLeg1 : enum<MAKE,TAKE >?
         
     /# 
     Field 1.19
     Indicator of whether the counterparty 1 is the payer or the receiver of leg 2 as determined at the time of the conclusion of the derivative.#/
-    directionOfLeg2 : enum<MAKE,TAKE >
+    directionOfLeg2 : enum<MAKE,TAKE >?
         
     /#  
     Field 1.20
     This field shall be populated only where the counterparty 1 is a non-financial counterparty, as referred to in Article 2 (9) of the Regulation (EU) No 648/2012.#/
-    directlyLinkedToCommercialActivityOrTreasuryFinancing : boolean
+    directlyLinkedToCommercialActivityOrTreasuryFinancing : boolean?
         
     /# 
     Field 2.1
     Unique Trade Identifier as referred to in Article 7 of the [ITS].#/
-    uti : string("[A-Z0-9]{52,52}")
+    uti : string("[A-Z0-9]{52,52}")?
         
     /# 
     Field 2.2
     Where a derivative was executed on a trading venue, a number generated by the trading venue and unique to that execution.#/
-    reportTrackingNumber : string("[A-Z0-9]{52,52}")
+    reportTrackingNumber : string("[A-Z0-9]{52,52}")?
         
     /# 
     Field 2.3
@@ -152,23 +152,23 @@ trait emirRefit {
        (e.g. in the case of a novation, when a transaction is terminated, and a new transaction is generated) or in a one-to-many relation between transactions 
        (e.g. in clearing or if a transaction is split into several different transactions).
        This data element is not applicable when reporting many-to-one and many-to-many relations between transactions (e.g. in the case of a compression). #/
-    priorUti : string("[A-Z0-9]{52,52}")
+    priorUti : string("[A-Z0-9]{52,52}")?
         
     /# 
     Field 2.4
     The UTI of the position in which a derivative is included. This field is applicable only for the reports related to the termination of a derivative due to its inclusion in a position.#/
-    subsequentPositionUti : string("[A-Z0-9]{52,52}")
+    subsequentPositionUti : string("[A-Z0-9]{52,52}")?
         
     /# 
     Field 2.5
     Identifier generated by the PTRR service provider or CCP providing the PTRR service in order to connect all derivatives entering  into a given PTRR event and resulting from that PTRR event.#/
-    postTradeRiskReduction : string("[A-Z0-9]{52,52}")
+    postTradeRiskReduction : string("[A-Z0-9]{52,52}")?
         
     /# 
     Field 2.6
     Identifier (determined by the counterparty  1) in order to connect derivatives in the same package in accordance with Article 1(2)(a). 
        A package may include reportable and non- reportable transactions."#/
-    packageIdentifier : string("[A-Z0-9]{36,36}")
+    packageIdentifier : string("[A-Z0-9]{36,36}")?
         
     /# 
     Field 2.7
@@ -188,17 +188,17 @@ trait emirRefit {
     /# 
     Field 2.10
     Each reported contract shall be classified according to its type.#/
-    contractType : enum<CFDS,FRAS,FUTR,FORW,OPTN,SPDB,SWAP,SWPT,OTHR> 
+    contractType : enum<CFDS,FRAS,FUTR,FORW,OPTN,SPDB,SWAP,SWPT,OTHR>?
         
     /# 
     Field 2.11
     Each reported contract shall be classified according to the asset class it is based on.#/
-    assetClass : enum<COMM,CRDT,CURR,INTR>
+    assetClass : enum<COMM,CRDT,CURR,INTR>?
 
    /# 
    Field 2.12
    Indicator whether the derivative is based on crypto-assets. #/
-   derivativeBasedOnCryptoAssets : boolean
+   derivativeBasedOnCryptoAssets : boolean?
 
    /# 
    Field 2.13
@@ -256,7 +256,7 @@ trait emirRefit {
    /# 
    Field 2.23
    Date and time of the last valuation marked to market, provided by the central counterparty (CCP) or calculated using the current or last available market price of the inputs. #/
-   valuationTimestamp : datetime
+   valuationTimestamp : datetime?
 
    /# 
    Field 2.24
@@ -591,12 +591,12 @@ trait emirRefit {
    /#
    Field 2.77
    Identifier of the payer of Other payment amount. #/
-   otherPaymentPayer : string(1, 72)?
+   otherPaymentPayer : string("[A-Z0-9]{72,72}")?
 
    /#
    Field 2.78
    Identifier of the receiver of Other payment amount. #/
-   otherPaymentReceiver : string(1, 72)?
+   otherPaymentReceiver : string("[A-Z0-9]{72,72}")?
 
    /#
    Field 2.151
@@ -625,7 +625,7 @@ trait emirRefit {
    • Corporate event: A corporate action on equity underlying that impacts the derivatives on that equity
    • Inclusion in position: Inclusion of CCP-cleared derivative or CFO into a position, where an existing derivative is terminated and either a new position is 
       created or the notional of an existing position is modified. Update - Update of an outstanding derivative performed during the transition period in order to ensure its conformity with the amended reporting requirements.#/
-   eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT>
+   eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT>?
 
    /#
    Field 2.153
