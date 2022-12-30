@@ -214,7 +214,45 @@ trait margins {
      1 and reported as one total value.#/
     variationMarginCollectedByCounterparty1Post-Haircut : decimal(25,5)
 
+    /#
+    Field 3.25
+    Currency in which the variation margin collected is denominated.#/
+    currencyOfVariationMarginCollected : isoCcy
 
+    /#
+    Field 3.26
+    Monetary value of any additional collateral collected by the counterparty 1 separate and independent  from initial and variation margin. This data element 
+     refers to the total current value of the excess collateral before application of the haircut (if applicable), rather than to its daily change.
+    Any initial or variation margin amount collected that exceeds the required initial margin or required variation margin, is reported as part of the 
+     initial margin collected or variation margin collected respectively, rather than included as excess collateral collected.
+    For centrally cleared transactions excess collateral is reported only to the extent it can be assigned to a specific portfolio or transaction.#/
+    excessCollateralCollectedByCounterparty1 : decimal(25,5)
+
+    /#
+    Field 3.27
+    Currency in which the excess collateral collected is denominated.
+    If the excess collateral is denominated in more than one currency, this data element reflects one of those currencies into which the counterparty 
+     1 has chosen to convert all the values of collected excess collateral.#/
+    currencyOfExcessCollateralCollected : isoCcy
+
+    /#
+    Field 3.28
+    • New: A report of a derivative, at a trade or position level, for the first time.
+    • Modify: A modification to the terms or details of a previously reported derivative, at a trade or position level, but not a correction of a report.
+    • Correct: A report correcting the erroneous data fields of a previously submitted report.
+    • Terminate: A Termination of an existing derivative, at a trade or position level.
+    • Error: A cancellation of a wrongly submitted entire report in case the derivative, at a trade or position level, never came into existence or was not 
+       subject to Regulation (EU) No 648/2012 reporting requirements but was reported to a trade repository by mistake or a cancellation of a duplicate report.
+    • Revive: Re-opening of a derivative, at a trade or position level, that was cancelled with action type 'Error' or terminated by mistake.
+    • Valuation: An update of a valuation of a derivative, at a trade or position level
+    • Position component: A report of a new derivative that is included in a separate position report on the same day.#/
+    actionType : enum<MARU, CORR>
+
+    /#
+    Field 3.29
+    Date on which the reportable event relating to the derivative contract and captured by the report took place or, in case of a modification when the 
+     modification become effective. #/
+    eventDate : date
 
 }
 
