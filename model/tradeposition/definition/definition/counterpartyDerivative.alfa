@@ -283,7 +283,7 @@ trait emirRefit {
    If collateral is reported on a portfolio basis, unique code assigned by the counterparty 1 to the portfolio. 
       This data element is not applicable if the collateralisation was performed on a transaction level basis, 
       or if there is no collateral agreement  or if no collateral is posted or received. #/
-   collateralPortfolioCode : string(1, 52)?
+   collateralPortfolioCode : string("[A-Z0-9]{52,52}")?
 
    /# 
    Field 2.28
@@ -332,7 +332,7 @@ trait emirRefit {
    /# 
    Field 2.35
    Name of the master agreement. This field shall only be completed where 'OTHR' is reported in field 2.34 (masterAgreementType). #/
-   otherMasterAgreementType : string(1, 50)?
+   otherMasterAgreementType : string("[A-Z0-9]{50,50}")?
 
    /# 
    Field 2.36
