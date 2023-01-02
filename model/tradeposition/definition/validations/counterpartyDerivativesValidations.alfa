@@ -12,4 +12,14 @@ fragment record emirRefit {
         if ( reportingTimestamp < toTime(get(executionTimestamp)) )  
             raise error ("EMIR-VR-1001-04, 'reporting timestamp should be equal or later than the execution timestamp.")
     }
+    /# TO DO
+    1. For action types 'NEWT', 'MODI', 'VALU', 'CORR', 'REVI' and 'POSC': this field shall contain a valid LEI included in the GLEIF database maintained by the Central Operating Unit. 
+    2. The status of the LEI for all the above action types shall be "Issued", "Lapsed", "Pending transfer" or "Pending archival".
+    3. For action types 'TERM' and 'EROR': This field shall contain an LEI included in the GLEIF database maintained by the Central Operating Unit, irrespective of the registration status of that LEI.
+    4. The LEI shall pertain to a legal entity and not a branch.
+    Correct status of the LEI should be verified as of the date reported in the field 1.1 Reporting timestamp.
+    //assert reportSubmittingEntityId {
+        //if ()
+    }#/
+
 }

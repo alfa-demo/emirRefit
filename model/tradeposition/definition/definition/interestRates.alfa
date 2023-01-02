@@ -1,6 +1,6 @@
 namespace Model
 
-# The Interest Rates derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
+# Section 2h - Interest Rates derivative
 record interestRates includes emirRefit {
    /# 
    Field 2.79

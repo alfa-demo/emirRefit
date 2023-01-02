@@ -1,6 +1,6 @@
 namespace Model
 
-# The Section 2j - Commodities and emission allowances (General) derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
+# Section 2j - Commodities and emission allowances (General) derivative
 record commoditiesGeneral includes emirRefit {
 
     /# 

@@ -1,6 +1,6 @@
 namespace Model
 
-# The Section 2m – Credit derivatives derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
+# Section 2m – Credit derivatives derivative
 record creditDerivatives includes emirRefit {
 
     /# 

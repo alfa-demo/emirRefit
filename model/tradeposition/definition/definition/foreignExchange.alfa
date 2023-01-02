@@ -1,6 +1,6 @@
 namespace Model
 
-# The Foreign Exchange derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
+# Section 2i – Foreign Exchange derivative
 record foreignExchange includes emirRefit {
 
     /# 

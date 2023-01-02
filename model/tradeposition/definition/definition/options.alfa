@@ -1,6 +1,6 @@
 namespace Model
 
-# The Section 2l - Options derivative contract (traded on trading venues and OTC) data elements capturing all IR Trade data related fields.
+# Section 2l - Options derivative
 record options includes emirRefit {
 
     /# 

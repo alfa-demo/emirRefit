@@ -173,7 +173,7 @@ trait emirRefit {
     /# 
     Field 2.7
     ISIN identifying the product if that product is admitted to trading or traded on a regulated market, MTF, OTF or systematic internaliser.#/
-    iInternationalSecuritiesIdentificationNumber : isoISIN?
+    internationalSecuritiesIdentificationNumber : isoISIN?
         
     /# 
     Field 2.8

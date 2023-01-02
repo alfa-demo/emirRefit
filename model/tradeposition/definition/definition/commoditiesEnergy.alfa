@@ -1,6 +1,6 @@
 namespace Model
 
-# The Commodities and emission allowances (Energy) derivative contract (traded on trading venues and OTC) data elements capturing all Commodities Energy Trade data related fields.
+# Section 2k - Commodities and emission allowances (Energy) derivative
 record commoditiesEnergy includes emirRefit {
 
     /# 
