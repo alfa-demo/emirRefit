@@ -92,7 +92,7 @@ trait margins {
         provisions to the central counterparty, i.e. committed credit lines.
     If the initial margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
          1 and reported as one total value.#/
-    initialMarginPostedByCounterparty1Pre-Haircut : decimal(25,5)?
+    initialMarginPostedByCounterparty1PreHaircut : decimal(25,5)?
 
     /#
     Field 3.13
@@ -104,7 +104,7 @@ trait margins {
         default fund contributions, nor collateral posted against liquidity provisions to the central counterparty, i.e. committed credit lines.
     If the initial margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
          1 and reported as one total value.#/
-    initialMarginPostedByCounterparty1Post-Haircut : decimal(25,5)?
+    initialMarginPostedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.14
@@ -118,7 +118,7 @@ trait margins {
     If the collateralisation is performed at portfolio level, the variation margin posted relates to the whole portfolio; if the collateralisation is performed for single transactions, the variation margin posted relates to such single transaction.
     This data element refers to the total current value of the variation margin, cumulated since the first reporting of variation margins posted for the portfolio/transaction.
     If the variation margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 1 and reported as one total value.#/
-    variationMarginPostedByCounterparty1Pre-Haircut : decimal(25,5)?
+    variationMarginPostedByCounterparty1PreHaircut : decimal(25,5)?
 
     /#
     Field 3.16
@@ -127,7 +127,7 @@ trait margins {
     If the collateralisation is performed at portfolio level, the variation margin posted relates to the whole portfolio; if the collateralisation is performed for single transactions, the variation margin posted relates to such single transaction.
     This data element refers to the total current value of the variation margin after application of the haircut (if applicable), cumulated since the first reporting of posted variation margins for the portfolio /transaction.
     If the variation margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 1 and reported as one total value.#/
-    variationMarginPostedByCounterparty1Post-Haircut : decimal(25,5)?
+    variationMarginPostedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.17
@@ -160,7 +160,7 @@ trait margins {
       as part of its investment activity.
     If the initial margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
      1 and reported as one total value.#/
-    initialMarginCollectedByCounterparty1Pre-Haircut : decimal (25,5)?
+    initialMarginCollectedByCounterparty1PreHaircut : decimal (25,5)?
 
     /#
     Field 3.21
@@ -172,7 +172,7 @@ trait margins {
      collateral collected by the central counterparty  as part of its investment activity.
     If the initial margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
       1 and reported as one total value.#/
-    initialMarginCollectedByCounterparty1Post-Haircut : decimal(25,5)?
+    initialMarginCollectedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.22
@@ -190,7 +190,7 @@ trait margins {
     This refers to the total current value of the variation margin, cumulated since the first reporting of collected variation margins for the portfolio/transaction.
     If the variation margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 
      1 and reported as one total value.#/
-    variationMarginCollectedByCounterparty1Pre-Haircut : decimal(25,5)?
+    variationMarginCollectedByCounterparty1PreHaircut : decimal(25,5)?
 
     /#
     Field 3.24
@@ -202,7 +202,7 @@ trait margins {
      reporting of collected variation margins for the portfolio transaction.
     If the variation margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 
      1 and reported as one total value.#/
-    variationMarginCollectedByCounterparty1Post-Haircut : decimal(25,5)?
+    variationMarginCollectedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.25
@@ -247,14 +247,14 @@ trait margins {
 }
 
 
-     enum collateralisationCategoryType {
-        UNCL # uncollateralised
-        PRC1 # partially collateralised: counterparty 1 only 
-        PRC2 # partially collateralised: counterparty 2 only 
-        PRCL # partially collateralised
-        OWC1 # one way collateralised: counterparty 1 only 
-        OWC2 # one way collateralised: counterparty 2 only 
-        OWP1 # one way/partially collateralised: counterparty 1 
-        OWP2 # one way/partially collateralised: counterparty 2 
-        FLCL # fully collateralised
-     }
+enum collateralisationCategoryType {
+    UNCL ## uncollateralised
+    PRC1 ## partially collateralised: counterparty 1 only 
+    PRC2 ## partially collateralised: counterparty 2 only 
+    PRCL ## partially collateralised
+    OWC1 ## one way collateralised: counterparty 1 only 
+    OWC2 ## one way collateralised: counterparty 2 only 
+    OWP2 ## one way/partially collateralised: counterparty 2 
+    OWP1 ## one way/partially collateralised: counterparty 1 
+    FLCL ## fully collateralised
+}

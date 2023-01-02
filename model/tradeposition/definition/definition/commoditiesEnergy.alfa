@@ -53,7 +53,7 @@ record commoditiesEnergy includes emirRefit {
     /#
     Field 2.128 
     The number of units included in the transaction for each delivery interval specified in field 70. #/
-    deliveryCapacity : decimal(*, 20)
+    deliveryCapacity : decimal(*, *, *, 20)
 
     /#
     Field 2.129
@@ -70,7 +70,7 @@ record commoditiesEnergy includes emirRefit {
     #MWh/h   
     MWHH,
     #MWh/d
-    MWHD
+    MWHD,
     #GW
     GWAT,
     #GWh/h
@@ -103,17 +103,17 @@ record commoditiesEnergy includes emirRefit {
     /#
     Field 1.130
     If applicable, price per quantity per delivery time interval. #/
-    priceTimeIntervalQuantity : decimal (*, 20)
+    priceTimeIntervalQuantity : decimal (*, *, *, 20)
 
     /# Field 1.131
-    The currency in which the price/time interval quantity is expressed. #/
+       The currency in which the price/time interval quantity is expressed. #/
     currencyOfThePriceTimeIntervalQuantity : isoCcy
 
 }
 record eicCodeType {
     name: eicCode
-    Value : string(16,16)
-    Value : ("[0-9][0-9][XYZTWV].+")
+    // Value : string(16,16)
+    Value : string("[0-9][0-9][XYZTWV].+")
 }
 
 

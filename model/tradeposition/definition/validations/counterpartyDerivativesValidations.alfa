@@ -1,6 +1,6 @@
-namespace emirRefit
+namespace Model
  
-fragment record counterpartyDerivative {
+fragment record emirRefit {
     /#
     1. Common input format: YYYY-MM-DDThh:MM:SSZ
     2. The reporting timestamp should be equal or earlier than the timestamp of the receipt of the report by the TR. 
@@ -9,10 +9,7 @@ fragment record counterpartyDerivative {
     5. The reporting timestamp should be equal or later than 2024-04-29.
      #/
     assert reportingTimestamp {
-        return if ( get(reportingTimestamp) < (executionTimestamp) )  
-                   some ("EMIR-VR-1001-04, 'reporting timestamp should be equal or later than the execution timestamp.")
-               else 
-                   none
+        if ( reportingTimestamp < toTime(get(executionTimestamp)) )  
+            raise error ("EMIR-VR-1001-04, 'reporting timestamp should be equal or later than the execution timestamp.")
     }
-
 }
