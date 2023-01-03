@@ -1,0 +1,78 @@
+namespace Model
+
+# Metadata for data lineage. This can be a field in the model or maintained 
+# separately as tagged data against a target record
+record Lineage {
+    /# 
+      Track producers sourcing this data.
+      Maintained as a `map` of source system and reference.
+      For example:
+      ```
+      { 
+        "Fidessa":"23989712", 
+        "OMS":"http://frontoff.acmebank.com/traderef=098129092" 
+      }
+      ```
+    #/
+    Producers : map< Name: string, LineageReference : string >    
+}
+
+# Annotate model ownership information
+annotation ModelOwner (record, trait) {
+  Org : string ## Model owner organisation
+}
+
+# Indicates data is sensitive and if this data is used outside of its primary purpose,
+# the value(s) should be obfuscated.
+annotation Mask (field) {
+  Method : MaskingMethodType
+}
+
+# Method use to mask a field value
+enum MaskingMethodType {
+  Shuffle       ## Use one data set in place of another
+  ScrambleText  ## Jumble text into a random order so the original content is not revealed
+  Multiply      ## Multiply numeric value by a random value
+  Clear         ## If type is optional, set to empty, if string, set value to blank, if numeric set to 0
+}
+
+# Indicates if reportable field is under reconciliation tolerance and start date
+annotation Reconciliation (field) {
+  Method : reconciliationType
+}
+
+# Indicate the reconciliation tolerance
+enum reconciliationType {
+  NA                   ## Not applicable or empty
+  SameAsCounterparty2  ## Same as field 1.9
+  SameAsCounterparty1  ## Same as field 1.4
+  Opposite             ## Opposite of the other counterparty 
+  No                   ## No
+  Yes                  ## Yes
+}
+# Indicates if reportable field is under reconciliation start date
+annotation reconciliationStartDate  (field) {
+  Method : reconciliationStartDateType
+}
+
+# Indicates if reportable field is under reconciliation start date
+enum reconciliationStartDateType {
+  NA  ## Not applicable or empty
+  `Start date of the reporting obligation`   
+  `Two years after the start date of the reporting obligation`
+  `Two years from the start date of the reporting obligation`
+}
+# Indicate reportable fields aligning with the Regulatory Oversight Committee’s Critical Data Elements (CDE)
+annotation fieldClassification  (field) {
+  Method : fieldClassificationType
+}
+
+# Indicate reportable fields aligning with the Regulatory Oversight Committee’s Critical Data Elements (CDE)
+enum fieldClassificationType {
+  CDE     ## Critical Data Elements (CDE)
+  UPI     ## Unique Product Identifier   
+  Other   ## not classified
+ 
+
+}
+
