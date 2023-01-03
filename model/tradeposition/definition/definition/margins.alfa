@@ -34,10 +34,10 @@ trait margins {
 
     /#
     Field 3.4
-    Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question.
+    Counterparty 1 (Reporting counterparty).Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question.
     In the case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported 
     as the counterparty.#/
-    reportingCounterparty : isoLEI
+    counterparty1 : isoLEI
 
     /#
     Field 3.5

@@ -119,7 +119,7 @@ record eicCodeType {
 
 record contractTradingHoursType {
     #in sequence
-    deliveryIntervalStartTime :  datetime
-    deliveryIntervalEndTime : datetime
+    deliveryIntervalStartTime : time # should be (hh:mm:ssZ) TBC how to express it
+    deliveryIntervalEndTime : datetime # should be (hh:mm:ssZ) TBC how to express it
     deliveryStartDate : date
 }

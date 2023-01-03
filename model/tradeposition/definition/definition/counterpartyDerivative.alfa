@@ -44,13 +44,13 @@ trait emirRefit {
     Field 1.4
     Counterparty 1 (Reporting counterparty) Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
        case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported as the counterparty. #/
-    ReportingCounterparty : isoLEI
+    counterparty1 : isoLEI
         
     /# 
     Field 1.5
     Indicate if the counterparty 1 (Reporting counterparty) is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
        8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
-    natureOfReportingCounterparty : enum<F, N, C, O>?
+    natureOfCounterparty1 : enum<F, N, C, O>?
         
     /# 
     Field 1.6
@@ -58,13 +58,13 @@ trait emirRefit {
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    corporateSectorOfReportingCounterparty : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>?
+    corporateSectorOfCounterparty1 : list<enum<INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U>>?
         
     /# 
     Field 1.7
     Information whether the counterparty 1 (Reporting counterparty) is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
        the transaction was concluded. #/
-    clearingThresholdOfReportingCounterparty : boolean?
+    clearingThresholdOfCounterparty1 : boolean?
         
     /# 
     Field 1.8
