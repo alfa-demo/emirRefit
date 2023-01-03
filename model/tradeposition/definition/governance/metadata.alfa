@@ -64,7 +64,7 @@ enum reconciliationStartDateType {
 }
 # Indicate reportable fields aligning with the Regulatory Oversight Committee’s Critical Data Elements (CDE)
 annotation fieldClassification  (field) {
-  Method : fieldClassificationType
+  Classification : fieldClassificationType
 }
 
 # Indicate reportable fields aligning with the Regulatory Oversight Committee’s Critical Data Elements (CDE)

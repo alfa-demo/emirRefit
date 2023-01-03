@@ -21,12 +21,14 @@ trait emirRefit {
     /# 
     Field 1.1
     Date and time of the submission of the report to the trade repository.#/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     reportingTimestamp : time
         
     /# 
     Field 1.2
     In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
        has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     reportSubmittingEntityId : isoLEI
         
     /# 
@@ -38,18 +40,21 @@ trait emirRefit {
        Regulation, the unique code identifying that  management company. Where an Alternative Investment Fund Manager (AIFM) is responsible, and legally liable, for 
        reporting on behalf of an Alternative Investment Fund (AIF) in accordance with Article 9(1)(c) of that Regulation, the unique code identifying that AIFM. Where 
        an authorised entity that is responsible for managing and acting on be #/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     entityResponsibleForReporting : isoLEI?
         
     /# 
     Field 1.4
     Counterparty 1 (Reporting counterparty) Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
        case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported as the counterparty. #/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     counterparty1 : isoLEI
         
     /# 
     Field 1.5
     Indicate if the counterparty 1 (Reporting counterparty) is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
        8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     natureOfCounterparty1 : enum<F, N, C, O>?
         
     /# 
