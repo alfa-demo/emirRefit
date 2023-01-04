@@ -27,5 +27,102 @@ fragment record derivativesTradeReport {
 
         // ...
     }
+    /# Field 1.5 Validation #/
+    assert natureOfCounterparty1 {
+        if (actionType == ActionType.NEWT || actionType == ActionType.MODI 
+            || actionType == ActionType.CORR || actionType == ActionType.REVI 
+            || actionType == ActionType.POSC && isNone( natureOfCounterparty1 ) )
+            raise error ("EMIR-VR-1005-01, this field is mandatory for action types 'NEWT', 'MODI','CORR', 'REVI', and 'POSC" )
+    }
+    /# Field 1.6 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. If field 1.5 is populated with 'F', at least one code pertaining to the classification of the financial counterparties shall be provided.
+    2. If field 1.5 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties shall be provided.
+    3. If field 1.5 is populated with 'C' or 'O', this field shall be left blank.#/
+
+    /# Field 1.7 Validation
+    1. If field 1.5 is populated with 'N' or 'F', this field shall be populated and shall contain only one of the following values: 'TRUE' or 'FALSE'. 
+    2. If field 1.5 is populated with 'C' or 'O', this field shall be left blank.#/
+
+    /# Field 1.9 Validaton
+    6. Fields 1.4 and 1.9 cannot contain the same LEI, unless this corresponds to the LEI of the CCP under field 2.33.
+    7. If field 1.8 is populated with 'FALSE', this field shall contain up to 72 alphanumeric characters. 
+    8. For action types 'NEWT' and 'POSC', the first 20 characters of the client code should be equal to the LEI reported in the field 1.4 Counterparty 1 (Reporting counterparty)
+    9. The value populated in this field when the trade is reported for the first time, shall not be modified in the subsequent reports.#/
+
+    /# Field 1.10 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. If field 1.8 is populated with 'FALSE', this field shall be populated and shall contain 2 alphabetical characters
+    2. If field 1.8 is populated with 'TRUE', this field shall be left blank #/
+
+    /# Field 1.11 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. If field 1.8 is populated with 'TRUE', this field shall be populated and shall contain only one of the following values: 'F', 'N', 'C' or 'O'. 1 alphabetical character.
+    2. If field 1.8 is populated with 'FALSE', this field shall be left blank. #/
+
+    /# Field 1.12 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. If field 1.11 is populated with 'F', at least one code pertaining to the classification of the financial counterparties shall be provided.
+    2. If field 1.11 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties shall be provided.
+    3. If field 1.11 is populated with 'C' ,  'O' or is blank, this field shall be left blank. #/
+
+    /# Field 1.13 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. If field 1.11 is populated with 'N' or 'F', this field shall be populated and shall contain only one of the following values: 'TRUE' or 'FALSE'. 
+    2. If field 1.11 is populated with 'C', 'O' or is blank, this field shall be left blank. #/
+
+    /# Field 1.14 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. This field shall contain only one of the following values: 'TRUE' or 'FALSE'. think this is sorted by boolean?
+    2. If the field 1.8 is populated with 'FALSE' , this field shall be populated with 'FALSE'. #/
+
+    /# Field 1.15 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+
+    /# Field 1.16 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. If field 2.31 is populated with 'Y' this field shall be populated.
+    2. When populated, shall contain a valid LEI included in the GLEIF database maintained by the Central Operating Unit. 
+    3. The status of the LEI shall be "Issued", "Lapsed", "Pending transfer" or "Pending archival".
+
+    Correct status of the LEI should be verified as of the date reported in the field 1.1 Reporting timestamp. Validation of the status should not be applied if 2.153 Event date is earlier than the day preceding the date reported in 1.1 Reporting timestamp. 
+
+    4. The LEI shall pertain to a legal entity and not a branch.
+    5. If field 2.31 is populated with 'N', this field shall be left blank.
+    6. Fields 1.16 and 2.33 cannot contain the same LEI #/
+
+    /# Field 1.17 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. Either field 1.17 or both fields 1.18 and 1.19 shall be populated.
+    2. If populated, this field shall contain only one of the following values: 'BYER' or 'SLLR'. 4 alphabetical characters. 
+    #/
+
+    /# Field 1.18 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. Either field 1.17 or both fields 1.18 and 1.19 shall be populated.
+    2. If populated, this field shall contain only one of the following values: 'MAKE' or 'TAKE'. 4 alphabetical characters. 
+    3. If populated, this field shall contain a different value than field 1.19. #/
+
+    /# Field 1.19 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. Either field 1.17 or both fields 1.18 and 1.19 shall be populated.
+    2. If populated, this field shall contain only one of the following values: 'MAK'E or 'TAKE'. 4 alphabetical characters. 
+    3. If populated, this field shall contain a different value than field 1.18. #/
+
+    /# Field 1.20 Validation
+    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+    1. If field 1.5 is populated with 'N' and field 2.154 (Level) is populated with 'TCTN', this field shall be populated and shall contain only one of the following values: 'TRUE' or 'FALSE'. 
+    2. If field 1.5 is populated with 'F', 'C' or 'O' or if field 2.154 is populated with 'PSTN', this field shall be left blank. #/
+
+
+
+
+
+
+
+
+
+
+
 
 }
