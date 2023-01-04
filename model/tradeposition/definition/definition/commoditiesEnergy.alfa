@@ -1,7 +1,7 @@
 namespace Model
 
 # Section 2k - Commodities and emission allowances (Energy) derivative
-record commoditiesEnergy includes emirRefit {
+record commoditiesEnergy includes derivativesTradeReport {
 
     /# Field 2.119 - Delivery point(s) or market area(s). #/
     deliveryPointOrZone : eicCodeType

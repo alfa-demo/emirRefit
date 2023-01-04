@@ -1,7 +1,7 @@
 namespace Model
 
 # Section 2m – Credit derivatives derivative
-record creditDerivatives includes emirRefit {
+record creditDerivatives includes derivativesTradeReport {
 
     /# Field 2.143 - Indicates the seniority of the debt security, or debt basket or index underlying a derivative.#/
     seniority : enum<SNDB, SBOD, OTHR>

@@ -1,5 +1,5 @@
 namespace Model
 
 @ModelOwner(Org="DataGovGroup")
-fragment trait emirRefit{
+fragment trait derivativesTradeReport{
 }

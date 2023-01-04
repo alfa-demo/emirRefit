@@ -1,6 +1,6 @@
 namespace Model
  
-fragment record emirRefit {
+fragment record derivativesTradeReport {
     /#
     1. Common input format: YYYY-MM-DDThh:MM:SSZ
     2. The reporting timestamp should be equal or earlier than the timestamp of the receipt of the report by the TR. 

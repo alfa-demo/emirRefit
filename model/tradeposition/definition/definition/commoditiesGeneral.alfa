@@ -1,7 +1,7 @@
 namespace Model
 
 # Section 2j - Commodities and emission allowances (General) derivative
-record commoditiesGeneral includes emirRefit {
+record commoditiesGeneral includes derivativesTradeReport {
 
     /# 
     Field 2.116

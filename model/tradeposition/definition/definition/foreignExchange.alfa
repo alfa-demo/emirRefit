@@ -1,7 +1,7 @@
 namespace Model
 
 # Section 2i – Foreign Exchange derivative
-record foreignExchange includes emirRefit {
+record foreignExchange includes derivativesTradeReport {
 
     /# 
     Field 2.113

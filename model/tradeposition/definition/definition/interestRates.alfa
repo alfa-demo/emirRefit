@@ -1,7 +1,7 @@
 namespace Model
 
 # Section 2h - Interest Rates derivative
-record interestRates includes emirRefit {
+record interestRates includes derivativesTradeReport {
    /# Field 2.79 - An indication of the fixed rate leg 1 or coupon used, where applicable.#/
    fixedRateOfLeg1OrCoupon : decimal(11,10)?
 
