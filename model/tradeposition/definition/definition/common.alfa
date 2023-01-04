@@ -35,3 +35,11 @@ enum ActionType {
     # Position component: A report of a new derivative that is included in a separate position report on the same day
     POSC
 }
+
+enum CorporateSectorType {
+    INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U
+}
+
+enum NatureOfCounterpartyType {
+    F, N, C, O
+}
