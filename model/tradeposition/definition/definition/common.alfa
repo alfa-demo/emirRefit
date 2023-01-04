@@ -1,9 +1,17 @@
+typedefs {
+    isoLEI       = string("[A-Z0-9]{18,18}[0-9]{2,2}")
+    isoCtyCode   = string("[A-Z]{3,3}")
+    isoISIN      = string
+    isoUPI       = string
+    isoCFI       = string
+    isoMktId     = native org.iso.MktIdISO10383
+    isoCcy       = native org.iso.CcyISO4217
+    eicCode      = native eu.standards.EicCode
+}
+
 namespace Model
 
-
-   /#
-   Field 2.151
-   • .#/
+/#  Field 2.151 #/
 enum ActionType {
     # New: A report of a derivative, at a trade or position level, for the first time
     NEWT, 
