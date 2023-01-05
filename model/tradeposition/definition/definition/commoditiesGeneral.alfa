@@ -1,5 +1,5 @@
 namespace Model
-
+# Asanka to chcek if below is the best way to represent the three field as per Table 4 of Annex I of the  ITS (excel)
 # Section 2j - Commodities and emission allowances (General) derivative
 record commoditiesGeneral includes derivativesTradeReport {
 

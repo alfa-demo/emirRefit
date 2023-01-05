@@ -20,7 +20,7 @@ trait derivativesTradeReport {
 
     /# Field 1.1 - Date and time of the submission of the report to the trade repository.#/
     @fieldClassification(Classification= fieldClassificationType.CDE)
-    reportingTimestamp : time
+    reportingTimestamp : time #Asanka to confirm the format will be ISO 8601 date in the UTC time format YYYY-MM-DDThh:mm:ssZ
         
     /# Field 1.2 - In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
        has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
@@ -175,7 +175,7 @@ trait derivativesTradeReport {
    valuationCurrency : isoCcy?
 
    /# Field 2.23 - Date and time of the last valuation marked to market, provided by the central counterparty (CCP) or calculated using the current or last available market price of the inputs. #/
-   valuationTimestamp : datetime?
+   valuationTimestamp : datetime? #Asanka to confirm the format will be ISO 8601 date in the UTC time format YYYY-MM-DDThh:mm:ssZ
 
    /# Field 2.24 - Source and method used for the valuation of the transaction by the counterparty 1.
       If at least one valuation input is used that is classified as mark-to­ model in the below table, then the whole valuation is classified as mark-to­ model.
@@ -198,7 +198,7 @@ trait derivativesTradeReport {
 
    /# Field 2.28 - Date and time of the confirmation, as set out in Article 12 of Commission Delegated Regulation (EU) No 149/2013.
       Applicable only to OTC derivative contracts not cleared by a CCP. #/
-   confirmationTimestamp : datetime?
+   confirmationTimestamp : datetime? #Asanka to confirm the format will be ISO 8601 date in the UTC time format YYYY-MM-DDThh:mm:ssZ
 
    /# Field 2.29 - For new reportable transactions, whether the legally binding terms of an OTC derivatives contract were documented and agreed upon (confirmed) or not (unconfirmed).
       If documented and agreed, whether such confirmation was done:
@@ -217,7 +217,7 @@ trait derivativesTradeReport {
    cleared : enum < Y, N>?
 
    /# Field 2.32 - Time and date when clearing took place. Applicable only to derivatives cleared by a CCP. #/ 
-   clearingTimestamp : datetime?
+   clearingTimestamp : datetime? #Asanka to confirm the format will be ISO 8601 date in the UTC time format YYYY-MM-DDThh:mm:ssZ
 
    /# Field 2.33 - Identifier of the central counterparty (CCP) that cleared the transaction. 
       This data element is not applicable if the value of the data element "Cleared" is "N" ("No, not centrally cleared"). #/
@@ -269,7 +269,7 @@ trait derivativesTradeReport {
 
    /# Field 2.42 - Date and time a transaction was originally executed, resulting in the generation of a new UTI. This data element remains unchanged throughout the life 
       of the UTI. For position level reporting it should refer to the time when position was opened for the first time. #/
-   executionTimestamp : datetime?
+   executionTimestamp : datetime? #Asanka to confirm the format will be ISO 8601 date in the UTC time format YYYY-MM-DDThh:mm:ssZ
 
    /# Field 2.43 - Unadjusted date at which obligations under the OTC derivative transaction come into effect, as included in the confirmation.
       If the effective date is not specified as part of the terms of the

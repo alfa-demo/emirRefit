@@ -94,7 +94,7 @@ record eicCodeType {
 
 record contractTradingHoursType {
     #in sequence
-    deliveryIntervalStartTime : time # should be (hh:mm:ssZ) TBC how to express it
-    deliveryIntervalEndTime : datetime # should be (hh:mm:ssZ) TBC how to express it
+    deliveryIntervalStartTime : time # Asanka to confirm if time format will be hh:mm:ssZ
+    deliveryIntervalEndTime : time # Asanka to confirm if time format will be hh:mm:ssZ
     deliveryStartDate : date
 }
