@@ -3,3 +3,8 @@ namespace Model
 @ModelOwner(Org="DataGovGroup")
 fragment trait derivativesTradeReport{
 }
+
+@ModelOwner(Org="CommoGovGroup")
+fragmet record commoditiesEnergy {
+
+}
