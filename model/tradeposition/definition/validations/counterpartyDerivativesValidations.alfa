@@ -9,7 +9,7 @@ fragment record derivativesTradeReport {
     5. The reporting timestamp should be equal or later than 2024-04-29.
      #/
     assert reportingTimestamp {
-        if ( reportingTimestamp < toTime(get(executionTimestamp)) )  
+        if ( reportingTimestamp < get(executionTimestamp))  
             raise error ("EMIR-VR-1001-04, 'reporting timestamp should be equal or later than the execution timestamp.")
     }
     /# 
@@ -158,258 +158,257 @@ fragment record derivativesTradeReport {
     }
 
     /# Field 2.2 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    00. if level is populated with 'PSTN' the field shall be left blank
-    1. If field 2.41 is populated with a MIC pertaining to a trading venue, this field shall  be populated and shall contain up to 52 alphanumerical characters where any character is allowed. 
-    2. The code reported in this field shall be different from the codes reported in fields 2.1, 2.3 or 2.4.
-    3. If field 2.41 is populated with a MIC that does not pertain to a trading venue (including XXXX and XOFF), this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        00. if level is populated with 'PSTN' the field shall be left blank
+        1. If field 2.41 is populated with a MIC pertaining to a trading venue, this field shall  be populated and shall contain up to 52 alphanumerical characters where any character is allowed. 
+        2. The code reported in this field shall be different from the codes reported in fields 2.1, 2.3 or 2.4.
+        3. If field 2.41 is populated with a MIC that does not pertain to a trading venue (including XXXX and XOFF), this field shall be left blank. #/
     assert  reportTrackingNumber {
 
     }
 
     /# Field 2.3 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. For action type 'NEWT': If field 2.152 is populated with 'NOVA', 'EXER' or 'ALOC', this field shall be populated.
-    2. For action type 'NEWT': If field 2.152 is populated with  'CLRG' or 'CORP', this field is optional.
-    3. For action type 'NEWT' and other event types this field shall be left blank.
-    4. When populated, this field shall contain up to 52 alphanumerical characters. Four special characters are allowed ":", ".",  "-", " _" .  Special characters not allowed at the beginning or the end. 
-    5. The code reported in this field shall be different from the codes reported in fields 2.1, 2.2 or 2.4. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. For action type 'NEWT': If field 2.152 is populated with 'NOVA', 'EXER' or 'ALOC', this field shall be populated.
+        2. For action type 'NEWT': If field 2.152 is populated with  'CLRG' or 'CORP', this field is optional.
+        3. For action type 'NEWT' and other event types this field shall be left blank.
+        4. When populated, this field shall contain up to 52 alphanumerical characters. Four special characters are allowed ":", ".",  "-", " _" .  Special characters not allowed at the beginning or the end. 
+        5. The code reported in this field shall be different from the codes reported in fields 2.1, 2.2 or 2.4. #/
     assert priorUti {
 
     }
 
     /# Field 2.4 Validation
-    0. if action type is populated with 'POSC" the field shall be populated (mandatory)
-    For action type 'TERM':
-    1. If field 2.152 is populated with 'INCP', this field shall be populated.
-    2. If field 2.152 is populated with value other than 'INCP', this field is optional.
-    3. When populated, this field shall contain up to 52 alphanumerical characters. Four special characters are allowed ":", ".",  "-", " _" .  Special characters not allowed at the beginning or the end. 
-    4. The code reported in this field shall be different from the codes reported in fields 2.1, 2.2 or 2.3. #/
+        0. if action type is populated with 'POSC" the field shall be populated (mandatory)
+        For action type 'TERM':
+        1. If field 2.152 is populated with 'INCP', this field shall be populated.
+        2. If field 2.152 is populated with value other than 'INCP', this field is optional.
+        3. When populated, this field shall contain up to 52 alphanumerical characters. Four special characters are allowed ":", ".",  "-", " _" .  Special characters not allowed at the beginning or the end. 
+        4. The code reported in this field shall be different from the codes reported in fields 2.1, 2.2 or 2.3. #/
     assert subsequentPositionUti {
 
     }
 
     /# Field 2.5 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    For action types 'NEWT', 'MODI' and 'TERM': 
-    1. If field 2.152 is populated with 'COMP' and field 2.39 is populated with 'PWAS', 'PRBM' or 'OTHR', this field shall be populated.   
-    2. If field 2.152 is populated with 'COMP' and field 2.39 is populated with 'PWOS', or if field 2.152 is not populated with 'COMP',  this field shall be left blank.
-    3. When populated, this field shall contain up to 52 alphanumerical characters where only the the upper-case alphabetic characters A–Z and the digits 0–9 are allowed. 
-    4. The first 20 characters of the PTRR ID should be equal to the LEI reported in the field 2.40 PTRR service provider #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        For action types 'NEWT', 'MODI' and 'TERM': 
+        1. If field 2.152 is populated with 'COMP' and field 2.39 is populated with 'PWAS', 'PRBM' or 'OTHR', this field shall be populated.   
+        2. If field 2.152 is populated with 'COMP' and field 2.39 is populated with 'PWOS', or if field 2.152 is not populated with 'COMP',  this field shall be left blank.
+        3. When populated, this field shall contain up to 52 alphanumerical characters where only the the upper-case alphabetic characters A–Z and the digits 0–9 are allowed. 
+        4. The first 20 characters of the PTRR ID should be equal to the LEI reported in the field 2.40 PTRR service provider #/
     assert postTradeRiskReduction {
 
     }
 
     /# Field 2.6 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank #/
     assert packageIdentifier {
 
     }
 
     /# Field 2.7 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.41 is populated with a MIC of a trading venue (RM, MTF or OTF) or of a systematic internaliser or with a MIC 'XOFF', this field shall be populated. 
-    2. When populated, this field shall contain 12 alphanumerical characters, including a check digit. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.41 is populated with a MIC of a trading venue (RM, MTF or OTF) or of a systematic internaliser or with a MIC 'XOFF', this field shall be populated. 
+        2. When populated, this field shall contain 12 alphanumerical characters, including a check digit. #/
     assert internationalSecuritiesIdentificationNumber {
 
     }
 
     /# Field 2.8 Validation
-
-    1. If the field 2.7 is populated, this field shall be left blank.
-    2. If the field 2.7 is blank and the field 2.41 is not populated with a MIC of a third-country organised trading platform,  this field shall be populated 
-    3. If the field 2.7 is blank and the field 2.41 is populated with a MIC of a third-country organised trading platform,  this field is optional.
-    4. When populated, this field shall contain a valid UPI included in the UPI database maintained by the ANNA DSB.  12 alphanumerical characters, including a check digit. #/
+        1. If the field 2.7 is populated, this field shall be left blank.
+        2. If the field 2.7 is blank and the field 2.41 is not populated with a MIC of a third-country organised trading platform,  this field shall be populated 
+        3. If the field 2.7 is blank and the field 2.41 is populated with a MIC of a third-country organised trading platform,  this field is optional.
+        4. When populated, this field shall contain a valid UPI included in the UPI database maintained by the ANNA DSB.  12 alphanumerical characters, including a check digit. #/
     assert uniqueProductIdentifier {
 
     }
 
     /# Field 2.9 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory!
-    1. This field shall be populated with CFI code composed of 6 characters and compliant with ISO 10962 Standard. 
-    2. At least the first  2 characters of the CFI code and the character representing asset class (if applicable for a given instrument) shall be provided (ie. these characters cannot be "X",  which represents not applicable or undefined value). 
-    #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory!
+        1. This field shall be populated with CFI code composed of 6 characters and compliant with ISO 10962 Standard. 
+        2. At least the first  2 characters of the CFI code and the character representing asset class (if applicable for a given instrument) shall be provided (ie. these characters cannot be "X",  which represents not applicable or undefined value). 
+        #/
     assert productClassification {
 
     }
 
     /# Field 2.10 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
+         0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
     assert contractType {
 
     }
 
     /# Field 2.11 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
     assert assetClass {
 
     }
 
     /# Field 2.12 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
     assert derivativeBasedOnCryptoAssets {
 
     }
 
     /# Field 2.13 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.13 is populated with "I", this field shall be populated and shall contain 12 alphanumerical including  a check digit.
-    2. If field 2.13 is populated with "X", and this field is populated, it shall contain 12 alphanumerical characters including a check digit. 
-    3. If field 2.13 is not populated with "I" or "X", this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.13 is populated with "I", this field shall be populated and shall contain 12 alphanumerical including  a check digit.
+        2. If field 2.13 is populated with "X", and this field is populated, it shall contain 12 alphanumerical characters including a check digit. 
+        3. If field 2.13 is not populated with "I" or "X", this field shall be left blank. #/
     assert underlyingIdentificationType {
 
     }
 
     /# Field 2.14 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.13 is populated with "I", this field shall be populated and shall contain 12 alphanumerical including  a check digit.
-    2. If field 2.13 is populated with "X", and this field is populated, it shall contain 12 alphanumerical characters including a check digit. 
-    3. If field 2.13 is not populated with "I" or "X", this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.13 is populated with "I", this field shall be populated and shall contain 12 alphanumerical including  a check digit.
+        2. If field 2.13 is populated with "X", and this field is populated, it shall contain 12 alphanumerical characters including a check digit. 
+        3. If field 2.13 is not populated with "I" or "X", this field shall be left blank. #/
     assert underlyingIdentification {
 
     }
 
     /# Field 2.15 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    2. If field 2.13 is not populated with 'X', this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        2. If field 2.13 is not populated with 'X', this field shall be left blank. #/
     assert indicatorOfTheUnderlyingIndex {
 
     }
 
     /# Field 2.16 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.13 is populated with 'X', this field shall be populated and shall contain up to 50 alphanumerical characters. Otherwise this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.13 is populated with 'X', this field shall be populated and shall contain up to 50 alphanumerical characters. Otherwise this field shall be left blank. #/
     assert nameOfTheUnderlyingIndex {
 
     }
 
     /# Field 2.17 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.13 is populated with 'B', this field shall be populated and shall contain up to 72 alphanumeric characters. 
-    2. The first 20 characters of the custom basket name should be equal to an LEI code contained in GLEIF database.
-    3. Otherwise this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.13 is populated with 'B', this field shall be populated and shall contain up to 72 alphanumeric characters. 
+        2. The first 20 characters of the custom basket name should be equal to an LEI code contained in GLEIF database.
+        3. Otherwise this field shall be left blank. #/
     assert customBasketCode {
 
     }
 
     /# Field 2.18 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.13 is populated with 'B', this field shall be populated and shall contain 12 alphanumeric characters, including a check digit. This field is repeatable.
-        Otherwise this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.13 is populated with 'B', this field shall be populated and shall contain 12 alphanumeric characters, including a check digit. This field is repeatable.
+            Otherwise this field shall be left blank. #/
     assert identifierOfTheBasketsConstituents {
 
     }
 
     /# Field 2.19 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.47 is populated with 'CASH', this field shall be populated. 
-    2. If field 2.47 is populated with 'OPTL', this field is optional. 
-    3. When populated, this field shall contain ISO 4217 Currency Code (official list only), 3 alphabetical characters. 
-    4. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
-    5. If field 2.47 is populated with 'PHYS' this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.47 is populated with 'CASH', this field shall be populated. 
+        2. If field 2.47 is populated with 'OPTL', this field is optional. 
+        3. When populated, this field shall contain ISO 4217 Currency Code (official list only), 3 alphabetical characters. 
+        4. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
+        5. If field 2.47 is populated with 'PHYS' this field shall be left blank. #/
     assert settlementCurrency1 {
 
     }
 
     /# Field 2.20 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. When populated, this field shall contain ISO 4217 Currency Code (official list only), 3 alphabetical characters.
-    2. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
-    3. If field 2.47 is populated with 'PHYS' this field shall be left blank #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. When populated, this field shall contain ISO 4217 Currency Code (official list only), 3 alphabetical characters.
+        2. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
+        3. If field 2.47 is populated with 'PHYS' this field shall be left blank #/
     assert settlementCurrency2 {
 
     }
 
     /# Field 2.21 Validation
-    0. if action type is populated with 'VALU' the field shall be populate
-    00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank #/
+        0. if action type is populated with 'VALU' the field shall be populate
+        00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank #/
     assert valuationAmount {
 
     }
 
     /# Field 2.22 Validation
-    0. if action type is populated with 'VALU' the field shall be populate
-    00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
-    1. If field 2.21 is populated, this field shall be populated and shall contain ISO 4217 Currency Code (official list only), 3 alphabetical characters.
-    2. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
-    3. Otherwise, the field shall be left blank. #/
+        0. if action type is populated with 'VALU' the field shall be populate
+        00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
+        1. If field 2.21 is populated, this field shall be populated and shall contain ISO 4217 Currency Code (official list only), 3 alphabetical characters.
+        2. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
+        3. Otherwise, the field shall be left blank. #/
     assert valuationCurrency {
 
     }
 
     /# Field 2.23 Validation
-    0. if action type is populated with 'VALU' the field shall be populate
-    00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
-    1. If field 2.21 is populated, this field shall be populated in a common input format: YYYY-MM-DDThh:mm:ssZ
-    2. The valuation timestamp shall be equal or later than 2014-02-12.
-    3. The valuation timestamp shall be equal or later than the execution timestamp.
-    4. The valuation timestamp shall not be greater than the reporting timestamp.
-    5. The date part of the valuation timestamp shall not be greater than the expiration date or, where populated, the early termination date.
-    6. The date part of the valuation timestamp shall be equal to 2.153 Event date.
-    7. Otherwise, the field shall be left blank. #/
+        0. if action type is populated with 'VALU' the field shall be populate
+        00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
+        1. If field 2.21 is populated, this field shall be populated in a common input format: YYYY-MM-DDThh:mm:ssZ
+        2. The valuation timestamp shall be equal or later than 2014-02-12.
+        3. The valuation timestamp shall be equal or later than the execution timestamp.
+        4. The valuation timestamp shall not be greater than the reporting timestamp.
+        5. The date part of the valuation timestamp shall not be greater than the expiration date or, where populated, the early termination date.
+        6. The date part of the valuation timestamp shall be equal to 2.153 Event date.
+        7. Otherwise, the field shall be left blank. #/
     assert valuationTimestamp {
 
     }
 
     /# Field 2.24 Validation
-    0. if action type is populated with 'VALU' the field shall be populate
-    00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
-    1. If field 2.21 is populated and field 2.31 is populated with 'Y',  this field shall be populated with 'CCPV'.
-    2. If field 2.21 is populated and field 2.31 is populated with 'N', this field shall be populated with 'MTMA' or 'MTMO' . 4 alphabetical characters.
-    3. Otherwise, the field shall be left blank. #/
+        0. if action type is populated with 'VALU' the field shall be populate
+        00. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
+        1. If field 2.21 is populated and field 2.31 is populated with 'Y',  this field shall be populated with 'CCPV'.
+        2. If field 2.21 is populated and field 2.31 is populated with 'N', this field shall be populated with 'MTMA' or 'MTMO' . 4 alphabetical characters.
+        3. Otherwise, the field shall be left blank. #/
     assert valuationMethod {
 
     }
 
     /# Field 2.25 Validation
-    0. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
-    1. If field 2.21 is populated, field 2.10 is populated with 'OPTN' or 'SWPT' and field 2.13 is not populated with 'B', this field shall be populated. 
-    2. When populated, this field shall contain up to 25 numeric characters including up to 5 decimal places.  Otherwise this field shall be left blank.
-        The decimal mark is not counted as a numeric character. If populated, it shall be represented by a dot.
-    3. Any value between -1 and 1 (including -1 and 1) is allowed.
-    The negative symbol, if populated, shall not be counted as a numerical character. #/
+        0. if action type is populated with 'MODI','TERM','EROR' the field shall be left blank
+        1. If field 2.21 is populated, field 2.10 is populated with 'OPTN' or 'SWPT' and field 2.13 is not populated with 'B', this field shall be populated. 
+        2. When populated, this field shall contain up to 25 numeric characters including up to 5 decimal places.  Otherwise this field shall be left blank.
+            The decimal mark is not counted as a numeric character. If populated, it shall be represented by a dot.
+        3. Any value between -1 and 1 (including -1 and 1) is allowed.
+        The negative symbol, if populated, shall not be counted as a numerical character. #/
     assert delta {
 
     }
 
     /# Field 2.26 Validation
-    0. if action type is populated with 'NEWT','MODI','CORR','REVI','POSC' the field shall be populated otherwise shall be left blank #/
+        0. if action type is populated with 'NEWT','MODI','CORR','REVI','POSC' the field shall be populated otherwise shall be left blank #/
     assert collateralPortfolioIndicator {
 
     }
 
     /# Field 2.27 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.26 is populated with 'TRUE', this field shall be populated and shall contain up to 52 alphanumerical characters. Special characters are not allowed. 
-        Otherwise, the field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.26 is populated with 'TRUE', this field shall be populated and shall contain up to 52 alphanumerical characters. Special characters are not allowed. 
+            Otherwise, the field shall be left blank. #/
     assert collateralPortfolioCode {
 
     }
 
     /# Field 2.28 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.29 is populated with 'ECNF' or 'YCNF', this field shall be populated in a common input format: YYYY-MM-DDThh:mm:ssZ.
-    2. The confirmation timestamp shall be greater than or equal to the Execution timestamp.
-    3. The confirmation timestamp shall not be greater than the reporting timestamp.
-    4. The date part of the confirmation timestamp shall not be greater than the expiration date or, where populated, the early termination date.
-    5. If field 2.29 is populated with 'NCNF', this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.29 is populated with 'ECNF' or 'YCNF', this field shall be populated in a common input format: YYYY-MM-DDThh:mm:ssZ.
+        2. The confirmation timestamp shall be greater than or equal to the Execution timestamp.
+        3. The confirmation timestamp shall not be greater than the reporting timestamp.
+        4. The date part of the confirmation timestamp shall not be greater than the expiration date or, where populated, the early termination date.
+        5. If field 2.29 is populated with 'NCNF', this field shall be left blank. #/
     assert confirmationTimestamp {
 
     }
 
     /# Field 2.29 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.41 is not populated with a MIC code of a trading venue that was a regulated market or a third-country market considered as equivalent to a regulated market at the time of the conclusion of the derivative and field 2.31 is populated with "N", this field shall be populated and shall contain only one of the following values: 'YCNF', 'NCNF' or 'ECNF'. 4 alphabetical characters.
-        Otherwise this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.41 is not populated with a MIC code of a trading venue that was a regulated market or a third-country market considered as equivalent to a regulated market at the time of the conclusion of the derivative and field 2.31 is populated with "N", this field shall be populated and shall contain only one of the following values: 'YCNF', 'NCNF' or 'ECNF'. 4 alphabetical characters.
+            Otherwise this field shall be left blank. #/
     assert confirmed {
 
     }
 
     /# Field 2.30 Validation
-    0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-    1. If field 2.41 is not populated with a MIC code of a trading venue that was a regulated market or a third-country market considered as equivalent to a regulated market at the time of the conclusion of the derivative, this field shall be populated and shall contain one of the following values 'TRUE' , 'FLSE' or 'UKWN'. 
-    2. If field 2.31 is populated with 'Y', this field shall be populated with 'UKWN'. 4 alphabetical characters.
-    3. Otherwise this field shall be left blank. #/
+        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        1. If field 2.41 is not populated with a MIC code of a trading venue that was a regulated market or a third-country market considered as equivalent to a regulated market at the time of the conclusion of the derivative, this field shall be populated and shall contain one of the following values 'TRUE' , 'FLSE' or 'UKWN'. 
+        2. If field 2.31 is populated with 'Y', this field shall be populated with 'UKWN'. 4 alphabetical characters.
+        3. Otherwise this field shall be left blank. #/
     assert clearingObligation {
 
     }
