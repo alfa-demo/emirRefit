@@ -37,7 +37,10 @@ enum ActionType {
 }
 
 enum CorporateSectorType {
-    INVF,CDTI,INUN,UCIT,ORPI,AIFD,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U
+    # Taxonomy for Financial Counterparties
+    INVF,CDTI,INUN,UCIT,ORPI,AIFD,
+    #Taxonomy for Non-Financial Counterparties.
+    A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U
 }
 
 enum NatureOfCounterpartyType {

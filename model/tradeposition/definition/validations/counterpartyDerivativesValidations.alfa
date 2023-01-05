@@ -36,8 +36,8 @@ fragment record derivativesTradeReport {
     }
     /# Field 1.6 Validation
         0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-        1. If field 1.5 is populated with 'F', at least one code pertaining to the classification of the financial counterparties shall be provided.
-        2. If field 1.5 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties shall be provided.
+        1. If field 1.5 is populated with 'F', at least one code pertaining to the classification of the financial counterparties (INVF,CDTI,INUN,UCIT,ORPI,AIFD) shall be provided.
+        2. If field 1.5 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties (A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U) shall be provided.
         3. If field 1.5 is populated with 'C' or 'O', this field shall be left blank.#/
     assert corporateSectorOfCounterparty1 {
         if (( actionType == ActionType.VALU || actionType == ActionType.TERM || actionType == ActionType.EROR ) && isSome( corporateSectorOfCounterparty1 ) )
