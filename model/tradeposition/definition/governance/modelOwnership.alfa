@@ -5,6 +5,6 @@ fragment trait derivativesTradeReport{
 }
 
 @ModelOwner(Org="CommoGovGroup")
-fragmet record commoditiesEnergy {
+fragment record commoditiesEnergy {
 
 }
