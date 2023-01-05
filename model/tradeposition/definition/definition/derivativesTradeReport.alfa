@@ -1,10 +1,18 @@
 /# 
-   # Introduction
-   
+   #### Introduction
+
    Canonical ALFA representation of  - ESMA Regulatory Technical Standards (RTS) and  Implementing Technical Standards (ITS) 
    in the Official Journal of the European Union of 07.10.2022-TR depicting one authorative source of data elements across enterprise's multiple source systems. 
    
-   All systems across the enterprise will use data as defined in this model to produce and consume data, allowing re-use of collected data across the enterprise. #/
+   * This is a bullet
+   * This is another
+
+   All systems across the enterprise will use data as defined in this model to produce and consume data, allowing re-use of collected data across the enterprise. 
+
+   For further details on EMIR REFIT, see [EMIR REFIT Guidelines from ESMA](https://www.esma.europa.eu/sites/default/files/library/esma74-362-2281_final_report_guidelines_emir_refit.pdf)
+   #/
+
+   
 namespace Model
 
 /# The base type for Trade and Position capturing all common Trade and Position data related fields.#/        
