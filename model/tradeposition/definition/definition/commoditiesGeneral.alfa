@@ -3,28 +3,22 @@ namespace Model
 # Section 2j - Commodities and emission allowances (General) derivative
 record commoditiesGeneral includes derivativesTradeReport {
 
-    /# 
-    Field 2.116
-    Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
+    /# Field 2.116 - Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
     baseProduct : classificationType?
 
-    /# 
-    Field 2.117
-    Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
-    This field requires a specific base product in field.#/
+    /# Field 2.117 - Sub - product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+       This field requires a specific base product in field.#/
     subProduct : classificationType?
 
-    /# 
-    Field 2.118
-    Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
-    This field requires a specific base product in field.#/
+    /# Field 2.118 - Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+       This field requires a specific base product in field.#/
     furtherSubProduct : classificationType?
 }
 
 # The manner in which commodties are classified in Table 4 of Annex I of the [ITS]
 union classificationType {
     # in case the base product is Metals
-    baseProduct: enum <METL>
+    baseProduct: BaseProductType
 
     # the sub product of a base commodity
     subProduct: enum< preciousSubProductType, nonPreciousSubProductType>
@@ -40,10 +34,17 @@ record nonPreciousSubProductType {
     furtherSubProduct : enum < ALUM, ALUA, CBLT, COPR, IRON, LEAD, MOLY, NASC, NICK, STEL, TINN, ZINC, OTHR>
 }
 
+enum BaseProductType {
+    METL
+}
 
+enum SubProductType includes MetlSubProductType {
 
+}
 
-
+enum MetlSubProductType {
+    NPRM, PRME
+}
 
 
 
