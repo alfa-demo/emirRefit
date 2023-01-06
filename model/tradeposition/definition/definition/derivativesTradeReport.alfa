@@ -51,54 +51,69 @@ trait derivativesTradeReport {
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
+    @fieldClassification(Classification= fieldClassificationType.Other)   
     corporateSectorOfCounterparty1 : list<CorpSectorType>?
         
     /# Field 1.7 - Information whether the counterparty 1 (Reporting counterparty) is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
        the transaction was concluded. #/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     clearingThresholdOfCounterparty1 : boolean?
         
     /# Field 1.8 - Indicator of whether LEI was used to identify the Counterparty 2.#/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     counterparty2IdentifierType : boolean
         
     /# Field 1.9 - Identifier of the second counterparty to a derivative transaction.#/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     counterparty2 : string("[A-Z0-9]{72,72}")
         
     /# Field 1.10 - In case the counterparty 2 is a natural person, the code of country of residence of that person.#/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     countryOfCounterparty2 : isoCtyCode?
         
     /# Field 1.11 - Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or 
        points 1, 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     natureOfCounterparty2 : NatureOfCounterpartyType?
         
     /# Field 1.12 - Nature of the counterparty 2's company activities. If the counterparty 2 is a Financial Counterparty, this field shall contain all necessary codes included in 
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 2 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     corporateSectorOfCounterparty2 : list<CorpSectorType>?
         
     /# Field 1.13 - Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
        when the transaction was concluded. #/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     clearingThresholdOfCounterparty2 : boolean?
         
     /# Field 1.14 - Indicator of whether the counterparty 2 has the reporting obligation under EMIR (irrespective of who is responsible and legally liable for its reporting).#/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     reportingObligationOfCounterparty2 : boolean?
         
     /# Field 1.15 - In the case a broker acts as intermediary for the counterparty 1 without becoming a counterparty himself, the counterparty 1 shall identify this broker by a unique code.#/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     brokerId : isoLEI?
         
     /# Field 1.16 - Identifier of the clearing member through which a derivative transaction was cleared at a central counterparty.#/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     clearingMember : isoLEI?
         
     /# Field 1.17 - Indicator of whether the counterparty 1 is the buyer or the seller as determined at the time of the transaction.#/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     direction : enum<BYER,SLLR>?
         
     /# Field 1.18 - Indicator of whether the counterparty 1 is the payer or the receiver of leg 1 as determined at the time of the of the conclusion of the derivative.#/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     directionOfLeg1 : enum<MAKE,TAKE >?
         
     /# Field 1.19 - Indicator of whether the counterparty 1 is the payer or the receiver of leg 2 as determined at the time of the conclusion of the derivative.#/
+    @fieldClassification(Classification= fieldClassificationType.CDE)
     directionOfLeg2 : enum<MAKE,TAKE >?
         
     /#  Field 1.20 - This field shall be populated only where the counterparty 1 is a non-financial counterparty, as referred to in Article 2 (9) of the Regulation (EU) No 648/2012.#/
+    @fieldClassification(Classification= fieldClassificationType.Other)
     directlyLinkedToCommercialActivityOrTreasuryFinancing : boolean?
         
     /# Field 2.1 - Unique Trade Identifier as referred to in Article 7 of the [ITS].#/

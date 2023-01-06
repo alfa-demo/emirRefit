@@ -6,5 +6,20 @@ fragment trait derivativesTradeReport{
 
 @ModelOwner(Org="CommoGovGroup")
 fragment record commoditiesEnergy {
+}
 
+@ModelOwner(Org="CommoGovGroup")
+fragment record commoditiesGeneral {
+}
+
+@ModelOwner(Org="CreditGovGroup")
+fragment record creditDerivatives {
+}
+
+@ModelOwner(Org="FXGovGroup")
+fragment record foreignExchange {
+}
+
+@ModelOwner(Org="IRGovGroup")
+fragment record interestRates {
 }
