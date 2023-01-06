@@ -4,6 +4,14 @@ namespace Model
 fragment trait derivativesTradeReport{
 }
 
+@ModelOwner(Org="DataGovGroup")
+fragment record classificationType {
+}
+
+@ModelOwner(Org="DataGovGroup")
+fragment record Lineage {
+}
+
 @ModelOwner(Org="CommoGovGroup")
 fragment record commoditiesEnergy {
 }
@@ -23,3 +31,5 @@ fragment record foreignExchange {
 @ModelOwner(Org="IRGovGroup")
 fragment record interestRates {
 }
+
+
