@@ -51,7 +51,7 @@ trait derivativesTradeReport {
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    corporateSectorOfCounterparty1 : list<CorporateSectorType>?
+    corporateSectorOfCounterparty1 : list<CorpSectorType>?
         
     /# Field 1.7 - Information whether the counterparty 1 (Reporting counterparty) is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
        the transaction was concluded. #/
@@ -74,7 +74,7 @@ trait derivativesTradeReport {
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 2 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    corporateSectorOfCounterparty2 : list<CorporateSectorType>?
+    corporateSectorOfCounterparty2 : list<CorpSectorType>?
         
     /# Field 1.13 - Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
        when the transaction was concluded. #/

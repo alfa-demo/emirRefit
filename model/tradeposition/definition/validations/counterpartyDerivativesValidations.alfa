@@ -16,35 +16,52 @@ fragment record derivativesTradeReport {
     1. For action types 'NEWT', 'MODI', 'VALU', 'CORR', 'REVI' and 'POSC': this field shall contain a valid LEI included in the GLEIF database maintained by the Central Operating Unit. 
     2. The status of the LEI for all the above action types shall be "Issued", "Lapsed", "Pending transfer" or "Pending archival".
     3. For action types 'TERM' and 'EROR': This field shall contain an LEI included in the GLEIF database maintained by the Central Operating Unit, irrespective of the registration status of that LEI.
-    4. The LEI shall pertain to a legal entity and not a branch.
-    Correct status of the LEI should be verified as of the date reported in the field 1.1 Reporting timestamp.
+    4. The LEI shall pertain to a legal entity and not a branch. Correct status of the LEI should be verified as of the date reported in the field 1.1 Reporting timestamp.
     #/
     assert reportSubmittingEntityId {
-        let validActionTypes = { ActionType.NEWT, ActionType.MODI, ActionType.VALU, ActionType.CORR, ActionType.REVI, ActionType.POSC }
+        let actionTypes = { ActionType.NEWT, ActionType.MODI, ActionType.VALU, ActionType.CORR, ActionType.REVI, ActionType.POSC }
 
-        if ( contains( validActionTypes, actionType ))
+        if ( contains( actionTypes, actionType ))
             debug("check in the GLEIF database")
 
         // ...
     }
     /# Field 1.5 Validation #/
     assert natureOfCounterparty1 {
-        if ( ( actionType == ActionType.NEWT || actionType == ActionType.MODI 
-            || actionType == ActionType.CORR || actionType == ActionType.REVI 
-            || actionType == ActionType.POSC)  && isNone( natureOfCounterparty1 ) )
+        let actionTypes = { ActionType.NEWT, ActionType.MODI, ActionType.CORR, ActionType.REVI, ActionType.POSC }
+
+        if ( contains( actionTypes, actionType)  && isNone( natureOfCounterparty1 ) )
             raise error ("EMIR-VR-1005-01, this field is mandatory for action types 'NEWT', 'MODI','CORR', 'REVI', and 'POSC" )
     }
     /# Field 1.6 Validation
-        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-        1. If field 1.5 is populated with 'F', at least one code pertaining to the classification of the financial counterparties (INVF,CDTI,INUN,UCIT,ORPI,AIFD) shall be provided.
-        2. If field 1.5 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties (A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U) shall be provided.
-        3. If field 1.5 is populated with 'C' or 'O', this field shall be left blank.#/
+        1. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
+        2. If field 1.5 is populated with 'F', at least one code pertaining to the classification of the financial counterparties (INVF,CDTI,INUN,UCIT,ORPI,AIFD) shall be provided.
+        3. If field 1.5 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties (A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U) shall be provided.
+        4. If field 1.5 is populated with 'C' or 'O', this field shall be left blank.#/
     assert corporateSectorOfCounterparty1 {
-        if (( actionType == ActionType.VALU || actionType == ActionType.TERM || actionType == ActionType.EROR ) && isSome( corporateSectorOfCounterparty1 ) )
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+
+        let financials = {CorpSectorType.INVF, CorpSectorType.CDTI, CorpSectorType.INUN, CorpSectorType.UCIT, CorpSectorType.ORPI, CorpSectorType.AIFD }
+        
+        let nonfinancials = {CorpSectorType.A, CorpSectorType.B, CorpSectorType.C, CorpSectorType.D, CorpSectorType.E, CorpSectorType.F, CorpSectorType.G, 
+                             CorpSectorType.H, CorpSectorType.I, CorpSectorType.J, CorpSectorType.K, CorpSectorType.L, CorpSectorType.M, CorpSectorType.N, 
+                             CorpSectorType.O, CorpSectorType.P, CorpSectorType.Q, CorpSectorType.T, CorpSectorType.U
+                            }
+
+        if ( contains( actionTypes, actionType ) && isSome( corporateSectorOfCounterparty1 ) )
             raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
-        if ( isSome(natureOfCounterparty1) && get(natureOfCounterparty1) == NatureOfCounterpartyType.F )
-           debug("TBC")
+        if ( isSome(natureOfCounterparty1) && get(natureOfCounterparty1) == NatureOfCounterpartyType.N && 
+             !isSome(corporateSectorOfCounterparty1) && len( filter( get(corporateSectorOfCounterparty1), e => contains(nonfinancials, e ) ) ) == 0 ) 
+            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties" )
+
+        if ( isSome(natureOfCounterparty1) && get(natureOfCounterparty1) == NatureOfCounterpartyType.F && 
+             !isSome(corporateSectorOfCounterparty1) && len( filter( get(corporateSectorOfCounterparty1), e => contains(financials, e ) ) ) == 0 ) 
+            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'F', at least one code pertaining to the classification of the financial counterparties" )
+
+        if ( isSome(natureOfCounterparty1) && isSome(corporateSectorOfCounterparty1) && 
+             contains( { NatureOfCounterpartyType.C, NatureOfCounterpartyType.O }, get(natureOfCounterparty1) ) )
+            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'C' or 'O', this field shall be left blank" )
     }
 
     /# Field 1.7 Validation
@@ -67,6 +84,9 @@ fragment record derivativesTradeReport {
         1. If field 1.8 is populated with 'FALSE', this field shall be populated and shall contain 2 alphabetical characters
         2. If field 1.8 is populated with 'TRUE', this field shall be left blank #/
     assert countryOfCounterparty2 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( countryOfCounterparty2 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -75,6 +95,9 @@ fragment record derivativesTradeReport {
         1. If field 1.8 is populated with 'TRUE', this field shall be populated and shall contain only one of the following values: 'F', 'N', 'C' or 'O'. 1 alphabetical character.
         2. If field 1.8 is populated with 'FALSE', this field shall be left blank. #/
     assert natureOfCounterparty2 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( natureOfCounterparty2 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -84,6 +107,9 @@ fragment record derivativesTradeReport {
         2. If field 1.11 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties shall be provided.
         3. If field 1.11 is populated with 'C' ,  'O' or is blank, this field shall be left blank. #/
     assert corporateSectorOfCounterparty2 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( corporateSectorOfCounterparty2 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -92,6 +118,9 @@ fragment record derivativesTradeReport {
         1. If field 1.11 is populated with 'N' or 'F', this field shall be populated and shall contain only one of the following values: 'TRUE' or 'FALSE'. 
         2. If field 1.11 is populated with 'C', 'O' or is blank, this field shall be left blank. #/
     assert clearingThresholdOfCounterparty2 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( clearingThresholdOfCounterparty2 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -100,12 +129,18 @@ fragment record derivativesTradeReport {
         1. This field shall contain only one of the following values: 'TRUE' or 'FALSE'. think this is sorted by boolean?
         2. If the field 1.8 is populated with 'FALSE' , this field shall be populated with 'FALSE'. #/
     assert reportingObligationOfCounterparty2 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( reportingObligationOfCounterparty2 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
     /# Field 1.15 Validation
        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank #/
     assert brokerId {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( brokerId ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -119,6 +154,9 @@ fragment record derivativesTradeReport {
         5. If field 2.31 is populated with 'N', this field shall be left blank.
         6. Fields 1.16 and 2.33 cannot contain the same LEI #/
     assert clearingMember {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( clearingMember ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -127,6 +165,9 @@ fragment record derivativesTradeReport {
         1. Either field 1.17 or both fields 1.18 and 1.19 shall be populated.
         2. If populated, this field shall contain only one of the following values: 'BYER' or 'SLLR'. 4 alphabetical characters. #/
     assert direction {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( direction ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -136,6 +177,9 @@ fragment record derivativesTradeReport {
         2. If populated, this field shall contain only one of the following values: 'MAKE' or 'TAKE'. 4 alphabetical characters. 
         3. If populated, this field shall contain a different value than field 1.19. #/
     assert directionOfLeg1 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( directionOfLeg1 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -145,6 +189,9 @@ fragment record derivativesTradeReport {
         2. If populated, this field shall contain only one of the following values: 'MAK'E or 'TAKE'. 4 alphabetical characters. 
         3. If populated, this field shall contain a different value than field 1.18. #/
     assert directionOfLeg2 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( directionOfLeg2 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -154,6 +201,9 @@ fragment record derivativesTradeReport {
         only one of the following values: 'TRUE' or 'FALSE'. 
         2. If field 1.5 is populated with 'F', 'C' or 'O' or if field 2.154 is populated with 'PSTN', this field shall be left blank. #/
     assert directlyLinkedToCommercialActivityOrTreasuryFinancing {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( directlyLinkedToCommercialActivityOrTreasuryFinancing ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -164,6 +214,9 @@ fragment record derivativesTradeReport {
         2. The code reported in this field shall be different from the codes reported in fields 2.1, 2.3 or 2.4.
         3. If field 2.41 is populated with a MIC that does not pertain to a trading venue (including XXXX and XOFF), this field shall be left blank. #/
     assert  reportTrackingNumber {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( reportTrackingNumber ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -175,6 +228,9 @@ fragment record derivativesTradeReport {
         4. When populated, this field shall contain up to 52 alphanumerical characters. Four special characters are allowed ":", ".",  "-", " _" .  Special characters not allowed at the beginning or the end. 
         5. The code reported in this field shall be different from the codes reported in fields 2.1, 2.2 or 2.4. #/
     assert priorUti {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( priorUti ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -197,6 +253,9 @@ fragment record derivativesTradeReport {
         3. When populated, this field shall contain up to 52 alphanumerical characters where only the the upper-case alphabetic characters A–Z and the digits 0–9 are allowed. 
         4. The first 20 characters of the PTRR ID should be equal to the LEI reported in the field 2.40 PTRR service provider #/
     assert postTradeRiskReduction {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( postTradeRiskReduction ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -211,6 +270,9 @@ fragment record derivativesTradeReport {
         1. If field 2.41 is populated with a MIC of a trading venue (RM, MTF or OTF) or of a systematic internaliser or with a MIC 'XOFF', this field shall be populated. 
         2. When populated, this field shall contain 12 alphanumerical characters, including a check digit. #/
     assert internationalSecuritiesIdentificationNumber {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( internationalSecuritiesIdentificationNumber ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -229,24 +291,36 @@ fragment record derivativesTradeReport {
         2. At least the first  2 characters of the CFI code and the character representing asset class (if applicable for a given instrument) shall be provided (ie. these characters cannot be "X",  which represents not applicable or undefined value). 
         #/
     assert productClassification {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( productClassification ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
     /# Field 2.10 Validation
          0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
     assert contractType {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( contractType ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
     /# Field 2.11 Validation
         0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
     assert assetClass {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( assetClass ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
     /# Field 2.12 Validation
         0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank else mandatory! #/
     assert derivativeBasedOnCryptoAssets {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( derivativeBasedOnCryptoAssets ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -256,6 +330,9 @@ fragment record derivativesTradeReport {
         2. If field 2.13 is populated with "X", and this field is populated, it shall contain 12 alphanumerical characters including a check digit. 
         3. If field 2.13 is not populated with "I" or "X", this field shall be left blank. #/
     assert underlyingIdentificationType {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( underlyingIdentificationType ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -265,6 +342,9 @@ fragment record derivativesTradeReport {
         2. If field 2.13 is populated with "X", and this field is populated, it shall contain 12 alphanumerical characters including a check digit. 
         3. If field 2.13 is not populated with "I" or "X", this field shall be left blank. #/
     assert underlyingIdentification {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( underlyingIdentification ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -272,6 +352,9 @@ fragment record derivativesTradeReport {
         0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
         2. If field 2.13 is not populated with 'X', this field shall be left blank. #/
     assert indicatorOfTheUnderlyingIndex {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( indicatorOfTheUnderlyingIndex ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -279,6 +362,9 @@ fragment record derivativesTradeReport {
         0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
         1. If field 2.13 is populated with 'X', this field shall be populated and shall contain up to 50 alphanumerical characters. Otherwise this field shall be left blank. #/
     assert nameOfTheUnderlyingIndex {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( nameOfTheUnderlyingIndex ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -288,6 +374,9 @@ fragment record derivativesTradeReport {
         2. The first 20 characters of the custom basket name should be equal to an LEI code contained in GLEIF database.
         3. Otherwise this field shall be left blank. #/
     assert customBasketCode {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( customBasketCode ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -296,6 +385,9 @@ fragment record derivativesTradeReport {
         1. If field 2.13 is populated with 'B', this field shall be populated and shall contain 12 alphanumeric characters, including a check digit. This field is repeatable.
             Otherwise this field shall be left blank. #/
     assert identifierOfTheBasketsConstituents {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( identifierOfTheBasketsConstituents ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -307,6 +399,9 @@ fragment record derivativesTradeReport {
         4. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
         5. If field 2.47 is populated with 'PHYS' this field shall be left blank. #/
     assert settlementCurrency1 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( settlementCurrency1 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -316,6 +411,9 @@ fragment record derivativesTradeReport {
         2. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
         3. If field 2.47 is populated with 'PHYS' this field shall be left blank #/
     assert settlementCurrency2 {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( settlementCurrency2 ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -368,6 +466,9 @@ fragment record derivativesTradeReport {
         3. Any value between -1 and 1 (including -1 and 1) is allowed.
         The negative symbol, if populated, shall not be counted as a numerical character. #/
     assert delta {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( delta ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -382,6 +483,9 @@ fragment record derivativesTradeReport {
         1. If field 2.26 is populated with 'TRUE', this field shall be populated and shall contain up to 52 alphanumerical characters. Special characters are not allowed. 
             Otherwise, the field shall be left blank. #/
     assert collateralPortfolioCode {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( collateralPortfolioCode ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -393,6 +497,9 @@ fragment record derivativesTradeReport {
         4. The date part of the confirmation timestamp shall not be greater than the expiration date or, where populated, the early termination date.
         5. If field 2.29 is populated with 'NCNF', this field shall be left blank. #/
     assert confirmationTimestamp {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( confirmationTimestamp ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -401,6 +508,9 @@ fragment record derivativesTradeReport {
         1. If field 2.41 is not populated with a MIC code of a trading venue that was a regulated market or a third-country market considered as equivalent to a regulated market at the time of the conclusion of the derivative and field 2.31 is populated with "N", this field shall be populated and shall contain only one of the following values: 'YCNF', 'NCNF' or 'ECNF'. 4 alphabetical characters.
             Otherwise this field shall be left blank. #/
     assert confirmed {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( confirmed ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
 
@@ -410,26 +520,12 @@ fragment record derivativesTradeReport {
         2. If field 2.31 is populated with 'Y', this field shall be populated with 'UKWN'. 4 alphabetical characters.
         3. Otherwise this field shall be left blank. #/
     assert clearingObligation {
+        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        if ( contains( actionTypes, actionType ) && isSome( clearingObligation ) )
+            raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field shall be left blank" )
 
     }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+library ActionTypeCheck {
 }
