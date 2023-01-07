@@ -1,4 +1,4 @@
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
 # Section 2h - Interest Rates derivative
 record interestRates includes derivativesTradeReport {

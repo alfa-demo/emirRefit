@@ -1,10 +1,10 @@
-namespace Compliance
+namespace ALFABANK.Regulatory.Compliance
 
 
 # Annotation to be used for Personal Identifiable Info against various definitions
 annotation PII (entity, record, trait, field ) {
     # Sensitivity of the PII
-    Sensitivity : DataSensitivity = DataSensitivity.Low
+    Sensitivity : DataSensitivity = DataSensitivity.Medium
 
     # Classification of the PII
     Classification : DataClassification = DataClassification.InternalOnly
@@ -26,6 +26,7 @@ enum RegionCode {
     China
 
     # See [Published docs](https://gdpr-info.eu/)
+    @CloudRegion( gcpRegions = [ "europe-west2", "europe-west1", "europe-west4", "europe-west6"], azureRegions = ["Switzerland North"] )
     Europe
     
     # See [Published docs](https://www.linklaters.com/en/insights/data-protected/data-protected---india)
@@ -35,20 +36,20 @@ enum RegionCode {
     Singapore
 
     # See [Published docs](https://www.linklaters.com/en/insights/data-protected/data-protected---switzerland)
-    @CloudRegion( gcpRegions = [ "europe-west6" ], azureRegions = ["Switzerland North"] )
+    @CloudRegion( gcpRegions = [ "europe-west2", "europe-west1", "europe-west4", "europe-west6"], azureRegions = ["Switzerland North"] )
     Swiss
     
     US
 }
 
-# Locations a target type can be considered as having valid residieny
-annotation Residency ( record, entity ) {
+# Locations a target type can be considered as having valid residency
+annotation Residency ( trait, record, entity ) {
     # Valid regions for this residency
     Locations : list< RegionCode >          
 }
 
 # Regions by Cloud vendors to be used to mark RegionCode specific vendor regions
-annotation CloudRegion ( field ) {
+annotation CloudRegion ( entity, record, trait, field ) {
     # Based on https://azure.microsoft.com/en-gb/global-infrastructure/geographies/
     azureRegions : list< string >?
 
@@ -56,5 +57,5 @@ annotation CloudRegion ( field ) {
     awsRegions : list< string >?
 
     # Based on https://cloud.google.com/about/locations
-    gcpRegions : list< string >?
+    gcpRegions : list < string >?
 }

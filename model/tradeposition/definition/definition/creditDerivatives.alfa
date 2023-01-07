@@ -1,4 +1,4 @@
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
 # Section 2m – Credit derivatives derivative
 record creditDerivatives includes derivativesTradeReport {

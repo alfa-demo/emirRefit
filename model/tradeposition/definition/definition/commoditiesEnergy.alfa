@@ -1,4 +1,4 @@
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
 # Section 2k - Commodities and emission allowances (Energy) derivative
 record commoditiesEnergy includes derivativesTradeReport {

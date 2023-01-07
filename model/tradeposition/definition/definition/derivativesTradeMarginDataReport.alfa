@@ -1,5 +1,5 @@
 
- namespace Model
+ namespace ALFABANK.Regulatory.Margin
 
     /# The base type for margins data capturing all common data elements.#/
         

@@ -11,7 +11,7 @@ record Message {
     CreateTs : datetime = timestamp()                       ## Message created timestamp
     ExpiryTs : datetime?                                    ## Message expriry timestamp if applicable
     Priority : int( 1, 10) = 5                              ## Message processing priority, 10 highest, 1 lowest
-    RestrictToRegions : list< Compliance.RegionCode >?      ## List of regions the message should be limited. If empty, unrestricted.
+    RestrictToRegions : list< ALFABANK.Regulatory.Compliance.RegionCode >?      ## List of regions the message should be limited. If empty, unrestricted.
 }
 
 # Service to interact with messages

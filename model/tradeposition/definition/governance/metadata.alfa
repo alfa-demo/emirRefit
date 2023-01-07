@@ -1,4 +1,4 @@
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
 # Metadata for data lineage. This can be a field in the model or maintained 
 # separately as tagged data against a target record

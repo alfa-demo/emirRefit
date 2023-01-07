@@ -13,9 +13,12 @@
    #/
 
    
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
-/# The base type for Trade and Position capturing all common Trade and Position data related fields.#/        
+/# The base type for Trade and Position capturing all common Trade and Position data related fields.#/
+@ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.Medium, Classification = Compliance.DataClassification.InternalOnly)
+//@ALFABANK.Regulatory.Residency ( Locations= [])
+      
 trait derivativesTradeReport {
 
     /# Field 1.1 - Date and time of the submission of the report to the trade repository.#/

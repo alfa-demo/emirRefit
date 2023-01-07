@@ -1,4 +1,4 @@
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
 # Section 2i – Foreign Exchange derivative
 record foreignExchange includes derivativesTradeReport {

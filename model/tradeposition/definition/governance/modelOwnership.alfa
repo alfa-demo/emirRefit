@@ -1,12 +1,12 @@
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
 @ModelOwner(Org="DataGovGroup")
 fragment trait derivativesTradeReport{
 }
 
-@ModelOwner(Org="ComplianceGovGroup")
-fragment record classificationType {
-}
+#@ModelOwner(Org="ComplianceGovGroup")
+#fragment record classificationType {
+#}
 
 @ModelOwner(Org="DataGovGroup")
 fragment record Lineage {

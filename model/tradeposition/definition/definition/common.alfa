@@ -9,7 +9,7 @@ typedefs {
     eicCode      = native referenceData.EicCode
 }
 
-namespace Model
+namespace ALFABANK.Regulatory.Model
 
 /#  Field 2.151 #/
 enum ActionType {
