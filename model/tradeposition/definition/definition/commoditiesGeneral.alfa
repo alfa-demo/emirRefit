@@ -1,7 +1,7 @@
 namespace ALFABANK.Regulatory.Model
 
 # Section 2j - Commodities and emission allowances (General) derivative
-record commoditiesGeneral includes ALFABANK.Regulatory.Model.derivativesTradeReport {
+record commoditiesGeneral includes derivativesTradeReport {
     /# Field 2.116 ## Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
     @fieldClassification(Classification= fieldClassificationType.Other)
     baseProduct : BaseProductType
