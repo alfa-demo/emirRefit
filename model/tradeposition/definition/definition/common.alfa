@@ -1,12 +1,12 @@
 typedefs {
-    isoLEI       = string("[A-Z0-9]{18,18}[0-9]{2,2}")
-    isoCtyCode   = string("[A-Z]{3,3}")
-    isoISIN      = string
-    isoUPI       = string
-    isoCFI       = string
-    isoMktId     = native org.iso.MktIdISO10383
-    isoCcy       = native org.iso.CcyISO4217
-    eicCode      = native eu.standards.EicCode
+    isoLEI       = native referenceData.LEI #string("[A-Z0-9]{18,18}[0-9]{2,2}")
+    isoCtyCode   = native referenceData.CountryCodeISO3166Alpha2code #string("[A-Z]{3,3}")
+    isoISIN      = native referenceData.ISIN 
+    isoUPI       = native referenceData.UPI
+    isoCFI       = native referenceData.CFIISO10962
+    isoMktId     = native referenceData.MktIdISO10383
+    isoCcy       = native referenceData.CcyISO4217
+    eicCode      = native referenceData.EicCode
 }
 
 namespace Model

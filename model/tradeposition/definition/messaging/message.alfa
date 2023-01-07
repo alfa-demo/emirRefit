@@ -1,0 +1,26 @@
+# A module containing definitions how a container-like Message supports transporting objects along with associated metadata.
+namespace Messaging
+
+# A priority based message containing list of records as a payload
+record Message {
+    Id : uuid                                               ## Unique message id
+    SourceSystemId : string                                 ## Source system identifier
+    MsgType : string                                        ## Message type identifier
+    Payload : list< $record >                               ## A list of records as payload
+    
+    CreateTs : datetime = timestamp()                       ## Message created timestamp
+    ExpiryTs : datetime?                                    ## Message expriry timestamp if applicable
+    Priority : int( 1, 10) = 5                              ## Message processing priority, 10 highest, 1 lowest
+    RestrictToRegions : list< Compliance.RegionCode >?      ## List of regions the message should be limited. If empty, unrestricted.
+}
+
+# Service to interact with messages
+service Messenger {
+    publish( m : Message ) : void                           ## Publish a message
+    registerConsumer( Type: string, c : Consumer ) : void   ## Register a message consumer to read message of the given type
+}
+
+# Service to act as a callback to consume a message
+service Consumer {
+    consume( m : Message ) : void                           ## Process a message as required
+}

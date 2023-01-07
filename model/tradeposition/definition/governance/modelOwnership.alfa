@@ -4,7 +4,7 @@ namespace Model
 fragment trait derivativesTradeReport{
 }
 
-@ModelOwner(Org="DataGovGroup")
+@ModelOwner(Org="ComplianceGovGroup")
 fragment record classificationType {
 }
 
