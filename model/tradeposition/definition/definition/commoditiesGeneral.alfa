@@ -1,50 +1,79 @@
 namespace Model
-# Asanka to chcek if below is the best way to represent the three field as per Table 4 of Annex I of the  ITS (excel)
+
 # Section 2j - Commodities and emission allowances (General) derivative
 record commoditiesGeneral includes derivativesTradeReport {
+    /# Field 2.116 ## Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
+    baseProduct : BaseProductType
 
-    /# Field 2.116 - Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
-    baseProduct : classificationType?
-
-    /# Field 2.117 - Sub - product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+    /# Field 2.117 ## Sub ## product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
        This field requires a specific base product in field.#/
-    subProduct : classificationType?
+    subProduct : SubProductType
 
-    /# Field 2.118 - Sub -    product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
+    /# Field 2.118 ## Further Sub ## product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
        This field requires a specific base product in field.#/
-    furtherSubProduct : classificationType?
+    furtherSubProduct : FurtherSubProductType
 }
 
-# The manner in which commodties are classified in Table 4 of Annex I of the [ITS]
-union classificationType {
-    # in case the base product is Metals
-    baseProduct: BaseProductType
+fragment record commoditiesGeneral {
+    assert CheckClassificationHierarchy {
 
-    # the sub product of a base commodity
-    subProduct: enum< preciousSubProductType, nonPreciousSubProductType>
-}
-    # in case the sub product is Precious
-record preciousSubProductType {
-    subProduct: enum <PRME>
-    furtherSubProduct : enum < GOLD, SLVR, PTNM, PLDM, OTHR >
-}
-    # in case the sub product is Non-Precious
-record nonPreciousSubProductType {
-    subProduct: enum <NPRM>
-    furtherSubProduct : enum < ALUM, ALUA, CBLT, COPR, IRON, LEAD, MOLY, NASC, NICK, STEL, TINN, ZINC, OTHR>
+        // Asanka - TODO avoid hard coding and generate this list from the enums defined
+        let x : map< string, map< string, set< string  > > > = {
+            "METL" : {
+                "NPRM" : {
+                    "GOLD", "SLVR", "PTNM", "PLDM", "OTHR"
+                },
+                "PRME" : {
+                    "ALUM", "ALUA", "CBLT", "COPR", "IRON", "LEAD", "MOLY", "NASC", "NICK", "STEL", "TINN", "ZINC", "OTHR"
+                }
+            }
+        }
+    }
 }
 
+# All commodities classification base types 
 enum BaseProductType {
     METL
 }
 
-enum SubProductType includes MetlSubProductType {
+# An aggregate of all Sub-Product types
+enum SubProductType includes METL_SubProductType { }
 
-}
+# An aggregate of all Further-Sub-Product types
+enum FurtherSubProductType includes METL_FurtherSubProductType { }
 
-enum MetlSubProductType {
+enum METL_SubProductType {
     NPRM, PRME
 }
 
+# An aggregate of Metal Further-Sub-Product types
+enum METL_FurtherSubProductType includes METL_NPRM_FurtherSubProductType, METL_PRME_FurtherSubProductType {
 
+}
+
+# Metal non-precious product types
+enum METL_NPRM_FurtherSubProductType {
+    ALUM ## Aluminium
+    ALUA ## Aluminium Alloy
+    CBLT ## Cobalt
+    COPR ## Copper
+    IRON ## Iron ore
+    LEAD ## Lead
+    MOLY ## Molybdenum
+    NASC ## NASAAC
+    NICK ## Nickel
+    STEL ## Steel
+    TINN ## Tin
+    ZINC ## Zinc
+    OTHR ## Other
+}
+
+# Metal precious product types
+enum METL_PRME_FurtherSubProductType {
+    GOLD ## Gold
+    SLVR ## Silver
+    PTNM ## Platinum
+    PLDM ## Palladium
+    OTHR ## Other
+}
 
