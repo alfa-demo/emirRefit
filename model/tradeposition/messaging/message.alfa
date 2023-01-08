@@ -1,5 +1,5 @@
 # A module containing definitions how a container-like Message supports transporting objects along with associated metadata.
-namespace Messaging
+namespace ALFABANK.Messaging
 
 # A priority based message containing list of records as a payload
 record Message {
@@ -23,4 +23,4 @@ service Messenger {
 # Service to act as a callback to consume a message
 service Consumer {
     consume( m : Message ) : void                           ## Process a message as required
-}
+} 
