@@ -21,13 +21,13 @@ trait derivativesTradeReport {
 
     /# Field 1.1 - Date and time of the submission of the report to the trade repository.#/
     @fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
     reportingTimestamp : datetime 
     
     /# Field 1.2 - In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
        has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
     @fieldClassification(Classification= fieldClassificationType.Other)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
     reportSubmittingEntityId : isoLEI
         
     /# Field 1.3 - Where a financial counterparty  is solely responsible, and legally liable, for reporting on behalf of both counterparties in accordance with Article 9(1)(a) of 
@@ -38,31 +38,33 @@ trait derivativesTradeReport {
        reporting on behalf of an Alternative Investment Fund (AIF) in accordance with Article 9(1)(c) of that Regulation, the unique code identifying that AIFM. Where 
        an authorised entity that is responsible for managing and acting on be #/
     @fieldClassification(Classification= fieldClassificationType.Other)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
     entityResponsibleForReporting : isoLEI?
         
     /# Field 1.4 - Counterparty 1 (Reporting counterparty) Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
        case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported as the counterparty. #/
     @fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
     counterparty1 : isoLEI
         
     /# Field 1.5 - Indicate if the counterparty 1 (Reporting counterparty) is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
        8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
     @fieldClassification(Classification= fieldClassificationType.Other)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.Other)
+    @fieldUsage(Usage= fieldUsageType.Other)
     natureOfCounterparty1 : NatureOfCounterpartyType?
         
     /# Field 1.6 - Nature of the counterparty 1's company activities. If the counterparty 1 is a Financial Counterparty, this field shall contain all necessary codes included in 
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    @fieldClassification(Classification= fieldClassificationType.Other)   
+    @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)   
     corporateSectorOfCounterparty1 : list<CorpSectorType>?
         
     /# Field 1.7 - Information whether the counterparty 1 (Reporting counterparty) is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
        the transaction was concluded. #/
     @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)  
     clearingThresholdOfCounterparty1 : boolean?
         
     /# Field 1.8 - Indicator of whether LEI was used to identify the Counterparty 2.#/
@@ -75,11 +77,13 @@ trait derivativesTradeReport {
         
     /# Field 1.10 - In case the counterparty 2 is a natural person, the code of country of residence of that person.#/
     @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)  
     countryOfCounterparty2 : isoCtyCode?
         
     /# Field 1.11 - Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or 
        points 1, 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
     @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)  
     natureOfCounterparty2 : NatureOfCounterpartyType?
         
     /# Field 1.12 - Nature of the counterparty 2's company activities. If the counterparty 2 is a Financial Counterparty, this field shall contain all necessary codes included in 
@@ -87,23 +91,28 @@ trait derivativesTradeReport {
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
     @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)  
     corporateSectorOfCounterparty2 : list<CorpSectorType>?
         
     /# Field 1.13 - Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
        when the transaction was concluded. #/
     @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)  
     clearingThresholdOfCounterparty2 : boolean?
         
     /# Field 1.14 - Indicator of whether the counterparty 2 has the reporting obligation under EMIR (irrespective of who is responsible and legally liable for its reporting).#/
     @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)  
     reportingObligationOfCounterparty2 : boolean?
         
     /# Field 1.15 - In the case a broker acts as intermediary for the counterparty 1 without becoming a counterparty himself, the counterparty 1 shall identify this broker by a unique code.#/
     @fieldClassification(Classification= fieldClassificationType.Other)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT)  
     brokerId : isoLEI?
         
     /# Field 1.16 - Identifier of the clearing member through which a derivative transaction was cleared at a central counterparty.#/
     @fieldClassification(Classification= fieldClassificationType.CDE)
+    @fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID, Usage= fieldUsageType.CFTC)
     clearingMember : isoLEI?
         
     /# Field 1.17 - Indicator of whether the counterparty 1 is the buyer or the seller as determined at the time of the transaction.#/
