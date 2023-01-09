@@ -1,6 +1,8 @@
 namespace ALFABANK.Regulatory.Model
 
 @ModelOwner(Org="DataGovGroup")
+@DataRetention (Retention = "15Y")
+@ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment trait derivativesTradeReport{
 }
 
@@ -15,26 +17,31 @@ fragment record Lineage {
 
 @ModelOwner(Org="CommoGovGroup")
 @DataRetention (Retention = "15Y")
+@ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record commoditiesEnergy {
 }
 
 @ModelOwner(Org="CommoGovGroup")
 @DataRetention (Retention = "12Y")
+@ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record commoditiesGeneral {
 }
 
 @ModelOwner(Org="CreditGovGroup")
 @DataRetention (Retention = "10Y")
+@ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record creditDerivatives {
 }
 
 @ModelOwner(Org="FXGovGroup")
 @DataRetention (Retention = "8Y")
+@ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record foreignExchange {
 }
 
 @ModelOwner(Org="IRGovGroup")
 @DataRetention (Retention = "15Y")
+@ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record interestRates {
 }
 
