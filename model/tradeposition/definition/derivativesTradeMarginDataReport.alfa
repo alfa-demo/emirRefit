@@ -9,7 +9,7 @@ trait margins {
     Field 3.1
     Date and time of the submission of the report to the trade repository..#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID)
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID])
     reportingTimestamp : time
 
     /#
@@ -17,7 +17,7 @@ trait margins {
     In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity has to be identified in this field by a unique code.
     Otherwise the entity responsible for reporting should be identified in this field.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.Other)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC )
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC] )
     reportSubmittingEntityId : isoLEI
 
     /#
@@ -32,7 +32,7 @@ trait margins {
         behalf of an IORP is responsible, and legally liable, for reporting on its behalf in accordance with Article 9(1)(d) of that Regulation, the unique code identifying that entity.
     This field is applicable only to the OTC derivatives.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.Other)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC )
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC] )
     entityResponsibleForReporting : isoLEI?
 
     /#
@@ -41,14 +41,14 @@ trait margins {
     In the case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported 
     as the counterparty.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])
     counterparty1 : isoLEI
 
     /#
     Field 3.5
     Indicator of whether LEI was used to identify the Counterparty 2.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])
     counterparty2IdentifierType : boolean
 
     /#
@@ -57,14 +57,14 @@ trait margins {
     In the case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported 
         as the counterparty.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)    
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])    
     counterparty2 : string("[A-Z0-9]{72,72}")
 
     /#
     Field 3.7
     Date and time as of which the values of the margins are reported.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.Other)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     collateralTimestamp : datetime
 
     /#
@@ -72,7 +72,7 @@ trait margins {
     Indicator of whether the collateralisation was performed on a portfolio basis. Under portfolio, it is understood the set of transactions t
         hat are margined together (either on a net or a gross basis) rather than an individual transaction.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)      
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])      
     collateralPortfolioIndicator : boolean
 
     /#
@@ -81,14 +81,14 @@ trait margins {
         if the collateralisation was performed on a transaction level basis, or if there is no collateral agreement  or if no collateral is posted or 
         received. #/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     collateralPortfolioCode : string("[A-Z0-9]{52,52}")?
 
     /#
     Field 3.10
-    Unique Trade Identifier as referred to in Article 7 of the [ITS].#/
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    Unique Trade Identifier as referred to in Article 7 of the [ITS].#/    
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])
     uti : string("[A-Z0-9]{52,52}")?
 
     /#
@@ -97,7 +97,7 @@ trait margins {
     This data element is provided for each transaction or each portfolio, depending on whether the collateralisation is performed at the 
         transaction or portfolio level, and is applicable to both cleared and uncleared transactions.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     collateralisationCategory : collateralisationCategoryType
 
     /#
@@ -112,7 +112,7 @@ trait margins {
     If the initial margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
          1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     initialMarginPostedByCounterparty1PreHaircut : decimal(25,5)?
 
     /#
@@ -126,14 +126,14 @@ trait margins {
     If the initial margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
          1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     initialMarginPostedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.14
     Currency in which the initial margin posted is denominated.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     currencyOfTheInitialMarginPosted : isoCcy?
 
     /#
@@ -144,7 +144,7 @@ trait margins {
     This data element refers to the total current value of the variation margin, cumulated since the first reporting of variation margins posted for the portfolio/transaction.
     If the variation margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     variationMarginPostedByCounterparty1PreHaircut : decimal(25,5)?
 
     /#
@@ -155,6 +155,7 @@ trait margins {
     This data element refers to the total current value of the variation margin after application of the haircut (if applicable), cumulated since the first reporting of posted variation margins for the portfolio /transaction.
     If the variation margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC]) 
     variationMarginPostedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
@@ -163,7 +164,7 @@ trait margins {
     If the variation margin posted is denominated in more than one currency, this data element reflects one of those currencies into  which the counterparty 1
      has chosen to convert all the values of posted variation margins.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     currencyOfTheVariationMarginsPosted : isoCcy?
 
     /#
@@ -174,14 +175,14 @@ trait margins {
      initial margin posted or variation margin posted respectively rather than included as excess collateral posted.
     For centrally cleared transactions, excess collateral is reported only to the extent it can be assigned to a specific portfolio or transaction.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     excessCollateralPostedByCounterparty1 : decimal (25,5)?
 
     /#
     Field 3.19
     Currency in which the excess collateral posted is denominated.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     currencyOfTheExcessCollateralPosted : isoCcy?
 
     /#
@@ -195,7 +196,7 @@ trait margins {
     If the initial margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
      1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     initialMarginCollectedByCounterparty1PreHaircut : decimal (25,5)?
 
     /#
@@ -209,7 +210,7 @@ trait margins {
     If the initial margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
       1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     initialMarginCollectedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
@@ -218,7 +219,7 @@ trait margins {
     If the initial margin collected is denominated in more than one currency, this data element reflects one of those currencies into which the counterparty  1 
      has chosen to convert all the values of collected initial margins. #/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     currencyOfInitialMarginCollected : isoCcy?
 
     /#
@@ -231,7 +232,7 @@ trait margins {
     If the variation margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 
      1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     variationMarginCollectedByCounterparty1PreHaircut : decimal(25,5)?
 
     /#
@@ -245,14 +246,14 @@ trait margins {
     If the variation margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 
      1 and reported as one total value.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     variationMarginCollectedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.25
     Currency in which the variation margin collected is denominated.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     currencyOfVariationMarginCollected : isoCcy?
 
     /#
@@ -263,7 +264,7 @@ trait margins {
      initial margin collected or variation margin collected respectively, rather than included as excess collateral collected.
     For centrally cleared transactions excess collateral is reported only to the extent it can be assigned to a specific portfolio or transaction.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     excessCollateralCollectedByCounterparty1 : decimal(25,5)?
 
     /#
@@ -272,7 +273,7 @@ trait margins {
     If the excess collateral is denominated in more than one currency, this data element reflects one of those currencies into which the counterparty 
      1 has chosen to convert all the values of collected excess collateral.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     currencyOfExcessCollateralCollected : isoCcy?
 
     /#
@@ -287,7 +288,7 @@ trait margins {
     • Valuation: An update of a valuation of a derivative, at a trade or position level
     • Position component: A report of a new derivative that is included in a separate position report on the same day.#/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     actionType : enum<MARU, CORR>
 
     /#
@@ -295,7 +296,7 @@ trait margins {
     Date on which the reportable event relating to the derivative contract and captured by the report took place or, in case of a modification when the 
      modification become effective. #/
     @ALFABANK.Regulatory.Model.fieldClassification(Classification= fieldClassificationType.CDE)
-    @ALFABANK.Regulatory.Model.fieldUsage(Usage= fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC)  
+    @ALFABANK.Regulatory.Model.fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, Usage= fieldUsageType.UK_EMIT_REFIT, Usage= fieldUsageType.MIFID,Usage= fieldUsageType.CFTC])  
     eventDate : date
 
 }
