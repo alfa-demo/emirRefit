@@ -44,7 +44,7 @@ enum FinancialsCorpSectorType {
     INVF,CDTI,INUN,UCIT,ORPI,AIFD
 }
 
-#Taxonomy for Non-Financial Counterparties.
+# Taxonomy for Non-Financial Counterparties.
 enum NonFinancialsCorpSectorType {
     A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U  
 }
