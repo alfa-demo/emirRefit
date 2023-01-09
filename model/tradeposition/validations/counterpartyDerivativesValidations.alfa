@@ -54,16 +54,19 @@ fragment record derivativesTradeReport {
         # When natureOfCounterparty1 is N check corporate sector is non-financial 
         if ( isSome(natureOfCounterparty1) && get(natureOfCounterparty1) == NatureOfCounterpartyType.N && 
              !isSome(corporateSectorOfCounterparty1) && len( filter( get(corporateSectorOfCounterparty1), e => contains(nonfinancials, e ) ) ) == 0 ) 
+            # Error - corporateSectorOfCounterparty1 needs a non-financial sector classification
             raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties" )
 
         # When natureOfCounterparty1 is F check corporate sector is financial 
         if ( isSome(natureOfCounterparty1) && get(natureOfCounterparty1) == NatureOfCounterpartyType.F && 
              !isSome(corporateSectorOfCounterparty1) && len( filter( get(corporateSectorOfCounterparty1), e => contains(financials, e ) ) ) == 0 ) 
+            # Error - corporateSectorOfCounterparty1 needs a financial sector classification
             raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'F', at least one code pertaining to the classification of the financial counterparties" )
 
         # When natureOfCounterparty1 is O or C check corporate sector is blank 
         if ( isSome(natureOfCounterparty1) && isSome(corporateSectorOfCounterparty1) && 
              contains( { NatureOfCounterpartyType.C, NatureOfCounterpartyType.O }, get(natureOfCounterparty1) ) )
+            # Error - corporateSectorOfCounterparty1 should be blank 
             raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'C' or 'O', this field shall be left blank" )
     }
 
