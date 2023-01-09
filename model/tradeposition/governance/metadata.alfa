@@ -80,11 +80,11 @@ enum fieldClassificationType {
 
 # Indicate usage of reportable fields 
 annotation fieldUsage (field) {
-  Usage : fieldUsageType
+  Usage : list <  fieldUsageType >
 }
 
 # Indicate the project that uses the reportable field
-list < enum fieldUsageType {
+enum fieldUsageType {
   MIFID         ## field use for MIFID reporting
   CFTC          ## field use for CFTC reporting
   EMIR          ## field use for EMIR reporting
