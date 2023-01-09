@@ -35,6 +35,10 @@ enum MaskingMethodType {
   Multiply      ## Multiply numeric value by a random value
   Clear         ## If type is optional, set to empty, if string, set value to blank, if numeric set to 0
 }
+# Indicate data retention requirement
+annotation DataRetention  (record, trait) {
+  Retention : string
+}
 
 # Indicates if reportable field is under reconciliation tolerance and start date
 annotation Reconciliation (field) {

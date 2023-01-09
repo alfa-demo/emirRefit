@@ -9,26 +9,32 @@ fragment trait derivativesTradeReport{
 #}
 
 @ModelOwner(Org="DataGovGroup")
+@DataRetention (Retention = "10Y")
 fragment record Lineage {
 }
 
 @ModelOwner(Org="CommoGovGroup")
+@DataRetention (Retention = "15Y")
 fragment record commoditiesEnergy {
 }
 
 @ModelOwner(Org="CommoGovGroup")
+@DataRetention (Retention = "12Y")
 fragment record commoditiesGeneral {
 }
 
 @ModelOwner(Org="CreditGovGroup")
+@DataRetention (Retention = "10Y")
 fragment record creditDerivatives {
 }
 
 @ModelOwner(Org="FXGovGroup")
+@DataRetention (Retention = "8Y")
 fragment record foreignExchange {
 }
 
 @ModelOwner(Org="IRGovGroup")
+@DataRetention (Retention = "15Y")
 fragment record interestRates {
 }
 
