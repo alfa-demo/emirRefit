@@ -76,7 +76,20 @@ enum fieldClassificationType {
   CDE     ## Critical Data Elements (CDE)
   UPI     ## Unique Product Identifier   
   Other   ## not classified
- 
+}
 
+# Indicate usage of reportable fields 
+annotation fieldUsage (field) {
+  Usage : fieldUsageType
+}
+
+# Indicate the project that uses the reportable field
+list < enum fieldUsageType {
+  MIFID         ## field use for MIFID reporting
+  CFTC          ## field use for CFTC reporting
+  EMIR          ## field use for EMIR reporting
+  EMIR_REFIT    ## field use for EMIR REFIT reporting
+  UK_EMIT_REFIT ## field use for UK EMIR REFIT reporting
+  Other         ## other 
 }
 
