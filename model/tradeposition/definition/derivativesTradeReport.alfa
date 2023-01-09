@@ -16,8 +16,6 @@
 namespace ALFABANK.Regulatory.Model
 
 /# The base type for Trade and Position capturing all common Trade and Position data related fields.#/
-@ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.Medium, Classification = Compliance.DataClassification.InternalOnly)
-//@ALFABANK.Regulatory.Residency ( Locations= [])
       
 trait derivativesTradeReport {
 
