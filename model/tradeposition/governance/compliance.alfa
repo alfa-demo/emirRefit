@@ -49,7 +49,7 @@ annotation Residency ( trait, record, entity ) {
 }
 
 # Regions by Cloud vendors to be used to mark RegionCode specific vendor regions
-annotation CloudRegion ( entity, record, trait, field ) {
+annotation CloudRegion ( field ) {
     # Based on https://azure.microsoft.com/en-gb/global-infrastructure/geographies/
     azureRegions : list< string >?
 
