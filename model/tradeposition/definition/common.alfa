@@ -36,11 +36,17 @@ enum ActionType {
     POSC
 }
 
-enum CorpSectorType {
-    # Taxonomy for Financial Counterparties
-    INVF,CDTI,INUN,UCIT,ORPI,AIFD,
-    #Taxonomy for Non-Financial Counterparties.
-    A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U
+enum CorpSectorType includes FinancialsCorpSectorType, NonFinancialsCorpSectorType  {
+}
+
+# Taxonomy for Financial Counterparties
+enum FinancialsCorpSectorType {
+    INVF,CDTI,INUN,UCIT,ORPI,AIFD
+}
+
+#Taxonomy for Non-Financial Counterparties.
+enum NonFinancialsCorpSectorType {
+    A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,T,U  
 }
 
 enum NatureOfCounterpartyType {

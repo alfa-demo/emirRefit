@@ -42,32 +42,29 @@ fragment record derivativesTradeReport {
         # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "corporateSectorOfCounterparty1", isSome( corporateSectorOfCounterparty1 ) )
 
-        # Create list of financials
-        let financials = {CorpSectorType.INVF, CorpSectorType.CDTI, CorpSectorType.INUN, CorpSectorType.UCIT, CorpSectorType.ORPI, CorpSectorType.AIFD }
+        # Create list of all financials
+        let financials =  enumValues(FinancialsCorpSectorType) 
         
-        # Create list of non-financials
-        let nonfinancials = {CorpSectorType.A, CorpSectorType.B, CorpSectorType.C, CorpSectorType.D, CorpSectorType.E, CorpSectorType.F, CorpSectorType.G, 
-                             CorpSectorType.H, CorpSectorType.I, CorpSectorType.J, CorpSectorType.K, CorpSectorType.L, CorpSectorType.M, CorpSectorType.N, 
-                             CorpSectorType.O, CorpSectorType.P, CorpSectorType.Q, CorpSectorType.T, CorpSectorType.U
-                            }
+        # Create list of all non-financials
+        let nonfinancials = enumValues(NonFinancialsCorpSectorType)  
 
         # When natureOfCounterparty1 is N check corporate sector is non-financial 
-        if ( isSome(natureOfCounterparty1) && get(natureOfCounterparty1) == NatureOfCounterpartyType.N && 
-             !isSome(corporateSectorOfCounterparty1) && len( filter( get(corporateSectorOfCounterparty1), e => contains(nonfinancials, e ) ) ) == 0 ) 
+        if ( get(natureOfCounterparty1) == NatureOfCounterpartyType.N && 
+             len( filter( get(corporateSectorOfCounterparty1), e => contains(nonfinancials, toString(e) ) ) ) == 0 ) 
             # Error - corporateSectorOfCounterparty1 needs a non-financial sector classification
-            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties" )
+            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is 'N', at least one code pertaining to the classification of the non-financial counterparties required" )
 
         # When natureOfCounterparty1 is F check corporate sector is financial 
-        if ( isSome(natureOfCounterparty1) && get(natureOfCounterparty1) == NatureOfCounterpartyType.F && 
-             !isSome(corporateSectorOfCounterparty1) && len( filter( get(corporateSectorOfCounterparty1), e => contains(financials, e ) ) ) == 0 ) 
+        if ( get(natureOfCounterparty1) == NatureOfCounterpartyType.F && 
+             len( filter( get(corporateSectorOfCounterparty1), e => contains(financials, toString(e) ) ) ) == 0 ) 
             # Error - corporateSectorOfCounterparty1 needs a financial sector classification
-            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'F', at least one code pertaining to the classification of the financial counterparties" )
+            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is 'F', at least one code pertaining to the classification of the financial counterparties required" )
 
         # When natureOfCounterparty1 is O or C check corporate sector is blank 
         if ( isSome(natureOfCounterparty1) && isSome(corporateSectorOfCounterparty1) && 
              contains( { NatureOfCounterpartyType.C, NatureOfCounterpartyType.O }, get(natureOfCounterparty1) ) )
             # Error - corporateSectorOfCounterparty1 should be blank 
-            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is populated with 'C' or 'O', this field shall be left blank" )
+            raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is  'C' or 'O', this field shall be left blank" )
     }
 
     /# Field 1.7 Validation
