@@ -9,6 +9,7 @@ fragment record derivativesTradeReport {
     5. The reporting timestamp should be equal or later than 2024-04-29.
      #/
     assert reportingTimestamp {
+        # Check if the reporting timestamp should be equal or later than the execution timestamp reported
         if ( reportingTimestamp < get(executionTimestamp))  
             raise error ("EMIR-VR-1001-04, 'reporting timestamp should be equal or later than the execution timestamp.")
     }
@@ -19,6 +20,7 @@ fragment record derivativesTradeReport {
     4. The LEI shall pertain to a legal entity and not a branch. Correct status of the LEI should be verified as of the date reported in the field 1.1 Reporting timestamp.
     #/
     assert reportSubmittingEntityId {
+        # Check if the LEI status is correcte depending action-type
         let actionTypes = { ActionType.NEWT, ActionType.MODI, ActionType.VALU, ActionType.CORR, ActionType.REVI, ActionType.POSC }
 
         if ( contains( actionTypes, actionType ))
@@ -28,6 +30,7 @@ fragment record derivativesTradeReport {
     }
     /# Field 1.5 Validation #/
     assert natureOfCounterparty1 {
+        # Check if the field should be mandatory depending action-type
         let actionTypes = { ActionType.NEWT, ActionType.MODI, ActionType.CORR, ActionType.REVI, ActionType.POSC }
 
         if ( contains( actionTypes, actionType)  && isNone( natureOfCounterparty1 ) )
@@ -87,6 +90,7 @@ fragment record derivativesTradeReport {
         1. If field 1.8 is populated with 'FALSE', this field shall be populated and shall contain 2 alphabetical characters
         2. If field 1.8 is populated with 'TRUE', this field shall be left blank #/
     assert countryOfCounterparty2 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "countryOfCounterparty2", isSome( countryOfCounterparty2 ) )
     }
 
@@ -95,6 +99,7 @@ fragment record derivativesTradeReport {
         1. If field 1.8 is populated with 'TRUE', this field shall be populated and shall contain only one of the following values: 'F', 'N', 'C' or 'O'. 1 alphabetical character.
         2. If field 1.8 is populated with 'FALSE', this field shall be left blank. #/
     assert natureOfCounterparty2 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "natureOfCounterparty2", isSome( natureOfCounterparty2 ) )
     }
 
@@ -104,6 +109,7 @@ fragment record derivativesTradeReport {
         2. If field 1.11 is populated with 'N', at least one code pertaining to the classification of the non-financial counterparties shall be provided.
         3. If field 1.11 is populated with 'C' ,  'O' or is blank, this field shall be left blank. #/
     assert corporateSectorOfCounterparty2 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "corporateSectorOfCounterparty2", isSome( corporateSectorOfCounterparty2 ) )
     }
 
@@ -112,6 +118,7 @@ fragment record derivativesTradeReport {
         1. If field 1.11 is populated with 'N' or 'F', this field shall be populated and shall contain only one of the following values: 'TRUE' or 'FALSE'. 
         2. If field 1.11 is populated with 'C', 'O' or is blank, this field shall be left blank. #/
     assert clearingThresholdOfCounterparty2 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "clearingThresholdOfCounterparty2", isSome( clearingThresholdOfCounterparty2 ) )
     }
 
@@ -120,12 +127,14 @@ fragment record derivativesTradeReport {
         1. This field shall contain only one of the following values: 'TRUE' or 'FALSE'. think this is sorted by boolean?
         2. If the field 1.8 is populated with 'FALSE' , this field shall be populated with 'FALSE'. #/
     assert reportingObligationOfCounterparty2 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "reportingObligationOfCounterparty2", isSome( reportingObligationOfCounterparty2 ) )
     }
 
     /# Field 1.15 Validation
        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank #/
     assert brokerId {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "brokerId", isSome( brokerId ) )
     }
 
@@ -139,6 +148,7 @@ fragment record derivativesTradeReport {
         5. If field 2.31 is populated with 'N', this field shall be left blank.
         6. Fields 1.16 and 2.33 cannot contain the same LEI #/
     assert clearingMember {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "clearingMember", isSome( clearingMember ) )
     }
 
@@ -147,6 +157,7 @@ fragment record derivativesTradeReport {
         1. Either field 1.17 or both fields 1.18 and 1.19 shall be populated.
         2. If populated, this field shall contain only one of the following values: 'BYER' or 'SLLR'. 4 alphabetical characters. #/
     assert direction {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "direction", isSome( direction ) )
     }
 
@@ -156,6 +167,7 @@ fragment record derivativesTradeReport {
         2. If populated, this field shall contain only one of the following values: 'MAKE' or 'TAKE'. 4 alphabetical characters. 
         3. If populated, this field shall contain a different value than field 1.19. #/
     assert directionOfLeg1 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "directionOfLeg1", isSome( directionOfLeg1 ) )
     }
 
@@ -165,6 +177,7 @@ fragment record derivativesTradeReport {
         2. If populated, this field shall contain only one of the following values: 'MAK'E or 'TAKE'. 4 alphabetical characters. 
         3. If populated, this field shall contain a different value than field 1.18. #/
     assert directionOfLeg2 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "directionOfLeg2", isSome( directionOfLeg2 ) )
     }
 
@@ -174,6 +187,7 @@ fragment record derivativesTradeReport {
         only one of the following values: 'TRUE' or 'FALSE'. 
         2. If field 1.5 is populated with 'F', 'C' or 'O' or if field 2.154 is populated with 'PSTN', this field shall be left blank. #/
     assert directlyLinkedToCommercialActivityOrTreasuryFinancing {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "directlyLinkedToCommercialActivityOrTreasuryFinancing", isSome( directlyLinkedToCommercialActivityOrTreasuryFinancing ) )
     }
 
@@ -184,6 +198,7 @@ fragment record derivativesTradeReport {
         2. The code reported in this field shall be different from the codes reported in fields 2.1, 2.3 or 2.4.
         3. If field 2.41 is populated with a MIC that does not pertain to a trading venue (including XXXX and XOFF), this field shall be left blank. #/
     assert  reportTrackingNumber {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "reportTrackingNumber", isSome( reportTrackingNumber ) )
     }
 
@@ -195,6 +210,7 @@ fragment record derivativesTradeReport {
         4. When populated, this field shall contain up to 52 alphanumerical characters. Four special characters are allowed ":", ".",  "-", " _" .  Special characters not allowed at the beginning or the end. 
         5. The code reported in this field shall be different from the codes reported in fields 2.1, 2.2 or 2.4. #/
     assert priorUti {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "priorUti", isSome( priorUti ) )
     }
 
@@ -217,6 +233,7 @@ fragment record derivativesTradeReport {
         3. When populated, this field shall contain up to 52 alphanumerical characters where only the the upper-case alphabetic characters A–Z and the digits 0–9 are allowed. 
         4. The first 20 characters of the PTRR ID should be equal to the LEI reported in the field 2.40 PTRR service provider #/
     assert postTradeRiskReduction {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "postTradeRiskReduction", isSome( postTradeRiskReduction ) )
     }
 
@@ -231,6 +248,7 @@ fragment record derivativesTradeReport {
         1. If field 2.41 is populated with a MIC of a trading venue (RM, MTF or OTF) or of a systematic internaliser or with a MIC 'XOFF', this field shall be populated. 
         2. When populated, this field shall contain 12 alphanumerical characters, including a check digit. #/
     assert internationalSecuritiesIdentificationNumber {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "internationalSecuritiesIdentificationNumber", isSome( internationalSecuritiesIdentificationNumber ) )
     }
 
@@ -316,6 +334,7 @@ fragment record derivativesTradeReport {
         1. If field 2.13 is populated with 'B', this field shall be populated and shall contain 12 alphanumeric characters, including a check digit. This field is repeatable.
             Otherwise this field shall be left blank. #/
     assert identifierOfTheBasketsConstituents {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "identifierOfTheBasketsConstituents", isSome( identifierOfTheBasketsConstituents ) )
     }
 
@@ -327,6 +346,7 @@ fragment record derivativesTradeReport {
         4. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
         5. If field 2.47 is populated with 'PHYS' this field shall be left blank. #/
     assert settlementCurrency1 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "settlementCurrency1", isSome( settlementCurrency1 ) )
     }
 
@@ -336,6 +356,7 @@ fragment record derivativesTradeReport {
         2. The following special currency codes are not allowed: ‘XAG’, ‘XAU’, ‘XBA’, ‘XBB’, ‘XBC’, ‘XBD’, ‘XDR’, ‘XEU’, ‘XFU’, ‘XPD’, ‘XPT’, ‘XXX’.
         3. If field 2.47 is populated with 'PHYS' this field shall be left blank #/
     assert settlementCurrency2 {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "settlementCurrency2", isSome( settlementCurrency2 ) )
     }
 
@@ -388,6 +409,7 @@ fragment record derivativesTradeReport {
         3. Any value between -1 and 1 (including -1 and 1) is allowed.
         The negative symbol, if populated, shall not be counted as a numerical character. #/
     assert delta {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "delta", isSome( delta ) )
    }
 
@@ -402,6 +424,7 @@ fragment record derivativesTradeReport {
         1. If field 2.26 is populated with 'TRUE', this field shall be populated and shall contain up to 52 alphanumerical characters. Special characters are not allowed. 
             Otherwise, the field shall be left blank. #/
     assert collateralPortfolioCode {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "collateralPortfolioCode", isSome( collateralPortfolioCode ) )
     }
 
@@ -413,6 +436,7 @@ fragment record derivativesTradeReport {
         4. The date part of the confirmation timestamp shall not be greater than the expiration date or, where populated, the early termination date.
         5. If field 2.29 is populated with 'NCNF', this field shall be left blank. #/
     assert confirmationTimestamp {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "confirmationTimestamp", isSome( confirmationTimestamp ) )
     }
 
@@ -421,6 +445,7 @@ fragment record derivativesTradeReport {
         1. If field 2.41 is not populated with a MIC code of a trading venue that was a regulated market or a third-country market considered as equivalent to a regulated market at the time of the conclusion of the derivative and field 2.31 is populated with "N", this field shall be populated and shall contain only one of the following values: 'YCNF', 'NCNF' or 'ECNF'. 4 alphabetical characters.
             Otherwise this field shall be left blank. #/
     assert confirmed {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "confirmed", isSome( confirmed ) )
     }
 
@@ -430,6 +455,7 @@ fragment record derivativesTradeReport {
         2. If field 2.31 is populated with 'Y', this field shall be populated with 'UKWN'. 4 alphabetical characters.
         3. Otherwise this field shall be left blank. #/
     assert clearingObligation {
+        # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "clearingObligation", isSome( clearingObligation ) )
     }
 }
