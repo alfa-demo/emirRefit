@@ -7,10 +7,6 @@ namespace ALFABANK.Regulatory.Model
 fragment trait derivativesTradeReport{
 }
 
-#@ModelOwner(Org="ComplianceGovGroup")
-#fragment record classificationType {
-#}
-
 @ModelOwner(Org="DataGovGroup")
 @DataRetention (Retention = "10Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.High, Classification = Compliance.DataClassification.Confidential)
