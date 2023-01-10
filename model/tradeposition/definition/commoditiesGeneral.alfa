@@ -18,7 +18,7 @@ record commoditiesGeneral includes derivativesTradeReport {
 }
 
 fragment record commoditiesGeneral {
-    # Re-usable rule to validate classification of commodities as per Table 4 of Annex I of the ITS
+    # Re-usable rule to validate classification of commodities
     assert CheckClassificationHierarchy {
 
         // Build a hierarchy of baseProduct -> subProduct -> furtherSubProduct based on the enum naming
