@@ -455,7 +455,7 @@ library ActionTypeCheck {
     # If action type is populated with 'VALU','TERM','EROR' the field shall be left blank
     shouldFieldBeBlank( at :ActionType, fieldName : string, fieldIsSet : boolean ) : void 
     {
-        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        let actionTypes = { ActionType.VALU, ActionType.EROR }
         if ( contains( actionTypes, at ) && fieldIsSet )
             raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field ${fieldName} should be left blank" )
 
