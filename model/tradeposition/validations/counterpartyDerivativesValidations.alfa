@@ -65,7 +65,7 @@ fragment record derivativesTradeReport {
 
         # When natureOfCounterparty1 is O or C check corporate sector is blank 
         if ( isSome(natureOfCounterparty1) && isSome(corporateSectorOfCounterparty1) && 
-             contains( { NatureOfCounterpartyType.C }, get(natureOfCounterparty1) ) )
+             contains( { NatureOfCounterpartyType.C, NatureOfCounterpartyType.O }, get(natureOfCounterparty1) ) )
             # Error - corporateSectorOfCounterparty1 should be blank 
             raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is  'C' or 'O', this field shall be left blank" )
     }
