@@ -6,9 +6,8 @@
    
    All systems across the enterprise will use data as defined in this model to produce and consume data, allowing re-use of collected data across the enterprise. 
 
-   For further details on EMIR REFIT, see [EMIR REFIT Guidelines from ESMA](https://www.esma.europa.eu/sites/default/files/library/esma74-362-2281_final_report_guidelines_emir_refit.pdf)
+   For further details on EMIR REFIT, see [EMIR REFIT Guidelines from ESMA](https://www.esma.europa.eu/policy-rules/post-trading/trade-reporting)
    #/
-
 
 
  namespace ALFABANK.Regulatory.Margin
