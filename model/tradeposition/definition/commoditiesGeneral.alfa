@@ -18,7 +18,7 @@ record commoditiesGeneral includes derivativesTradeReport {
 }
 
 fragment record commoditiesGeneral {
-    # Validate the 3 fields contain values which are contextually valid 
+    # Re-usable rule to validate classification of commodities as per Table 4 of Annex I of the  ITS
     assert CheckClassificationHierarchy {
 
         # Build a hierarchy of baseProduct - > subProduct - > furtherSubProduct based on the enum naming 
