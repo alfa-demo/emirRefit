@@ -18,10 +18,10 @@ record commoditiesGeneral includes derivativesTradeReport {
 }
 
 fragment record commoditiesGeneral {
-    # Validate the 3 fields contain values which are contextually valid
+    # Validate the 3 fields contain values which are contextually valid 
     assert CheckClassificationHierarchy {
 
-        # Build a hierarchy of baseProduct -> subProduct -> furtherSubProduct based on the enum naming
+        # Build a hierarchy of baseProduct -> subProduct -> furtherSubProduct based on the enum naming 
         let hierarchy : map< string, map< string, set< string  > > > =
                 toMap( toList(enumValues( BaseProductType )),
                        k1 => k1,
@@ -31,12 +31,12 @@ fragment record commoditiesGeneral {
                                   )
                      )
 
-         # Check if the sub-product is defined under the base product
+         # Check if the sub-product is defined under the base product 
          let subProdsMap = get ( get( hierarchy, toString( baseProduct ) ) )
          if ( ! contains( keys( subProdsMap ), toString(subProduct) ) )
              raise warning("EMIR-VR-NNN, 'Invalid sub-product ${subProduct} for base type ${baseProduct}' ")
 
-         # Check if the sub-product is defined under the further-sub-product
+         # Check if the sub-product is defined under the further-sub-product 
          let furtherSubProdsSet = get( get( subProdsMap, toString( furtherSubProduct ) ) )
          if ( ! contains( furtherSubProdsSet, toString(furtherSubProduct) ) )
              raise warning("EMIR-VR-NNN, 'Invalid further-sub-product ${furtherSubProduct} for sub product ${baseProduct}' ")
