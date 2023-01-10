@@ -22,7 +22,7 @@ trait derivativesTradeReport {
     /# Field 1.1 - Date and time of the submission of the report to the trade repository.#/
     @fieldClassification(Classification= fieldClassificationType.CDE)
     @fieldUsage(Usage= [fieldUsageType.EMIR_REFIT, fieldUsageType.UK_EMIT_REFIT, fieldUsageType.MIFID, fieldUsageType.CFTC])
-    reportingTimestamp : datetime 
+    reportingTimestamp : datetime
     
     /# Field 1.2 - In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
        has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
