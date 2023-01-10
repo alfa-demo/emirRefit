@@ -1,52 +1,41 @@
 namespace ALFABANK.Regulatory.Model
 
-@ModelOwner(Org="DataGovGroup")
 @DataRetention (Retention = "15Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.Medium, Classification = Compliance.DataClassification.InternalOnly)
 @ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss, RegionCode.US])
 fragment trait derivativesTradeReport{
 }
 
-#@ModelOwner(Org="ComplianceGovGroup")
-#fragment record classificationType {
-#}
-
-@ModelOwner(Org="DataGovGroup")
 @DataRetention (Retention = "10Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.High, Classification = Compliance.DataClassification.Confidential)
 @ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss, RegionCode.US])
 fragment record Lineage {
 }
 
-@ModelOwner(Org="CommoGovGroup")
 @DataRetention (Retention = "15Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.High, Classification = Compliance.DataClassification.InternalOnly)
 @ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record commoditiesEnergy {
 }
 
-@ModelOwner(Org="CommoGovGroup")
 @DataRetention (Retention = "12Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.Low, Classification = Compliance.DataClassification.InternalOnly)
 @ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record commoditiesGeneral {
 }
 
-@ModelOwner(Org="CreditGovGroup")
 @DataRetention (Retention = "10Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.Medium, Classification = Compliance.DataClassification.InternalOnly)
 @ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record creditDerivatives {
 }
 
-@ModelOwner(Org="FXGovGroup")
 @DataRetention (Retention = "8Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.Medium, Classification = Compliance.DataClassification.InternalOnly)
 @ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])
 fragment record foreignExchange {
 }
 
-@ModelOwner(Org="IRGovGroup")
 @DataRetention (Retention = "15Y")
 @ALFABANK.Regulatory.Compliance.PII( Sensitivity = Compliance.DataSensitivity.Medium, Classification = Compliance.DataClassification.InternalOnly)
 @ALFABANK.Regulatory.Compliance.Residency (Locations = [RegionCode.Europe,RegionCode.Swiss])

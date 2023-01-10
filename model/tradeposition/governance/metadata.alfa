@@ -17,11 +17,6 @@ record Lineage {
     Producers : map< Name: string, LineageReference : string >    
 }
 
-# Annotate model ownership information
-annotation ModelOwner (record, trait) {
-  Org : string ## Model owner organisation
-}
-
 # Indicates data is sensitive and if this data is used outside of its primary purpose,
 # the value(s) should be obfuscated.
 annotation Mask (field) {

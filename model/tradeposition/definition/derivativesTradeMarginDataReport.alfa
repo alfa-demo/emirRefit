@@ -4,10 +4,6 @@
    Canonical ALFA representation of  - ESMA Regulatory Technical Standards (RTS) and  Implementing Technical Standards (ITS) 
    in the Official Journal of the European Union of 07.10.2022-TR depicting one authorative source of data elements across enterprise's multiple source systems. 
    
-   * The DerivativesTradeMarginDataReport message is sent by the report submitting entity to the trade repository (TR) to report the margins exchanged in relation 
-        to the derivative transactions or made available by the trade repository (TR) to the report submitting entity and the reporting counterparty as well as the 
-        entity responsible for reporting, if applicable.
-
    All systems across the enterprise will use data as defined in this model to produce and consume data, allowing re-use of collected data across the enterprise. 
 
    For further details on EMIR REFIT, see [EMIR REFIT Guidelines from ESMA](https://www.esma.europa.eu/sites/default/files/library/esma74-362-2281_final_report_guidelines_emir_refit.pdf)

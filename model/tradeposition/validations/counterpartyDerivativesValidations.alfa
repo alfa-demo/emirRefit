@@ -65,7 +65,7 @@ fragment record derivativesTradeReport {
 
         # When natureOfCounterparty1 is O or C check corporate sector is blank 
         if ( isSome(natureOfCounterparty1) && isSome(corporateSectorOfCounterparty1) && 
-             contains( { NatureOfCounterpartyType.C, NatureOfCounterpartyType.O }, get(natureOfCounterparty1) ) )
+             contains( { NatureOfCounterpartyType.C }, get(natureOfCounterparty1) ) )
             # Error - corporateSectorOfCounterparty1 should be blank 
             raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is  'C' or 'O', this field shall be left blank" )
     }
@@ -447,16 +447,6 @@ fragment record derivativesTradeReport {
     assert confirmed {
         # Check if the field should be blank depending action-type
         ActionTypeCheck::shouldFieldBeBlank(actionType, "confirmed", isSome( confirmed ) )
-    }
-
-    /# Field 2.30 Validation
-        0. if action type is populated with 'VALU','TERM','EROR' the field shall be left blank
-        1. If field 2.41 is not populated with a MIC code of a trading venue that was a regulated market or a third-country market considered as equivalent to a regulated market at the time of the conclusion of the derivative, this field shall be populated and shall contain one of the following values 'TRUE' , 'FLSE' or 'UKWN'. 
-        2. If field 2.31 is populated with 'Y', this field shall be populated with 'UKWN'. 4 alphabetical characters.
-        3. Otherwise this field shall be left blank. #/
-    assert clearingObligation {
-        # Check if the field should be blank depending action-type
-        ActionTypeCheck::shouldFieldBeBlank(actionType, "clearingObligation", isSome( clearingObligation ) )
     }
 }
 

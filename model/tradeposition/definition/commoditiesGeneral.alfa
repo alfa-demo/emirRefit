@@ -78,7 +78,7 @@ enum METL_NPRM_FurtherSubProductType {
     TINN ## Tin
     ZINC ## Zinc
     OTHR ## Other
-}
+} 
 
 # Metal precious product types
 enum METL_PRME_FurtherSubProductType {
@@ -86,6 +86,6 @@ enum METL_PRME_FurtherSubProductType {
     SLVR ## Silver
     PTNM ## Platinum
     PLDM ## Palladium
-    OTHR ## Other
+   // OTHR ## Other
 }
 
