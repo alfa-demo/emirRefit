@@ -1,0 +1,202 @@
+namespace ALFABANK.Regulatory.Model
+
+
+# All commodities classification base types 
+enum BaseProductType {
+    AGRI ## Agricultural
+    NRGY ## Energy
+    ENVR ## Environmental
+    FRGT ## Freight
+    FRTL ## Fertiliser
+    INDP ## Industrial products
+    METL ## Metals
+
+}
+
+# An aggregate of all Commodities Sub-Product types
+enum SubProductType includes AGRI_SubProductType, NRGY_SubProductType, ENVR_SubProductType, 
+                             FRGT_SubProductType, FRTL_SubProductType, INDP_SubProductType, METL_SubProductType { }
+
+# An aggregate of all Commodities Further-Sub-Product types
+enum FurtherSubProductType includes AGRI_FurtherSubProductType, NRGY_FurtherSubProductType, ENVR_FurtherSubProductType,
+                                    FRGT_FurtherSubProductType, METL_FurtherSubProductType { }
+
+
+// ------- AGRI --------
+# Commodity agricultural sub-products 
+enum AGRI_SubProductType {
+    GROS ## Grains Oil Seeds
+    SOFT ## Softs
+    POTA ## Potato
+    OOLI ## Olive oil
+    DIRY ## Dairy
+    SEAF ## Seafood
+    LSTK ## Livestock
+    GRIN ## Grain
+    OTHR ## Other
+    FRST ## Forestry
+}
+
+enum AGRI_FurtherSubProductType {
+
+}
+
+// ------- NRGY --------
+# Commodity energy sub-products 
+enum NRGY_SubProductType {
+    ELEC ## Electricity
+    NGAS ## Natural Gas
+    OILP ## Oil
+    COAL ## Coal
+    INRG ## Inter Energy 
+    RNNG ## Renewable energy 
+    LGHT ## Light ends
+    DIST ## Distillates
+    OTHR ## Other
+}
+
+enum NRGY_FurtherSubProductType includes NRGY_ELEC_FurtherSubProductType, NRGY_NGAS_FurtherSubProductType, NRGY_OILP_FurtherSubProductType {
+
+}
+# An aggregate of Commodity electricity further sub-product types
+enum NRGY_ELEC_FurtherSubProductType {
+    BSLD  ## Base load
+    FITR  ## Financial Transmission Rights 
+    PKLD  ## Peak load
+    OFFP  ## Off-peak
+    OTHR  ## Other    
+}
+
+# An aggregate of Commodity Energy natural gas further sub-product types
+enum NRGY_NGAS_FurtherSubProductType {
+    GASP  ##  GASPOOL 
+    LNGG  ##  LNG 
+    NBPG  ##  NBP 
+    NCGG  ##  NCG 
+    TTFG  ##  TTF
+    OTHR  ##  Other 
+}
+
+# An aggregate of Commodity Energy Oil further sub-product types
+enum NRGY_OILP_FurtherSubProductType {
+    BAKK  ##  Bakken 
+    BDSL  ##  Biodiesel 
+    BRNT  ##  Brent 
+    BRNX  ##  Brent NX
+    CNDA  ##  Canadian 
+    COND  ##  Condensate 
+    DSEL  ##  Diesel 
+    DUBA  ##  Dubai 
+    ESPO  ##  ESPO
+    ETHA  ##  Ethanol 
+    FUEL  ##  Fuel
+    FOIL  ##  Fuel Oil 
+    GOIL  ##  Gasoil 
+    GSLN  ##  Gasoline 
+    HEAT  ##  Heating Oil 
+    JTFL  ##  Jet Fuel 
+    KERO  ##  Kerosene
+    LLSO  ##  Light Louisiana Sweet (LLS) 
+    MARS  ##  Mars
+    NAPH  ##  Naphta 
+    NGLO  ##  NGL
+    TAPI  ##  Tapis
+    URAL  ##  Urals 
+    WTIO  ##  WTI
+    OTHR  ##  Other    
+}
+
+// ------- ENVR --------
+# Commodity Environmental sub-products 
+enum ENVR_SubProductType {
+    EMIS ## Emissions
+    WTHR ## Weather ‘CRBR’ - Carbon related’
+    OTHR ## Other
+}
+
+enum ENVR_FurtherSubProductType includes ENVR_EMIS_FurtherSubProductType {
+
+}
+
+enum ENVR_EMIS_FurtherSubProductType {
+    CERE ## CER 
+    ERUE ## ERU 
+    EUAE ## EUA 
+    EUAA ## EUAA
+    OTHR ## Other
+}
+
+// ------- FRGT --------
+# Commodity Freight sub-products 
+enum FRGT_SubProductType {
+    WETF ## Wet
+    DRYF ## Dry
+    CSHP ## Containerships
+    OTHR ## Other    
+}
+
+enum FRGT_FurtherSubProductType includes FRGT_WETF_FurtherSubProductType, FRGT_DRYF_FurtherSubProductType  {
+}
+
+enum FRGT_WETF_FurtherSubProductType {
+    TNKR ## Tankers
+    OTHR ## Other
+}
+
+enum FRGT_DRYF_FurtherSubProductType {
+    DBCR ## Dry bulk carriers
+    OTHR ## Other
+}
+
+// ------- FRTL --------
+# Commodity Fertilizer sub-products 
+enum FRTL_SubProductType {
+    AMMO ## Ammonia
+    DAPH ## DAP (Diammonium Phosphate) 
+    PTSH ## Potash
+    SLPH ## Sulphur ‘UREA’ - Urea
+    UAAN ## UAN (urea and ammonium nitrate)
+    OTHR ## Other
+}
+
+// ------- INDP --------
+enum INDP_SubProductType {
+    CSTR ## Construction
+    MFTG ## Manufacturing
+}
+
+// ------- METL --------
+
+enum METL_SubProductType {
+    NPRM, PRME
+}
+
+# An aggregate of Commodity Metal Further-Sub-Product types
+enum METL_FurtherSubProductType includes METL_NPRM_FurtherSubProductType, METL_PRME_FurtherSubProductType { }
+
+# Metal non-precious product types
+enum METL_NPRM_FurtherSubProductType {
+    ALUM ## Aluminium
+    ALUA ## Aluminium Alloy
+    CBLT ## Cobalt
+    COPR ## Copper
+    IRON ## Iron ore
+    LEAD ## Lead
+    MOLY ## Molybdenum
+    NASC ## NASAAC
+    NICK ## Nickel
+    STEL ## Steel
+    TINN ## Tin
+    ZINC ## Zinc
+    OTHR ## Other
+}
+
+# Commodity Metal precious product types
+enum METL_PRME_FurtherSubProductType {
+    GOLD ## Gold
+    SLVR ## Silver
+    PTNM ## Platinum
+    PLDM ## Palladium
+    OTHR ## Other
+}
+
