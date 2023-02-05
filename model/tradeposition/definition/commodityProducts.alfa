@@ -166,9 +166,10 @@ enum INDP_SubProductType {
 }
 
 // ------- METL --------
-
+# Commodity Metal sub-products 
 enum METL_SubProductType {
-    NPRM, PRME
+    NPRM ## Non-precious metals 
+    PRME ## Precious metals
 }
 
 # An aggregate of Commodity Metal Further-Sub-Product types
