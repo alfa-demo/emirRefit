@@ -1,9 +1,9 @@
-# Captures the technical standards for reporting under the European Markets Infrastructure Regulation (EMIR Refit)
+## Captures the technical standards for reporting under the European Markets Infrastructure Regulation (EMIR Refit)
 
-## Rerefence
+### Rerefence
 https://www.esma.europa.eu/policy-rules/post-trading/trade-reporting
 
-### Summary
+#### Summary
 
 Rules and guidance on implementing EMIR provisions
 ESMA has developed detailed rules and guidance on reporting, registering, and accessing data.
