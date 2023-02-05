@@ -25,9 +25,9 @@ fragment record commoditiesGeneral {
         let hierarchy : map< string, map< string, set< string  > > > =
                 toMap( toList(enumValues( BaseProductType )),
                        k1 => k1,
-                       k1 => toMap< map< string, set< string  > > >( toList(enumValues( "Model." + k1 + "_SubProductType" )),
+                       k1 => toMap< map< string, set< string  > > >( toList(enumValues( "Model." + k1 + "_SubProductType", ( list<string> ) [] )),
                                     k2 => k2,
-                                    k2 => enumValues( "Model." + k1 + "_" + k2 + "_FurtherSubProductType" )
+                                    k2 => enumValues( "Model." + k1 + "_" + k2 + "_FurtherSubProductType", ( list<string> ) [] )
                                   )
                      )
 

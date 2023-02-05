@@ -113,7 +113,7 @@ enum ENVR_SubProductType {
     WTHR ## Weather ‘CRBR’ - Carbon related’
     OTHR ## Other
 }
-
+ 
 enum ENVR_FurtherSubProductType includes ENVR_EMIS_FurtherSubProductType {
 
 }
@@ -160,6 +160,7 @@ enum FRTL_SubProductType {
 }
 
 // ------- INDP --------
+# Commodity industrial sub-products 
 enum INDP_SubProductType {
     CSTR ## Construction
     MFTG ## Manufacturing
@@ -167,6 +168,7 @@ enum INDP_SubProductType {
 
 // ------- METL --------
 
+# Commodity Metal sub-products 
 enum METL_SubProductType {
     NPRM, PRME
 }
