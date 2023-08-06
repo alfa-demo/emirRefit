@@ -95,6 +95,7 @@ enum fieldUsageType {
   QUANTS        ## field use for Pricing & Valuation
   CREDIT_RISK   ## field use for Credit Risk reporting
   SETTLEMENT    ## field use for Settlement reporting
+  REGULATORY    ## field use for Regulatory reporting
   Other         ## other 
 }
 
