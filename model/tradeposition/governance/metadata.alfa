@@ -90,6 +90,10 @@ enum fieldUsageType {
   EMIR          ## field use for EMIR reporting
   EMIR_REFIT    ## field use for EMIR REFIT reporting
   UK_EMIT_REFIT ## field use for UK EMIR REFIT reporting
+  Quant         ## field use for Pricing & Valuation
+  MktRisk       ## field use for Market Risk reporting
+  CrtRisk       ## field use for Credit Risk reporting
+  BO            ## field use for Finance & Settlement reporting
   Other         ## other 
 }
 
