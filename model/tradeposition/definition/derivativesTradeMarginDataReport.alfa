@@ -1,4 +1,3 @@
-import ALFABANK.Regulatory.Model.*
 
 /# 
    #### Description
@@ -15,7 +14,7 @@ import ALFABANK.Regulatory.Model.*
    For further details on EMIR REFIT, see [EMIR REFIT Guidelines from ESMA](https://www.esma.europa.eu/policy-rules/post-trading/trade-reporting)
    #/
 
-namespace ALFABANK.Regulatory.Margin
+namespace ALFABANK.Regulatory.Model
 
 
 /# The base type for margins data capturing all common data elements.#/

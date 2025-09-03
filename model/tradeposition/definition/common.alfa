@@ -1,12 +1,12 @@
 typedefs {
-    isoLEI       =external ALFABANK.ReferenceData.LEI #string("[A-Z0-9]{18,18}[0-9]{2,2}")
-    isoCtyCode   =external ALFABANK.ReferenceData.CountryCodeISO3166Alpha2code #string("[A-Z]{3,3}")
-    isoISIN      =external ALFABANK.ReferenceData.ISIN 
-    isoUPI       =external ALFABANK.ReferenceData.UPI
-    isoCFI       =external ALFABANK.ReferenceData.CFIISO10962
-    isoMktId     =external ALFABANK.ReferenceData.MktIdISO10383
-    isoCcy       =external ALFABANK.ReferenceData.CcyISO4217
-    eicCode      =external ALFABANK.ReferenceData.EicCode
+    isoLEI     = external ALFABANK.ReferenceData.LEI #string("[A-Z0-9]{18,18}[0-9]{2,2}")
+    isoCtyCode = external ALFABANK.ReferenceData.CountryCodeISO3166Alpha2code #string("[A-Z]{3,3}")
+    isoISIN    = external ALFABANK.ReferenceData.ISIN 
+    isoUPI     = external ALFABANK.ReferenceData.UPI
+    isoCFI     = external ALFABANK.ReferenceData.CFIISO10962
+    isoMktId   = external ALFABANK.ReferenceData.MktIdISO10383
+    isoCcy     = external ALFABANK.ReferenceData.CcyISO4217
+    eicCode    = external ALFABANK.ReferenceData.EicCode
 }
 
 namespace ALFABANK.Regulatory.Model

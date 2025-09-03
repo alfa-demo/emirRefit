@@ -6,7 +6,7 @@ namespace ALFABANK.Regulatory.Model
 @DataRetention (Retention="15Y")
 @PII( Sensitivity=DataSensitivity.Medium, Classification=DataClassification.InternalOnly)
 @Residency (Locations=[RegionCode.Europe,RegionCode.Swiss, RegionCode.US])
-fragment trait DerivativesTradeReport{
+fragment trait DerivativesTradeReport {
 }
 
 @ModelOwner(Org="CommoGovGroup")
