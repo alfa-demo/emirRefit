@@ -1,4 +1,3 @@
-//import ALFABANK.*
 import ALFABANK.Regulatory.Compliance.*
 
 namespace ALFABANK.Regulatory.Model
