@@ -1,24 +1,24 @@
 namespace ALFABANK.Regulatory.Model
 
 # Section 2i – Foreign Exchange derivative
-record foreignExchange includes derivativesTradeReport {
+record ForeignExchange includes DerivativesTradeReport {
 
     /# 
     Field 2.113 - Exchange rate between the two different currencies specified in the derivative transaction agreed by the counterparties at the 
         inception of the transaction, expressed as the rate of exchange from converting the unit currency into the quoted currency.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     exchangeRate1 : decimal(13,11)?
 
     /#
     Field 2.114 - Forward exchange rate as agreed between the counterparties in the contractual agreement It shall be expressed as a price of 
         base currency in the quoted currency. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     forwardExchangeRate : decimal(13,11)?
 
     /#
     Field 2.115 - Currency pair and order in which the exchange rate is denominated, expressed as unit currency/quoted currency.
         7 characters representing two ISO 4217 currency codes separated by ‘/’ without restricting the currency pair ordering.
         The first currency code shall indicate the unit currency, and the second currency code shall indicate the quote currency.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     exchangeRateBasis : string(1, 7)?
 }

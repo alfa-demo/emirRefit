@@ -18,14 +18,14 @@ import ALFABANK.Regulatory.Model.*
 namespace ALFABANK.Regulatory.Margin
 
 
-    /# The base type for margins data capturing all common data elements.#/
+/# The base type for margins data capturing all common data elements.#/
         
-trait margins {
+trait Margins {
 
     /# 
     Field 3.1
     Date and time of the submission of the report to the trade repository..#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID])
     reportingTimestamp : time
 
@@ -33,7 +33,7 @@ trait margins {
     Field 3.2
     In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity has to be identified in this field by a unique code.
     Otherwise the entity responsible for reporting should be identified in this field.#/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC] )
     reportSubmittingEntityId : isoLEI
 
@@ -48,7 +48,7 @@ trait margins {
         Article 9(1)(c) of that Regulation, the unique code identifying that AIFM. Where an authorised entity that is responsible for managing and acting on 
         behalf of an IORP is responsible, and legally liable, for reporting on its behalf in accordance with Article 9(1)(d) of that Regulation, the unique code identifying that entity.
     This field is applicable only to the OTC derivatives.#/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC] )
     entityResponsibleForReporting : isoLEI?
 
@@ -57,14 +57,14 @@ trait margins {
     Counterparty 1 (Reporting counterparty).Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question.
     In the case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported 
     as the counterparty.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])
     counterparty1 : isoLEI
 
     /#
     Field 3.5
     Indicator of whether LEI was used to identify the Counterparty 2.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])
     counterparty2IdentifierType : boolean
 
@@ -73,14 +73,14 @@ trait margins {
     Identifier of the second counterparty to a derivative transaction.
     In the case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported 
         as the counterparty.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])    
     counterparty2 : string("[A-Z0-9]{72,72}")
 
     /#
     Field 3.7
     Date and time as of which the values of the margins are reported.#/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     @FieldUsage(Usage=[ FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     collateralTimestamp : datetime
 
@@ -88,7 +88,7 @@ trait margins {
     Field 3.8
     Indicator of whether the collateralisation was performed on a portfolio basis. Under portfolio, it is understood the set of transactions t
         hat are margined together (either on a net or a gross basis) rather than an individual transaction.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])      
     collateralPortfolioIndicator : boolean
 
@@ -97,14 +97,14 @@ trait margins {
     If collateral is reported on a portfolio basis, unique code assigned by the counterparty 1 to the portfolio. This data element is not applicable 
         if the collateralisation was performed on a transaction level basis, or if there is no collateral agreement  or if no collateral is posted or 
         received. #/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     collateralPortfolioCode : string("[A-Z0-9]{52,52}")?
 
     /#
     Field 3.10
     Unique Trade Identifier as referred to in Article 7 of the [ITS].#/    
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])
     uti : string("[A-Z0-9]{52,52}")?
 
@@ -113,9 +113,9 @@ trait margins {
     Indicate whether a collateral agreement between the counterparties exists.
     This data element is provided for each transaction or each portfolio, depending on whether the collateralisation is performed at the 
         transaction or portfolio level, and is applicable to both cleared and uncleared transactions.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
-    collateralisationCategory : collateralisationCategoryType
+    collateralisationCategory : CollateralisationCategoryType
 
     /#
     Field 3.12
@@ -128,7 +128,7 @@ trait margins {
         provisions to the central counterparty, i.e. committed credit lines.
     If the initial margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
          1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     initialMarginPostedByCounterparty1PreHaircut : decimal(25,5)?
 
@@ -142,14 +142,14 @@ trait margins {
         default fund contributions, nor collateral posted against liquidity provisions to the central counterparty, i.e. committed credit lines.
     If the initial margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
          1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     initialMarginPostedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.14
     Currency in which the initial margin posted is denominated.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     currencyOfTheInitialMarginPosted : isoCcy?
 
@@ -160,7 +160,7 @@ trait margins {
     If the collateralisation is performed at portfolio level, the variation margin posted relates to the whole portfolio; if the collateralisation is performed for single transactions, the variation margin posted relates to such single transaction.
     This data element refers to the total current value of the variation margin, cumulated since the first reporting of variation margins posted for the portfolio/transaction.
     If the variation margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     variationMarginPostedByCounterparty1PreHaircut : decimal(25,5)?
 
@@ -171,7 +171,7 @@ trait margins {
     If the collateralisation is performed at portfolio level, the variation margin posted relates to the whole portfolio; if the collateralisation is performed for single transactions, the variation margin posted relates to such single transaction.
     This data element refers to the total current value of the variation margin after application of the haircut (if applicable), cumulated since the first reporting of posted variation margins for the portfolio /transaction.
     If the variation margin posted is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC]) 
     variationMarginPostedByCounterparty1PostHaircut : decimal(25,5)?
 
@@ -180,7 +180,7 @@ trait margins {
     Currency in which the variation margin posted is denominated.
     If the variation margin posted is denominated in more than one currency, this data element reflects one of those currencies into  which the counterparty 1
      has chosen to convert all the values of posted variation margins.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     currencyOfTheVariationMarginsPosted : isoCcy?
 
@@ -191,14 +191,14 @@ trait margins {
     Any initial or variation margin amount posted that exceeds the required initial margin or required variation margin, is reported as part of the 
      initial margin posted or variation margin posted respectively rather than included as excess collateral posted.
     For centrally cleared transactions, excess collateral is reported only to the extent it can be assigned to a specific portfolio or transaction.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     excessCollateralPostedByCounterparty1 : decimal (25,5)?
 
     /#
     Field 3.19
     Currency in which the excess collateral posted is denominated.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     currencyOfTheExcessCollateralPosted : isoCcy?
 
@@ -212,7 +212,7 @@ trait margins {
       as part of its investment activity.
     If the initial margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
      1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     initialMarginCollectedByCounterparty1PreHaircut : decimal (25,5)?
 
@@ -226,7 +226,7 @@ trait margins {
      collateral collected by the central counterparty  as part of its investment activity.
     If the initial margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty
       1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     initialMarginCollectedByCounterparty1PostHaircut : decimal(25,5)?
 
@@ -235,7 +235,7 @@ trait margins {
     Currency in which the initial margin collected is denominated.
     If the initial margin collected is denominated in more than one currency, this data element reflects one of those currencies into which the counterparty  1 
      has chosen to convert all the values of collected initial margins. #/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     currencyOfInitialMarginCollected : isoCcy?
 
@@ -248,7 +248,7 @@ trait margins {
     This refers to the total current value of the variation margin, cumulated since the first reporting of collected variation margins for the portfolio/transaction.
     If the variation margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 
      1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     variationMarginCollectedByCounterparty1PreHaircut : decimal(25,5)?
 
@@ -262,14 +262,14 @@ trait margins {
      reporting of collected variation margins for the portfolio transaction.
     If the variation margin collected is denominated in more than one currency, those amounts are converted into a single currency chosen by the counterparty 
      1 and reported as one total value.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     variationMarginCollectedByCounterparty1PostHaircut : decimal(25,5)?
 
     /#
     Field 3.25
     Currency in which the variation margin collected is denominated.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     currencyOfVariationMarginCollected : isoCcy?
 
@@ -280,7 +280,7 @@ trait margins {
     Any initial or variation margin amount collected that exceeds the required initial margin or required variation margin, is reported as part of the 
      initial margin collected or variation margin collected respectively, rather than included as excess collateral collected.
     For centrally cleared transactions excess collateral is reported only to the extent it can be assigned to a specific portfolio or transaction.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     excessCollateralCollectedByCounterparty1 : decimal(25,5)?
 
@@ -289,7 +289,7 @@ trait margins {
     Currency in which the excess collateral collected is denominated.
     If the excess collateral is denominated in more than one currency, this data element reflects one of those currencies into which the counterparty 
      1 has chosen to convert all the values of collected excess collateral.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     currencyOfExcessCollateralCollected : isoCcy?
 
@@ -304,7 +304,7 @@ trait margins {
     • Revive: Re-opening of a derivative, at a trade or position level, that was cancelled with action type 'Error' or terminated by mistake.
     • Valuation: An update of a valuation of a derivative, at a trade or position level
     • Position component: A report of a new derivative that is included in a separate position report on the same day.#/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     actionType : enum<MARU, CORR>
 
@@ -312,14 +312,14 @@ trait margins {
     Field 3.29
     Date on which the reportable event relating to the derivative contract and captured by the report took place or, in case of a modification when the 
      modification become effective. #/
-    @FieldClassification(Classification=fieldClassificationType.CDE)
+    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID,  FieldUsageType.CFTC])  
     eventDate : date
 
 }
 
 
-enum collateralisationCategoryType {
+enum CollateralisationCategoryType {
     UNCL ## uncollateralised
     PRC1 ## partially collateralised: counterparty 1 only 
     PRC2 ## partially collateralised: counterparty 2 only 

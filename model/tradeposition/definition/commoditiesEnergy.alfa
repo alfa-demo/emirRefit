@@ -1,52 +1,52 @@
 namespace ALFABANK.Regulatory.Model
 
 # Section 2k - Commodities and emission allowances (Energy) derivative
-record commoditiesEnergy includes derivativesTradeReport {
+record CommoditiesEnergy includes DerivativesTradeReport {
 
     /# Field 2.119 - Delivery point(s) or market area(s). #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     deliveryPointOrZone : eicCodeType
 
     /# Field 2.120 - Identification of the border(s) or border point(s) of a transportation contract.#/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     interconnectionPoint : eicCodeType
 
     /# Field 2.121 - Identification of the delivery profile. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     loadType : enum < BSLD, PKLD, OFFP, HABH, SHPD, GASD, OTHR>
 
     // Section of fields 122-131 is repeatable 
 
     /# Field 2.122 - The start time of the delivery interval for each block or shape. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     deliveryIntervalStartTime : contractTradingHoursType
 
     /# Field 2.123 - The end time of the delivery interval for each block or shape. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     deliveryIntervalEndTime : contractTradingHoursType
 
     /# Field 2.124 - Start date of delivery. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     deliveryStartDate : contractTradingHoursType
 
     /# Field 2.125 - End date of delivery. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     deliveryEndDate : date
 
     /# Field 2.126 - The duration of the delivery period. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     duration_ : enum < MNUT, HOUR, DASD, WEEK, MNTH, QURT, SEAS, YEAR, OTHR>
 
     /# Field 2.127 - The days of the week of the delivery. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     daysOfTheWeek : list<enum <WDAY, WEND, MOND, TUED, WEDD, THUD, FRID, SATD, SUND, XBHL, IBHL>>
 
     /# Field 2.128 - The number of units included in the transaction for each delivery interval specified in field 70. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     deliveryCapacity : decimal(*, *, *, 20)
 
     /# Field 2.129 - The unit of measurement used.#/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     quantityUnit : enum <
     # KW 
     KWAT,
@@ -90,11 +90,11 @@ record commoditiesEnergy includes derivativesTradeReport {
     GJDD >
 
     /# Field 1.130 - If applicable, price per quantity per delivery time interval. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     priceTimeIntervalQuantity : decimal (*, *, *, 20)
 
     /# Field 1.131 - The currency in which the price/time interval quantity is expressed. #/
-    @FieldClassification(Classification=fieldClassificationType.Other)
+    @FieldClassification(Classification=FieldClassificationType.Other)
     currencyOfThePriceTimeIntervalQuantity : isoCcy
 
 }

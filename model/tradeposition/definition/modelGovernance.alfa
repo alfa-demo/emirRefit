@@ -3,56 +3,45 @@ import ALFABANK.Regulatory.Compliance.*
 namespace ALFABANK.Regulatory.Model
 
 @ModelOwner(Org="DataGovGroup")
-@DataRetention (Retention ="15Y")
-@PII( Sensitivity =Compliance.DataSensitivity.Medium, Classification =Compliance.DataClassification.InternalOnly)
-@Residency (Locations =[RegionCode.Europe,RegionCode.Swiss, RegionCode.US])
-fragment trait derivativesTradeReport{
-}
-
-#@ModelOwner(Org="ComplianceGovGroup")
-#fragment record classificationType {
-#}
-
-@ModelOwner(Org="DataGovGroup")
-@DataRetention (Retention ="10Y")
-@PII( Sensitivity =Compliance.DataSensitivity.High, Classification =Compliance.DataClassification.Confidential)
-@Residency (Locations =[RegionCode.Europe,RegionCode.Swiss, RegionCode.US])
-fragment record Lineage {
+@DataRetention (Retention="15Y")
+@PII( Sensitivity=DataSensitivity.Medium, Classification=DataClassification.InternalOnly)
+@Residency (Locations=[RegionCode.Europe,RegionCode.Swiss, RegionCode.US])
+fragment trait DerivativesTradeReport{
 }
 
 @ModelOwner(Org="CommoGovGroup")
-@DataRetention (Retention ="15Y")
-@PII( Sensitivity =Compliance.DataSensitivity.High, Classification =Compliance.DataClassification.InternalOnly)
-@Residency (Locations =[RegionCode.Europe,RegionCode.Swiss])
-fragment record commoditiesEnergy {
+@DataRetention (Retention="15Y")
+@PII( Sensitivity=DataSensitivity.High, Classification=DataClassification.InternalOnly)
+@Residency (Locations=[RegionCode.Europe,RegionCode.Swiss])
+fragment record CommoditiesEnergy {
 }
 
 @ModelOwner(Org="CommoGovGroup")
-@DataRetention (Retention ="12Y")
-@PII( Sensitivity =Compliance.DataSensitivity.Low, Classification =Compliance.DataClassification.InternalOnly)
-@Residency (Locations =[RegionCode.Europe,RegionCode.Swiss])
-fragment record commoditiesGeneral {
+@DataRetention (Retention="12Y")
+@PII( Sensitivity=DataSensitivity.Low, Classification=DataClassification.InternalOnly)
+@Residency (Locations=[RegionCode.Europe,RegionCode.Swiss])
+fragment record CommoditiesGeneral {
 }
 
 @ModelOwner(Org="CreditGovGroup")
-@DataRetention (Retention ="10Y")
-@PII( Sensitivity =Compliance.DataSensitivity.Medium, Classification =Compliance.DataClassification.InternalOnly)
-@Residency (Locations =[RegionCode.Europe,RegionCode.Swiss])
-fragment record creditDerivatives {
+@DataRetention (Retention="10Y")
+@PII( Sensitivity=DataSensitivity.Medium, Classification=DataClassification.InternalOnly)
+@Residency (Locations=[RegionCode.Europe,RegionCode.Swiss])
+fragment record CreditDerivatives {
 }
 
 @ModelOwner(Org="FXGovGroup")
-@DataRetention (Retention ="8Y")
-@PII( Sensitivity =Compliance.DataSensitivity.Medium, Classification =Compliance.DataClassification.InternalOnly)
-@Residency (Locations =[RegionCode.Europe,RegionCode.Swiss])
-fragment record foreignExchange {
+@DataRetention (Retention="8Y")
+@PII( Sensitivity=DataSensitivity.Medium, Classification=DataClassification.InternalOnly)
+@Residency (Locations=[RegionCode.Europe,RegionCode.Swiss])
+fragment record ForeignExchange {
 }
 
 @ModelOwner(Org="IRGovGroup")
-@DataRetention (Retention ="15Y")
-@PII( Sensitivity =Compliance.DataSensitivity.Medium, Classification =Compliance.DataClassification.InternalOnly)
-@Residency (Locations =[RegionCode.Europe,RegionCode.Swiss])
-fragment record interestRates {
+@DataRetention (Retention="15Y")
+@PII( Sensitivity=DataSensitivity.Medium, Classification=DataClassification.InternalOnly)
+@Residency (Locations=[RegionCode.Europe,RegionCode.Swiss])
+fragment record InterestRates {
 }
 
 

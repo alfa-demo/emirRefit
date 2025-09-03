@@ -1,4 +1,0 @@
-licensee=ALFA Github Evaluation Usage
-expiry-date=2023-10-01
-license-code=E71vAVC8jJ+/WWYldm1+L6TcOt6esLuM3zySgT8w0hNG0n/HQVIkxZpfc1gWZ0Dk0uSLdnPplKhcC16529y0gg==
-type=Evaluation

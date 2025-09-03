@@ -42,11 +42,11 @@ annotation DataRetention  (record, trait) {
 
 # Indicates if reportable field is under reconciliation tolerance and start date
 annotation Reconciliation (field) {
-  Method : reconciliationType
+  Method : ReconciliationType
 }
 
 # Indicate the reconciliation tolerance
-enum reconciliationType {
+enum ReconciliationType {
   NA                   ## Not applicable or empty
   SameAsCounterparty2  ## Same as field 1.9
   SameAsCounterparty1  ## Same as field 1.4
@@ -55,12 +55,12 @@ enum reconciliationType {
   Yes                  ## Yes
 }
 # Indicates if reportable field is under reconciliation start date
-annotation reconciliationStartDate  (field) {
-  Method : reconciliationStartDateType
+annotation ReconciliationStartDate  (field) {
+  Method : ReconciliationStartDateType
 }
 
 # Indicates if reportable field is under reconciliation start date
-enum reconciliationStartDateType {
+enum ReconciliationStartDateType {
   NA  ## Not applicable or empty
   `Start date of the reporting obligation`   
   `Two years after the start date of the reporting obligation`
@@ -68,11 +68,11 @@ enum reconciliationStartDateType {
 }
 # Indicate reportable fields aligning with the Regulatory Oversight Committee’s Critical Data Elements (CDE)
 annotation FieldClassification  (field) {
-  Classification : fieldClassificationType
+  Classification : FieldClassificationType
 }
 
 # Indicate reportable fields aligning with the Regulatory Oversight Committee’s Critical Data Elements (CDE)
-enum fieldClassificationType {
+enum FieldClassificationType {
   CDE     ## Critical Data Elements (CDE)
   UPI     ## Unique Product Identifier   
   Other   ## not classified
