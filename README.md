@@ -15,3 +15,9 @@ XML EMIR Reporting Schemas
     Incoming messages (applicable from 29 April 2024)
     Outgoing messages (applicable from 29 April 2024)
 
+
+#### CLI Compile
+mvn com.schemarise.alfa.utils:alfa-maven-plugin:3.6.0:cli -Dalfa.compile -Dalfa.sourcepath=model
+
+#### CLI Markdown Generation
+mvn com.schemarise.alfa.utils:alfa-maven-plugin:3.6.0:cli -Dalfa.exporters=markdown -Dalfa.output=target -Dalfa.sourcepath=model

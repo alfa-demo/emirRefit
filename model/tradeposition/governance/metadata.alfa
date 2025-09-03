@@ -67,7 +67,7 @@ enum reconciliationStartDateType {
   `Two years from the start date of the reporting obligation`
 }
 # Indicate reportable fields aligning with the Regulatory Oversight Committee’s Critical Data Elements (CDE)
-annotation fieldClassification  (field) {
+annotation FieldClassification  (field) {
   Classification : fieldClassificationType
 }
 
@@ -79,12 +79,12 @@ enum fieldClassificationType {
 }
 
 # Indicate usage of reportable fields 
-annotation fieldUsage (field) {
-  Usage : list <  fieldUsageType >
+annotation FieldUsage (field) {
+  Usage : list <  FieldUsageType >
 }
 
 # Indicate the project that uses the reportable field
-enum fieldUsageType {
+enum FieldUsageType {
   MIFID         ## field use for MIFID reporting
   CFTC          ## field use for CFTC reporting
   EMIR          ## field use for EMIR reporting

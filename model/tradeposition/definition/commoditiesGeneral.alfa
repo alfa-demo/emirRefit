@@ -4,19 +4,19 @@ namespace ALFABANK.Regulatory.Model
 record commoditiesGeneral includes derivativesTradeReport {
     /# **Field 2.116** 
        Base product as specified in the classification of commodities in Table 4 of Annex I of the [ITS].#/
-    @fieldClassification(Classification= fieldClassificationType.Other)
+    @FieldClassification(Classification=fieldClassificationType.Other)
     baseProduct : BaseProductType
 
     /# **Field 2.117**
        Subproduct as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
        This field requires a specific base product in field.#/
-    @fieldClassification(Classification= fieldClassificationType.Other)   
+    @FieldClassification(Classification=fieldClassificationType.Other)   
     subProduct : SubProductType
 
     /# **Field 2.118** 
        Further-sub-product as specified in the classification of commodities in Table 4 of Annex I of the [ITS]
        This field requires a specific base product in field.#/
-    @fieldClassification(Classification= fieldClassificationType.Other)   
+    @FieldClassification(Classification=fieldClassificationType.Other)   
     furtherSubProduct : FurtherSubProductType
 }
 
@@ -35,7 +35,7 @@ fragment record commoditiesGeneral {
                      )
 
         # Use hierachy to get the sub-products for the given base-product
-         let subProdsMap = get ( get( hierarchy, toString( baseProduct ) ) )
+         let subProdsMap =get ( get( hierarchy, toString( baseProduct ) ) )
 
          # Check if the sub-product is defined under the base product 
          if ( ! contains( keys( subProdsMap ), toString(subProduct) ) )
@@ -44,7 +44,7 @@ fragment record commoditiesGeneral {
 
         
         # Use hierachy to get the further-sub-products for the given sub-product
-         let furtherSubProdsSet = get( get( subProdsMap, toString( furtherSubProduct ) ) )
+         let furtherSubProdsSet =get( get( subProdsMap, toString( furtherSubProduct ) ) )
 
          # Check if the sub-product is defined under the further-sub-product 
          if ( ! contains( furtherSubProdsSet, toString(furtherSubProduct) ) )

@@ -3,47 +3,47 @@ namespace ALFABANK.Regulatory.Model
 # Section 2h - Interest Rates derivative
 record interestRates includes derivativesTradeReport {
    /# Field 2.79 - An indication of the fixed rate leg 1 or coupon used, where applicable.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    fixedRateOfLeg1OrCoupon : decimal(11,10)?
 
    /# Field 2.80 - Where applicable: day count convention (often also referred to as day count fraction or day  count basis or day count method) 
       that determines how interest payments are calculated. It is used to compute the year fraction of the calculation period, and indicates 
       the number of days in the calculation period divided by the number of days in the year. #/
-   @fieldClassification(Classification= fieldClassificationType.CDE)   
+   @FieldClassification(Classification=fieldClassificationType.CDE)   
    fixedRateOrCouponDayCountConventionLeg1 : enum <A001,A002,A003,A004,A005,A006,A007,A008,A009,A010,A011,A012,A013,A014,A015,A016,A017,A018,A019,NARR>?
 
    /# Field 2.81 - Where applicable: time unit associated with the frequency of payments, eg day, week, month, year or term of the stream for the fixed rate of leg 1 or coupon.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    fixedRateOrCouponPaymentFrequencyPeriodLeg1 : enum <DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.82 - Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment dates occur for the fixed rate of leg 1 or coupon.
       For example, a  transaction with payments occurring every two months is represented with a payment frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
       This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is "TERM", then the payment frequency period multiplier is 1. If the payment 
       frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0. #/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    fixedRateOrCouponPaymentFrequencyPeriodMultiplierLeg1 : int(0,999)?
 
    /# Field 2.83 - Where applicable: an identifier of the interest rates used which are reset at predetermined intervals by reference to a market reference rate.#/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    identifierOfTheFloatingRateOfLeg1 : isoLEI?
 
    /# Field 2.84 - An indication of the interest rate, where available.#/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    indicatorOfTheFloatingRateOfLeg1 : enum<ESTR,SONA,SOFR,EONA,EONS,EURI,EUUS,EUCH,GCFR,ISDA,LIBI,LIBO,MAAA,PFAN,TIBO,STBO,BBSW,JIBA,BUBO,CDOR,CIBO,MOSP,NIBO,PRBO,TLBO,WIBO,TREA,SWAP,FUSW,EFFR,OBFR>?
 
    /# Field 2.85 - The full name of the interest rate as assigned by the index provider. #/
-   @fieldClassification(Classification= fieldClassificationType.Other)
+   @FieldClassification(Classification=fieldClassificationType.Other)
    nameOfTheFloatingRateOfLeg1 : string("^[A-Z]{1,50}$")?
 
    /# Field 2.86 - Where applicable: day count convention (often also referred to as day count fraction or day count basis or day count method) that determines how 
       interest payments for the floating rate of leg 1 are calculated. It is used to compute the year fraction of the calculation period, and indicates 
       the number of days in the calculation period divided by the number of days in the year.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    floatingRateDayCountConventionOfLeg1 : enum<A001,A002,A003,A004,A005,A006,A007,A008,A009,A010,A011,A012,A013,A014,A015,A016,A017,A018,A019,NARR>?
 
    /# Field 2.87
       Where applicable: time unit associated with the frequency of payments,  eg day, week, month, year or term of the stream for the floating rate of leg 1.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)   
+   @FieldClassification(Classification=fieldClassificationType.CDE)   
    floatingRatePaymentFrequencyPeriodOfLeg1 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.88 - Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic 
@@ -51,19 +51,19 @@ record interestRates includes derivativesTradeReport {
       with a payment frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
       This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is 'TERM", then the payment 
       frequency period multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    floatingRatePaymentFrequencyPeriodMultiplierOfLeg1 : int(0,999)?
 
    /# Field 2.89 - Time period describing the reference period for the floating rate of leg 1.#/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    floatingRateReferencePeriodOfLeg1TimePeriod : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.90 - Multiplier of the time period describing the reference period for the floating rate of leg 1. #/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    floatingRateReferencePeriodOfLeg1Multiplier : int(0,999)?
 
    /# Field 2.91 - Where applicable: time unit associated with the frequency of payments resets, e.g. day, week, month, year or term of the stream for the floating rate of leg 1.#/
-   @fieldClassification(Classification= fieldClassificationType.Other)
+   @FieldClassification(Classification=fieldClassificationType.Other)
    floatingRateResetFrequencyPeriodOfLeg1 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.92 - Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic 
@@ -71,31 +71,31 @@ record interestRates includes derivativesTradeReport {
       with a payment frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
       This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is "TERM", then the payment 
       frequency period multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
-   @fieldClassification(Classification= fieldClassificationType.Other)
+   @FieldClassification(Classification=fieldClassificationType.Other)
    floatingRateResetFrequencyMultiplierOfLeg1 : int(0,999)?
 
    /# Field 2.93 - An indication of the spread of leg 1, where applicable: for OTC derivative transactions with periodic payments (eg interest rate fixed/float swaps, interest rate basis swaps, commodity swaps),
       • spread on the individual floating leg(s) index reference price, in the case where there is a spread on a floating leg(s).
       • difference between the reference prices of the two floating leg indexes.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    spreadOfLeg1 : decimal(18, 13)?
 
    /# Field 2.94 - Where applicable: currency in which the spread of leg 1 is denominated. This data element is only applicable if Spread is expressed as monetary amount.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    spreadCurrencyOfLeg1 : isoCcy?
 
    /# Field 2.95 - An indication of the fixed rate leg 2 used, where applicable. #/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    fixedRateOfLeg2 : decimal(11, 10)?
 
    /# Field 2.96 - Where applicable: day count convention (often also referred to as day count fraction or day  count basis or day count method) that determines 
       how interest payments are calculated. It is used to compute the year fraction of the calculation period, and indicates the number of days in the 
       calculation period divided by the number of days in the year.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    fixedRateDayCountConventionLeg2 : enum<A001,A002,A003,A004,A005,A006,A007,A008,A009,A010,A011,A012,A013,A014,A015,A016,A017,A018,A019,NARR>?
 
    /# Field 2.97 - Where applicable: time unit associated with the frequency of payments,  eg day, week, month, year or term of the stream for the fixed rate of leg 2.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    fixedRatePaymentFrequencyPeriodLeg2 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.98 - Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment dates 
@@ -103,29 +103,29 @@ record interestRates includes derivativesTradeReport {
       of "MNTH" (monthly) and a payment frequency period multiplier of 2.
       This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is 'TERM", then the payment frequency period 
       multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    fixedRatePaymentFrequencyPeriodMultiplierLeg2 : int(0,999)?
 
    /# Field 2.99 - Where applicable: an identifier of the interest rates used which are reset at predetermined intervals by reference to a market reference rate #/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    identifierOfTheFloatingRateOfLeg2 : isoISIN?
 
    /# Field 2.100 - An indication of the interest rate, where available.#/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    indicatorOfTheFloatingRateOfLeg2 : enum<ESTR,SONA,SOFR,EONA,EONS,EURI,EUUS,EUCH,GCFR,ISDA,LIBI,LIBO,MAAA,PFAN,TIBO,STBO,BBSW,JIBA,BUBO,CDOR,CIBO,MOSP,NIBO,PRBO,TLBO,WIBO,TREA,SWAP,FUSW,EFFR,OBFR>?
 
    /# Field 2.101 - The full name of the interest rate as assigned by the index provider. #/
-   @fieldClassification(Classification= fieldClassificationType.Other)
+   @FieldClassification(Classification=fieldClassificationType.Other)
    nameOfTheFloatingRateOfLeg2 : string (0, 50)?
 
    /# Field 2.102 - Where applicable: day count convention (often also referred to as day count fraction or day count basis or day count method) that determines 
       how interest payments for the floating rate of leg 2 are calculated. It is used to compute the year fraction of the calculation period, and 
       indicates the number of days in the calculation period divided by the number of days in the year.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    floatingRateDayCountConventionOfLeg2 : enum<A001,A002,A003,A004,A005,A006,A007,A008,A009,A010,A011,A012,A013,A014,A015,A016,A017,A018,A019,NARR>?
 
    /# Field 2.103 - Where applicable: time unit associated with the frequency of payments,  eg day, week, month, year or term of the stream for the floating rate of leg 2.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    floatingRatePaymentFrequencyPeriodOfLeg2 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.104 - Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment 
@@ -133,19 +133,19 @@ record interestRates includes derivativesTradeReport {
       frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
       This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is "TERM", then the payment frequency 
       period multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    floatingRatePaymentFrequencyPeriodMultiplierOfLeg2 : int(0,999)?
 
    /# Field 2.105 - Time period describing the reference period for the floating rate of leg 2.#/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    floatingRateReferencePeriodOfLeg2TimePeriod : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.106 - Multiplier of the time period describing the reference period for the floating rate of leg 2.#/
-   @fieldClassification(Classification= fieldClassificationType.UPI)
+   @FieldClassification(Classification=fieldClassificationType.UPI)
    floatingRateReferencePeriodOfLeg2Multiplier : int(0,999)?
 
    /# Field 2.107 - Where applicable: time unit associated with the frequency of payments resets, e.g. day, week, month, year or term of the stream for the floating rate of leg 2.#/
-   @fieldClassification(Classification= fieldClassificationType.Other)
+   @FieldClassification(Classification=fieldClassificationType.Other)
    floatingRateResetFrequencyPeriodOfLeg2 : enum< DAIL, WEEK, MNTH, YEAR, ADHO, EXPI>?
 
    /# Field 2.108 - Where applicable: number of time units (as expressed by the payment frequency period) that determines the frequency at which periodic payment 
@@ -153,17 +153,17 @@ record interestRates includes derivativesTradeReport {
       frequency period of "MNTH" (monthly) and a payment frequency period multiplier of 2.
       This data element is not applicable if the payment frequency period is "ADHO". If payment frequency period is ''TERM", then the payment frequency 
       period multiplier is 1. If the payment frequency is intraday, then the payment frequency period is "DAIL" and the payment frequency multiplier is 0.#/
-   @fieldClassification(Classification= fieldClassificationType.Other)
+   @FieldClassification(Classification=fieldClassificationType.Other)
    floatingRateResetFrequencyMultiplierOfLeg2 : int(0,999)?
 
    /# Field 2.109 - An indication of the spread of leg 2, where applicable: for OTC derivative transactions with periodic payments (e.g. interest rate fixed/float swaps, interest rate basis swaps, commodity swaps),
       • spread on the individual floating leg(s) index reference price, in the case where there is a spread on a floating leg(s).
       • difference between the reference prices of the two floating leg indexes.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    spreadOfLeg2 : decimal (18, 13)?
 
    /# Field 2.110 - Where applicable: currency in which the spread of leg 2 is denominated. This data element is only applicable if Spread is expressed as monetary amount.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    spreadCurrencyOfLeg2 : isoCcy?
 
    /# Field 2.111 - Traded price of the entire package in which the reported derivative transaction is a component of a package transaction.
@@ -173,7 +173,7 @@ record interestRates includes derivativesTradeReport {
          • Package transaction price is used
       Spread and related data elements of the transactions (spread currency) that represent individual components of the package are reported when available.
       Package transaction spread may not be known when a new transaction is reported but may be updated later.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    packageTransactionSpread : decimal (18, 13)?
 
    /# Field 2.112
@@ -181,6 +181,6 @@ record interestRates includes derivativesTradeReport {
          • no package is involved, or
          • Package transaction price is used, or
          • Package transaction spread is expressed as percentage or basis points.#/
-   @fieldClassification(Classification= fieldClassificationType.CDE)
+   @FieldClassification(Classification=fieldClassificationType.CDE)
    packageTransactionSpreadCurrency : isoCcy?
 }    

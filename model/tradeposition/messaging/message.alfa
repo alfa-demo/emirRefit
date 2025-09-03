@@ -6,11 +6,11 @@ record Message {
     Id : uuid                                               ## Unique message id
     SourceSystemId : string                                 ## Source system identifier
     MsgType : string                                        ## Message type identifier
-    Payload : list< $record >                               ## A list of records as payload
+    // Payload : list< $record >                               ## A list of records as payload
     
-    CreateTs : datetime = timestamp()                       ## Message created timestamp
+    CreateTs : datetime =timestamp()                       ## Message created timestamp
     ExpiryTs : datetime?                                    ## Message expriry timestamp if applicable
-    Priority : int( 1, 10) = 5                              ## Message processing priority, 10 highest, 1 lowest
+    Priority : int( 1, 10) =5                              ## Message processing priority, 10 highest, 1 lowest
     RestrictToRegions : list< ALFABANK.Regulatory.Compliance.RegionCode >?      ## List of regions the message should be limited. If empty, unrestricted.
 }
 

@@ -21,7 +21,7 @@ fragment record derivativesTradeReport {
     #/
     assert reportSubmittingEntityId {
         # Check if the LEI status is correcte depending action-type
-        let actionTypes = { ActionType.NEWT, ActionType.MODI, ActionType.VALU, ActionType.CORR, ActionType.REVI, ActionType.POSC }
+        let actionTypes ={ ActionType.NEWT, ActionType.MODI, ActionType.VALU, ActionType.CORR, ActionType.REVI, ActionType.POSC }
 
         if ( contains( actionTypes, actionType ))
             debug("check in the GLEIF database")
@@ -31,7 +31,7 @@ fragment record derivativesTradeReport {
     /# Field 1.5 Validation #/
     assert natureOfCounterparty1 {
         # Check if the field should be mandatory depending action-type
-        let actionTypes = { ActionType.NEWT, ActionType.MODI, ActionType.CORR, ActionType.REVI, ActionType.POSC }
+        let actionTypes ={ ActionType.NEWT, ActionType.MODI, ActionType.CORR, ActionType.REVI, ActionType.POSC }
 
         if ( contains( actionTypes, actionType)  && isNone( natureOfCounterparty1 ) )
             raise error ("EMIR-VR-1005-01, this field is mandatory for action types 'NEWT', 'MODI','CORR', 'REVI', and 'POSC" )
@@ -46,20 +46,20 @@ fragment record derivativesTradeReport {
         ActionTypeCheck::shouldFieldBeBlank(actionType, "corporateSectorOfCounterparty1", isSome( corporateSectorOfCounterparty1 ) )
 
         # Create list of all financials
-        let financials =  enumValues(FinancialsCorpSectorType) 
+        let financials = enumValues(FinancialsCorpSectorType) 
         
         # Create list of all non-financials
-        let nonfinancials = enumValues(NonFinancialsCorpSectorType)  
+        let nonfinancials =enumValues(NonFinancialsCorpSectorType)  
 
         # When natureOfCounterparty1 is N check corporate sector is non-financial 
-        if ( get(natureOfCounterparty1) == NatureOfCounterpartyType.N && 
-             len( filter( get(corporateSectorOfCounterparty1), e => contains(nonfinancials, toString(e) ) ) ) == 0 ) 
+        if ( get(natureOfCounterparty1) ==NatureOfCounterpartyType.N && 
+             len( filter( get(corporateSectorOfCounterparty1), e => contains(nonfinancials, toString(e) ) ) ) ==0 ) 
             # Error - corporateSectorOfCounterparty1 needs a non-financial sector classification
             raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is 'N', at least one code pertaining to the classification of the non-financial counterparties required" )
 
         # When natureOfCounterparty1 is F check corporate sector is financial 
-        if ( get(natureOfCounterparty1) == NatureOfCounterpartyType.F && 
-             len( filter( get(corporateSectorOfCounterparty1), e => contains(financials, toString(e) ) ) ) == 0 ) 
+        if ( get(natureOfCounterparty1) ==NatureOfCounterpartyType.F && 
+             len( filter( get(corporateSectorOfCounterparty1), e => contains(financials, toString(e) ) ) ) ==0 ) 
             # Error - corporateSectorOfCounterparty1 needs a financial sector classification
             raise error ("EMIR-VR-ZZZ, If natureOfCounterparty1 is 'F', at least one code pertaining to the classification of the financial counterparties required" )
 
@@ -465,7 +465,7 @@ library ActionTypeCheck {
     # If action type is populated with 'VALU','TERM','EROR' the field shall be left blank
     shouldFieldBeBlank( at :ActionType, fieldName : string, fieldIsSet : boolean ) : void 
     {
-        let actionTypes = { ActionType.VALU, ActionType.TERM, ActionType.EROR }
+        let actionTypes ={ ActionType.VALU, ActionType.TERM, ActionType.EROR }
         if ( contains( actionTypes, at ) && fieldIsSet )
             raise error ("EMIR-VR-ZZZ, if action type is populated with 'VALU','TERM','EROR' the field ${fieldName} should be left blank" )
 
