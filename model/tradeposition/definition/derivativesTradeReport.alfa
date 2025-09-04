@@ -15,19 +15,49 @@
    
 namespace ALFABANK.Regulatory.Model
 
+
 /# The base type for Trade and Position capturing all common Trade and Position data related fields.#/
-      
+
+@alfa.meta.FieldAnnotations( {
+   [@FieldClassification(Classification=FieldClassificationType.CDE)] : 
+      [customBasketCode, 
+      identifierOfTheBasketsConstituents, settlementCurrency1, settlementCurrency2,valuationAmount, valuationCurrency, 
+      valuationTimestamp, valuationMethod, delta, collateralPortfolioIndicator, collateralPortfolioCode, 
+      confirmed,cleared, centralcounterparty,venueOfExecution,executionTimestamp,effectiveDate,expirationDate,
+      earlyTerminationDate,finalContractualSettlementdate,deliveryType,price,priceCurrency,unadjustedEffectiveDateOfThePrice,
+      unadjustedEndDateOfThePrice,priceInEffectBetweenTheUnadjustedEffectiveDateAndTheEndDate,packageTransactionPrice,
+      packageTransactionPriceCurrency,notionalAmountOfLeg1,notionalCurrency1,effectiveDateofTheNotionalAmountOfLeg1,endDateOfTheNotionalAmountOfLeg1,
+      notionalAmountInEffectOnAssociatedEffectiveDateOfLeg1,totalNotionalQuantityOfLeg1,effectiveDateOfTheNotionalQuantityOfLeg1,
+      endDateOfTheNotionalQuantityOfLeg1,notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg1,notionalAmountOfLeg2,notionalCurrency2,
+      effectiveDateOfTheNotionalAmountOfLeg2,endDateOfTheNotionalAmountOfLeg2,notionalAmountInEffectOnAssociatedEffectiveDateOfLeg2,
+      totalNotionalQuantityOfLeg2,effectiveDateOfTheNotionalQuantityOfLeg2,endDateOfTheNotionalQuantityOfLeg2,
+      notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg2,otherPaymentType,otherPaymentAmount,otherPaymentCurrency,otherPaymentDate,
+      otherPaymentPayer,otherPaymentReceiver,optionStyle,strikePrice,effectiveDateOfTheStrikePrice,endDateOfTheStrikePrice,
+      strikePriceInEffectOnAssociatedEffectiveDate,strikePriceCurrencyCurrencyPair,optionPremiumAmount,optionPremiumCurrency,optionPremiumPaymentDate,
+      maturityDateOfTheUnderlying]
+      ,
+   [@FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC]),
+    @FieldClassification(Classification=FieldClassificationType.Other)] : 
+     [ reportingTimestamp, reportSubmittingEntityId, entityResponsibleForReporting, counterparty1, clearingMember ]
+     ,
+   [@FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])] : 
+     [ corporateSectorOfCounterparty1, clearingThresholdOfCounterparty1, countryOfCounterparty2, natureOfCounterparty2, corporateSectorOfCounterparty2,
+      clearingThresholdOfCounterparty2, reportingObligationOfCounterparty2, brokerId ]
+     ,
+   [@FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other])] : 
+     [direction, directionOfLeg1, directionOfLeg2, uti, reportTrackingNumber, priorUti, subsequentPositionUti]
+     ,
+   [@FieldClassification(Classification=FieldClassificationType.UPI)] : 
+     [uniqueProductIdentifier, contractType, assetClass, derivativeBasedOnCryptoAssets, underlyingIdentificationType, indicatorOfTheUnderlyingIndex, nameOfTheUnderlyingIndex, optionType]
+})
+
 trait DerivativesTradeReport {
 
     /# Field 1.1 - Date and time of the submission of the report to the trade repository.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC])
     reportingTimestamp : datetime
     
     /# Field 1.2 - In the case where the entity responsible for reporting has delegated the submission of the report to a third party or to the other counterparty, this entity 
        has to be identified in this field by a unique code. Otherwise the entity responsible for reporting should be identified in this field. #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC])
     reportSubmittingEntityId : isoLEI
         
     /# Field 1.3 - Where a financial counterparty  is solely responsible, and legally liable, for reporting on behalf of both counterparties in accordance with Article 9(1)(a) of 
@@ -37,19 +67,14 @@ trait DerivativesTradeReport {
        Regulation, the unique code identifying that  management company. Where an Alternative Investment Fund Manager (AIFM) is responsible, and legally liable, for 
        reporting on behalf of an Alternative Investment Fund (AIF) in accordance with Article 9(1)(c) of that Regulation, the unique code identifying that AIFM. Where 
        an authorised entity that is responsible for managing and acting on be #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC])
-    entityResponsibleForReporting : isoLEI?
+        entityResponsibleForReporting : isoLEI?
         
     /# Field 1.4 - Counterparty 1 (Reporting counterparty) Identifier of the counterparty to a derivative transaction who is fulfilling its reporting obligation via the report in question. In the 
        case of an allocated derivative transaction executed by a fund manager on behalf of a fund, the fund and not the fund manager is reported as the counterparty. #/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC])
     counterparty1 : isoLEI
         
     /# Field 1.5 - Indicate if the counterparty 1 (Reporting counterparty) is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or points 1, 
        8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
     @FieldUsage(Usage=[ FieldUsageType.Other ] )
     natureOfCounterparty1 : NatureOfCounterpartyType?
         
@@ -57,267 +82,197 @@ trait DerivativesTradeReport {
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 1 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])   
     corporateSectorOfCounterparty1 : list<CorpSectorType>?
         
     /# Field 1.7 - Information whether the counterparty 1 (Reporting counterparty) is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment when 
        the transaction was concluded. #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     clearingThresholdOfCounterparty1 : boolean?
         
     /# Field 1.8 - Indicator of whether LEI was used to identify the Counterparty 2.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     counterparty2IdentifierType : boolean
         
     /# Field 1.9 - Identifier of the second counterparty to a derivative transaction.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
     @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC,  FieldUsageType.Other])
     counterparty2 : string("[A-Z0-9]{72,72}")
         
     /# Field 1.10 - In case the counterparty 2 is a natural person, the code of country of residence of that person.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     countryOfCounterparty2 : isoCtyCode?
         
     /# Field 1.11 - Indicate if the counterparty  2 is a CCP, a financial, non-financial counterparty or other type of counterparty in accordance with point 5 of Article 1 or 
        points 1, 8 and 9 of Article 2 of Regulation (EU) No 648/2012 of the European Parliament and of the Council. #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     natureOfCounterparty2 : NatureOfCounterpartyType?
         
     /# Field 1.12 - Nature of the counterparty 2's company activities. If the counterparty 2 is a Financial Counterparty, this field shall contain all necessary codes included in 
        the Taxonomy for Financial Counterparties and applying to that Counterparty. If the counterparty 2 is a Non-Financial Counterparty, this field shall contain all 
        necessary codes included in the Taxonomy for Non-Financial Counterparties and applying to that Counterparty. Where more than one activity is reported, the codes 
        shall be populated in order of the relative importance of the corresponding activities. #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     corporateSectorOfCounterparty2 : list<CorpSectorType>?
         
     /# Field 1.13 - Information whether the counterparty 2 is above the clearing threshold referred to in Article 4(a)(3) or 10(3) of Regulation (EU) No 648/2012 at the moment 
        when the transaction was concluded. #/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     clearingThresholdOfCounterparty2 : boolean?
         
     /# Field 1.14 - Indicator of whether the counterparty 2 has the reporting obligation under EMIR (irrespective of who is responsible and legally liable for its reporting).#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     reportingObligationOfCounterparty2 : boolean?
         
     /# Field 1.15 - In the case a broker acts as intermediary for the counterparty 1 without becoming a counterparty himself, the counterparty 1 shall identify this broker by a unique code.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT])  
     brokerId : isoLEI?
         
     /# Field 1.16 - Identifier of the clearing member through which a derivative transaction was cleared at a central counterparty.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC])
     clearingMember : isoLEI?
         
     /# Field 1.17 - Indicator of whether the counterparty 1 is the buyer or the seller as determined at the time of the transaction.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )
     direction : enum<BYER,SLLR>?
         
     /# Field 1.18 - Indicator of whether the counterparty 1 is the payer or the receiver of leg 1 as determined at the time of the of the conclusion of the derivative.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )
     directionOfLeg1 : enum<MAKE,TAKE >?
         
     /# Field 1.19 - Indicator of whether the counterparty 1 is the payer or the receiver of leg 2 as determined at the time of the conclusion of the derivative.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )
     directionOfLeg2 : enum<MAKE,TAKE >?
         
     /#  Field 1.20 - This field shall be populated only where the counterparty 1 is a non-financial counterparty, as referred to in Article 2 (9) of the Regulation (EU) No 648/2012.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
     @FieldUsage( Usage=[ FieldUsageType.Other ] )
     directlyLinkedToCommercialActivityOrTreasuryFinancing : boolean?
         
     /# Field 2.1 - Unique Trade Identifier as referred to in Article 7 of the [ITS].#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )
     uti : string("[A-Z0-9]{52,52}")?
         
     /# Field 2.2 - Where a derivative was executed on a trading venue, a number generated by the trading venue and unique to that execution.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )
     reportTrackingNumber : string("[A-Z0-9]{52,52}")?
         
     /# Field 2.3 - UTI assigned to the predecessor transaction that has given rise to the reported transaction due to a lifecycle event, in a one-to-one relation between transactions 
        (e.g. in the case of a novation, when a transaction is terminated, and a new transaction is generated) or in a one-to-many relation between transactions 
        (e.g. in clearing or if a transaction is split into several different transactions).
        This data element is not applicable when reporting many-to-one and many-to-many relations between transactions (e.g. in the case of a compression). #/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )   
     priorUti : string("[A-Z0-9]{52,52}")?
         
     /# Field 2.4 - The UTI of the position in which a derivative is included. This field is applicable only for the reports related to the termination of a derivative due to its inclusion in a position.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )
     subsequentPositionUti : string("[A-Z0-9]{52,52}")?
         
     /# Field 2.5 - Identifier generated by the PTRR service provider or CCP providing the PTRR service in order to connect all derivatives entering  into a given PTRR event and resulting from that PTRR event.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    @FieldUsage(Usage=[FieldUsageType.EMIR_REFIT, FieldUsageType.UK_EMIT_REFIT, FieldUsageType.MIFID, FieldUsageType.CFTC, FieldUsageType.Other] )
     postTradeRiskReduction : string("[A-Z0-9]{52,52}")?
         
     /# Field 2.6 - Identifier (determined by the counterparty  1) in order to connect derivatives in the same package in accordance with Article 1(2)(a). 
        A package may include reportable and non- reportable transactions."#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    packageIdentifier : string("[A-Z0-9]{36,36}")?
+        packageIdentifier : string("[A-Z0-9]{36,36}")?
         
     /# Field 2.7 - ISIN identifying the product if that product is admitted to trading or traded on a regulated market, MTF, OTF or systematic internaliser.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    internationalSecuritiesIdentificationNumber : isoISIN?
+        internationalSecuritiesIdentificationNumber : isoISIN?
         
     /# Field 2.8 - UPI identifying the product.#/
-    @FieldClassification(Classification=FieldClassificationType.UPI)
     uniqueProductIdentifier : isoUPI?
         
     /# Field 2.9 - Classification of Financial Instrument (CFI) code pertaining to the instrument.#/
-    @FieldClassification(Classification=FieldClassificationType.Other)
-    productClassification : isoCFI?
+        productClassification : isoCFI?
         
     /# Field 2.10 - Each reported contract shall be classified according to its type.#/
-    @FieldClassification(Classification=FieldClassificationType.UPI)
     contractType : enum<CFDS,FRAS,FUTR,FORW,OPTN,SPDB,SWAP,SWPT,OTHR>?
         
     /# Field 2.11 - Each reported contract shall be classified according to the asset class it is based on.#/
-    @FieldClassification(Classification=FieldClassificationType.UPI)
     assetClass : enum<COMM,CRDT,CURR,INTR>?
 
    /# Field 2.12- Indicator whether the derivative is based on crypto-assets. #/
-   @FieldClassification(Classification=FieldClassificationType.UPI)
    derivativeBasedOnCryptoAssets : boolean?
 
    /# Field 2.13 - The type of relevant underlying identifier. 1 alphabetic character:I =ISIN,B =Basket,X =Index. #/
-   @FieldClassification(Classification=FieldClassificationType.UPI)
    underlyingIdentificationType : enum< I, B, X >?
 
    /# Field 2.14 - The direct underlying shall be identified by using a unique identification for this underlying based on its type.
       For Credit Default Swaps, the ISIN of the reference obligation should be provided. #/
-   @FieldClassification(Classification=FieldClassificationType.UPI)   
+     
    underlyingIdentification : isoISIN?
 
    /# Field 2.15 - An indication of the underlying index, where available. The indication of the floating rate index. 4 alphabetic characters: #/
-   @FieldClassification(Classification=FieldClassificationType.UPI)
    indicatorOfTheUnderlyingIndex : enum <ESTR,SONA,SOFR,EONA,EONS,EURI,EUUS,EUCH,GCFR,ISDA,LIBI,LIBO,MAAA,PFAN,TIBO,STBO,BBSW,JIBA,BUBO,CDOR,CIBO,MOSP,NIBO,PRBO,TLBO,WIBO,TREA,SWAP,FUSW,EFFR,OBFR>?
 
    /# Field 2.16 - The full name of the underlying index as assigned by the index provider. Up to 50 alphanumeric characters. 
       Special characters are allowed if they form part of the full name of the index.#/
-   @FieldClassification(Classification=FieldClassificationType.UPI)
    nameOfTheUnderlyingIndex : string(1, 50)?
 
    /# Field 2.17 - If the derivative transaction is based on a custom basket, unique code assigned by the structurer of the custom basket to link its constituents. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   customBasketCode : string("[A-Z0-9]{18,18}[0-9]{2,2}[A-Z0-9]{52,52}")?
+      customBasketCode : string("[A-Z0-9]{18,18}[0-9]{2,2}[A-Z0-9]{52,52}")?
 
    /# Field 2.18 - In case of custom baskets composed, among others, of financial instruments traded in a trading venue, only financial instruments traded in a trading venue shall be specified. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   identifierOfTheBasketsConstituents : isoISIN?
+      identifierOfTheBasketsConstituents : isoISIN?
 
    /# Field 2.19 - Currency for the cash settlement of the transaction when applicable. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   settlementCurrency1 : isoCcy?
+      settlementCurrency1 : isoCcy?
 
    /# Field 2.20 - Currency for the cash settlement of the transaction when applicable. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   settlementCurrency2 : isoCcy?
+      settlementCurrency2 : isoCcy?
 
    /# Field 2.21 - Mark-to-market valuation of the contract, or mark­ to-model valuation as referred to in Article 4 of the [RTS]
       The CCP's valuation to be used for a cleared trade. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   valuationAmount : decimal(25,5)?
+      valuationAmount : decimal(25,5)?
 
    /# Field 2.22 - Currency in which the valuation amount is denominated. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   valuationCurrency : isoCcy?
+      valuationCurrency : isoCcy?
 
    /# Field 2.23 - Date and time of the last valuation marked to market, provided by the central counterparty (CCP) or calculated using the current or last available market price of the inputs. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   valuationTimestamp : datetime? 
+      valuationTimestamp : datetime? 
    
    /# Field 2.24 - Source and method used for the valuation of the transaction by the counterparty 1.
       If at least one valuation input is used that is classified as mark-to­ model in the below table, then the whole valuation is classified as mark-to­ model.
       If only inputs are used that are classified as mark-to­ market in the table below, then the whole valuation  is classified as mark-to­ market. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   valuationMethod : enum < MTMA, MTMO, CCPV> ?
+      valuationMethod : enum < MTMA, MTMO, CCPV> ?
 
    /# Field 2.25 - The ratio of the absolute change in price of a derivative transaction to the change in price of the underlier.
       This field is applicable only to options and swaptions.
       Updated delta shall be reported on a daily basis by financial counterparties and non-financial counterparties as referred to in Article 1O of Regulation (EU) No 648/2012. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   delta : decimal(25,5)?
+      delta : decimal(25,5)?
 
    /# Field 2.26 - Indicator of whether the collateralisation was performed on a portfolio basis. Under portfolio, it is understood the set of transactions that are margined together 
       (either on a net or a gross basis) rather than an individual transaction. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   collateralPortfolioIndicator : boolean?
+      collateralPortfolioIndicator : boolean?
 
    /# Field 2.27 - If collateral is reported on a portfolio basis, unique code assigned by the counterparty 1 to the portfolio. 
       This data element is not applicable if the collateralisation was performed on a transaction level basis, 
       or if there is no collateral agreement  or if no collateral is posted or received. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   collateralPortfolioCode : string("[A-Z0-9]{52,52}")?
+      collateralPortfolioCode : string("[A-Z0-9]{52,52}")?
 
    /# Field 2.28 - Date and time of the confirmation, as set out in Article 12 of Commission Delegated Regulation (EU) No 149/2013.
       Applicable only to OTC derivative contracts not cleared by a CCP. #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   confirmationTimestamp : datetime? 
+      confirmationTimestamp : datetime? 
 
    /# Field 2.29 - For new reportable transactions, whether the legally binding terms of an OTC derivatives contract were documented and agreed upon (confirmed) or not (unconfirmed).
       If documented and agreed, whether such confirmation was done:
       • via a shared confirmation facility or platform, or a private/bilateral electronic system (electronic);
       • via a human-readable written document, such as fax, paper or manually processed e-mails (non- electronic).
       Applicable only to OTC derivative contracts not cleared by a CCP. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   confirmed : enum < NCNF, ECNF, YCNF>?
+      confirmed : enum < NCNF, ECNF, YCNF>?
    
    /# Field 2.30 - Indicates, whether the reported contract belongs to a class of OTC derivatives that has been declared subject to the clearing 
       obligation and both counterparties to the contract are subject to the clearing obligation under Regulation (EU) No 648/2012, 
       as of the time of execution of the contract. Applicable only to OTC derivative contracts. #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   clearingObligation : enum < TRUE, FLSE, UKWN>?
+      clearingObligation : enum < TRUE, FLSE, UKWN>?
 
    /# Field 2.31 - Indicator of whether the derivative has been cleared by a CCP. 1 alphabetic character:
       Y=yes, centrally cleared, for beta and gamma transactions. N=no, not centrally cleared. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   cleared : enum < Y, N>?
+      cleared : enum < Y, N>?
 
    /# Field 2.32 - Time and date when clearing took place. Applicable only to derivatives cleared by a CCP. #/ 
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   clearingTimestamp : datetime? 
+      clearingTimestamp : datetime? 
 
    /# Field 2.33 - Identifier of the central counterparty (CCP) that cleared the transaction. 
       This data element is not applicable if the value of the data element "Cleared" is "N" ("No, not centrally cleared"). #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   centralcounterparty : isoLEI?
+      centralcounterparty : isoLEI?
 
    /# Field 2.34 - Reference to the master agreement type under which the counterparties concluded a derivative. #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   masterAgreementType : enum< ISDA, CDEA, EUMA, FPCA, FMAT, DERV, CMOP, CHMA, IDMA, EFMA, GMRA, GMSL, BIAG, OTHR>?
+      masterAgreementType : enum< ISDA, CDEA, EUMA, FPCA, FMAT, DERV, CMOP, CHMA, IDMA, EFMA, GMRA, GMSL, BIAG, OTHR>?
 
    /# Field 2.35 - Name of the master agreement. This field shall only be completed where 'OTHR' is reported in field 2.34 (masterAgreementType). #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   otherMasterAgreementType : string("[A-Z0-9]{50,50}")?
+      otherMasterAgreementType : string("[A-Z0-9]{50,50}")?
 
    /# Field 2.36 - Reference to the year of the master agreement relevant to the reported trade, if applicable. #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   masterAgreementVersion : date(*, *, "YYYY")?
+      masterAgreementVersion : date(*, *, "YYYY")?
 
    /# Field 2.37 - Indicates whether the contract was entered into as an intragroup transaction, defined in Article 3 of Regulation (EU) No 648/2012. #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   intragroup : boolean?
+      intragroup : boolean?
 
    /# Field 2.38 - Identify whether the contract results from a PTRR operation. Boolean value:
       TRUE =contract results from a PTRR event
       FALSE =contract does not result from a PTRR event #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   ptrr : boolean?
+      ptrr : boolean?
 
    /# Field 2.39 - Indicator of a type of a PTRR operation for the purpose of reporting under EMIR.
       Portfolio Compression without a third-party service provider: An arrangement to reduce risk in existing portfolios of trades 
@@ -331,12 +286,10 @@ trait DerivativesTradeReport {
       of trades by adding new non-price forming trades and where no existing trades in the portfolio are terminated or replaced and the 
       notional is increased rather than decreased. Other Portfolio PTTR services: A PTRR service provided by a service provider to reduce 
       risk in existing portfolios of trades using non-price forming trades and where such service does not qualify as Portfolio Compression  or Portfolio Rebalancing.#/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   typeOfPtrrTechnique : enum < PWOS, PWAS, PRBM, OTHR >?
+      typeOfPtrrTechnique : enum < PWOS, PWAS, PRBM, OTHR >?
 
    /# Field 2.40 - LEI identifying the PTRR service provider. #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   ptrrServiceProvider : isoLEI?
+      ptrrServiceProvider : isoLEI?
 
    /# Field 2.41 -Identification of the venue where the transaction was executed.
       Use the ISO 10383 segment MIC for transactions executed on a trading venue, Systematic Internaliser (SI) or organised trading platform outside of the Union. 
@@ -346,64 +299,52 @@ trait DerivativesTradeReport {
       or where a counterparty does not know it is trading with a counterparty 2 acting as an SI.
       Use MIC code 'XXXX' for financial instruments that are not admitted to trading or traded on a trading venue or for which no request for admission has 
       been made and that are not traded on an organised trading platform outside of the Union. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   venueOfExecution : isoMktId?
+      venueOfExecution : isoMktId?
 
    /# Field 2.42 - Date and time a transaction was originally executed, resulting in the generation of a new UTI. This data element remains unchanged throughout the life 
       of the UTI. For position level reporting it should refer to the time when position was opened for the first time. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   executionTimestamp : datetime? 
+      executionTimestamp : datetime? 
 
    /# Field 2.43 - Unadjusted date at which obligations under the OTC derivative transaction come into effect, as included in the confirmation.
       If the effective date is not specified as part of the terms of the
       contract, the counterparties shall report in this field the date of execution of the derivative. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   effectiveDate : date?
+      effectiveDate : date?
 
    /# Field 2.44 - Unadjusted date at which obligations under the derivative transaction stop being effective, as included in the confirmation. 
       Early termination does not affect this data element. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   expirationDate : date?
+      expirationDate : date?
 
    /# Field 2.45 - Effective date of the early termination (expiry) of the reported transaction. This data element is applicable if the termination 
       of the transaction occurs prior to its maturity due to an ex- interim decision of a counterparty (or counterparties). #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   earlyTerminationDate : date?
+      earlyTerminationDate : date?
 
    /# Field 2.46 - Unadjusted date as per the contract, by which all transfer of cash or assets should take place and the counterparties should no longer 
       have any outstanding obligations to each other under that contract. For products that may not have a final contractual settlement 
       date (eg American options), this data element reflects the date by which the transfer of cash or asset would take place if termination were to occur on the expiration date.#/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   finalContractualSettlementdate : date? 
+      finalContractualSettlementdate : date? 
 
    /# Field 2.47 - Indicates whether the contract is settled physically or in cash. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   deliveryType : enum < CASH, PHYS, OPTL >?
+      deliveryType : enum < CASH, PHYS, OPTL >?
 
    /# Field 2.48 - Price specified in the derivative transaction. It does not include fees, taxes or commissions. 
       Where the price is not known when a new transaction is reported, the price is updated as it becomes available.
       For transactions that are part of a package, this data element contains the price of the component transaction where applicable. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   price : decimal(18, 13)?
+      price : decimal(18, 13)?
 
    /# Field 2.49 - Currency in which the price is denominated. Price currency is only applicable if price is expressed as monetary value. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   priceCurrency : isoCcy?
+      priceCurrency : isoCcy?
 
    /# Fields 50-52 are repeatable and shall be populated in the case of derivatives involving price schedules #/
 
    /# Field 2.50 - Unadjusted effective date of the price. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   unadjustedEffectiveDateOfThePrice : date?
+      unadjustedEffectiveDateOfThePrice : date?
 
    /# Field 2.51 - Unadjusted end date of the price (not applicable if the unadjusted end date of a given schedule's period 
       is back-to-back with the unadjusted effective date of the subsequent period). #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   unadjustedEndDateOfThePrice : date?
+      unadjustedEndDateOfThePrice : date?
 
    /# Field 2.52 - Price in effect between the unadjusted effective date and inclusive of the unadjusted end date. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   priceInEffectBetweenTheUnadjustedEffectiveDateAndTheEndDate : decimal(18, 13)?
+      priceInEffectBetweenTheUnadjustedEffectiveDateAndTheEndDate : decimal(18, 13)?
 
    /# Field 2.53 - Traded price of the entire package in which the reported derivative transaction is a component.
       This data element is not applicable if
@@ -411,121 +352,95 @@ trait DerivativesTradeReport {
       • package transaction spread is used.
       Prices and related data elements of the transactions (Price currency) that represent individual components of the package are reported when available.
       The package transaction price may not be known when a new transaction is reported but may be updated later. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   packageTransactionPrice : decimal(18, 13)?
+      packageTransactionPrice : decimal(18, 13)?
 
    /# Field 2.54 - Currency in which the Package transaction price is denominated. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   packageTransactionPriceCurrency : isoCcy?
+      packageTransactionPriceCurrency : isoCcy?
 
    /# Field 2.55 - Notional amount of leg 1 as referred to in Article 5 of the [RTS]. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalAmountOfLeg1 : decimal(25,5, 0.0, * )?
+      notionalAmountOfLeg1 : decimal(25,5, 0.0, * )?
 
    /# Field 2.56 - Where applicable: the currency in which the notional amount of leg 1 is denominated. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalCurrency1 : isoCcy?
+      notionalCurrency1 : isoCcy?
 
    // Fields 57-59 are repeatable and shall be populated in the case of derivatives involving notional amount schedules 
 
    /# Field 2.57 - Unadjusted date on which the associated notional amount of leg 1 becomes effective. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   effectiveDateofTheNotionalAmountOfLeg1 : date?
+      effectiveDateofTheNotionalAmountOfLeg1 : date?
 
    /# Field 2.58 - Unadjusted end date of the notional amount of leg 1 #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   endDateOfTheNotionalAmountOfLeg1 : date?
+      endDateOfTheNotionalAmountOfLeg1 : date?
 
    /# Field 2.59 - Notional amount of leg 1 which becomes effective on the associated unadjusted effective date. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalAmountInEffectOnAssociatedEffectiveDateOfLeg1 : decimal(25,5, 0.0, * )?
+      notionalAmountInEffectOnAssociatedEffectiveDateOfLeg1 : decimal(25,5, 0.0, * )?
 
    /# Field 2.60 - Where applicable: the currency in which the notional amount of leg 1 is denominated. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   totalNotionalQuantityOfLeg1: decimal(25,5, 0.0, * )?
+      totalNotionalQuantityOfLeg1: decimal(25,5, 0.0, * )?
 
    // Fields 61-63 are repeatable and shall be populated in the case of derivatives involving notional quantity schedules #/
 
    /# Field 2.61 - Unadjusted date on which the associated notional amount of leg 1 becomes effective. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   effectiveDateOfTheNotionalQuantityOfLeg1 : date?
+      effectiveDateOfTheNotionalQuantityOfLeg1 : date?
 
    /# Field 2.62 - Unadjusted end date of the notional quantity of leg 1 #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   endDateOfTheNotionalQuantityOfLeg1 : date?
+      endDateOfTheNotionalQuantityOfLeg1 : date?
 
    /# Field 2.63 - Notional quantity of leg 1 which becomes effective on the associated unadjusted effective  date. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg1 : decimal(25,5, 0.0, * )?
+      notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg1 : decimal(25,5, 0.0, * )?
 
    /# Field 2.64 - Where applicable, notional amount of leg 2 as referred to in Article 5 of the [RTS]. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalAmountOfLeg2 : decimal(25,5, 0.0, * )?
+      notionalAmountOfLeg2 : decimal(25,5, 0.0, * )?
 
    /# Field 2.65 - Where applicable: the currency in which the notional amount of leg 2 is denominated. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalCurrency2 : isoCcy?
+      notionalCurrency2 : isoCcy?
 
    // Fields 66-68 are repeatable and shall be populated in the case of derivatives involving notional amount schedules #/
 
    /# Field 2.66 - Unadjusted date on which the associated notional amount of leg 2 becomes effective. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   effectiveDateOfTheNotionalAmountOfLeg2 : date?
+      effectiveDateOfTheNotionalAmountOfLeg2 : date?
 
    /# Field 2.67 - Unadjusted end date of the notional amount of leg 2 #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   endDateOfTheNotionalAmountOfLeg2 : date?
+      endDateOfTheNotionalAmountOfLeg2 : date?
 
    /# Field 2.68 - Notional amount of leg 2 which becomes effective on the associated unadjusted effective date. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalAmountInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
+      notionalAmountInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
 
    /# Field 2.69 - Aggregate Notional quantity of the underlying asset of leg 2 for the term of the transaction.
       Where the Total notional quantity is not known when a new transaction is reported, the Total notional quantity is updated as it becomes available. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   totalNotionalQuantityOfLeg2: decimal(25,5, 0.0, * )?
+      totalNotionalQuantityOfLeg2: decimal(25,5, 0.0, * )?
 
    // Fields 70-72 are repeatable and shall be populated in the case of derivatives involving notional quantity schedules 
 
    /# Field 2.70 - Unadjusted date on which the associated notional quantity of leg 2 becomes effective. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   effectiveDateOfTheNotionalQuantityOfLeg2 : date?
+      effectiveDateOfTheNotionalQuantityOfLeg2 : date?
 
    /# Field 2.71 - Unadjusted end date of the notional quantity of leg 2#/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   endDateOfTheNotionalQuantityOfLeg2 : date?
+      endDateOfTheNotionalQuantityOfLeg2 : date?
 
    /# Field 2.72 - Notional quantity of leg 2 which becomes effective on the associated unadjusted effective date. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
+      notionalQuantityInEffectOnAssociatedEffectiveDateOfLeg2 : decimal(25,5, 0.0, * )?
 
    // Section of fields 73-78 is repeatable 
 
    /# Field 2.73 
       Type of Other payment amount.
       Option premium payment is not included as a payment type as premiums for option are reported using the option premium dedicated data element.#/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   otherPaymentType : enum <UFRO, UWIN, PEXH>?
+      otherPaymentType : enum <UFRO, UWIN, PEXH>?
 
    /# Field 2.74 - Payment amounts with corresponding payment types to accommodate requirements of transaction descriptions from different asset classes. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   otherPaymentAmount : decimal(25,5, 0.0, * )?
+      otherPaymentAmount : decimal(25,5, 0.0, * )?
 
    /# Field 2.75 - Currency in which Other payment amount is denominated. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   otherPaymentCurrency : isoCcy?
+      otherPaymentCurrency : isoCcy?
 
    /# Field 2.76 - Unadjusted date on which the other payment amount is paid. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   otherPaymentDate : date?
+      otherPaymentDate : date?
 
    /# Field 2.77 - Identifier of the payer of Other payment amount. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   otherPaymentPayer : string("[A-Z0-9]{72,72}")?
+      otherPaymentPayer : string("[A-Z0-9]{72,72}")?
 
    /# Field 2.78 - Identifier of the receiver of Other payment amount. #/
-   @FieldClassification(Classification=FieldClassificationType.CDE)
-   otherPaymentReceiver : string("[A-Z0-9]{72,72}")?
+      otherPaymentReceiver : string("[A-Z0-9]{72,72}")?
 
    # Section 2l - Options derivative
 
@@ -538,14 +453,12 @@ trait DerivativesTradeReport {
       In case of Caps and Floors it shall be:
         "Put", in case of a Floor. 
         "Call", in case of a Cap. #/
-    @FieldClassification(Classification=FieldClassificationType.UPI)
     optionType : enum < PUTO, CALL, OTHR >
 
     /#
     Field 2.133 - Indicates whether the option may be exercised only at a fixed date (European), a series of pre-specified dates (Bermudan) or 
       at any time during the life of the contract (American). #/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    optionStyle : enum<AMER, BERM, EURO>
+        optionStyle : enum<AMER, BERM, EURO>
 
     /# 
     Field 2.134 - For options other than FX options, swaptions and similar products, price at which the owner of an option can buy or sell the underlying asset of the option.
@@ -553,52 +466,42 @@ trait DerivativesTradeReport {
          In the example 0.9426 USO/EUR, USO is the unit currency and EUR is the quoted currency; USO 1 =EUR 0.9426.Where the strike price is not known when a new transaction is 
          reported, the strike price is updated as it becomes available.
       • For volatility and variance swaps and similar products the volatility strike price is reported in this data element. #/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    strikePrice : decimal(18,13)
+        strikePrice : decimal(18,13)
 
     /# Fields 135-137 are repeatable and shall be populated in the case of derivatives involving strike price schedules #/
 
     /# Field 2.135 - Unadjusted effective date of the strike price.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    effectiveDateOfTheStrikePrice : date
+        effectiveDateOfTheStrikePrice : date
 
     /# Field 2.136 - Unadjusted end date of the strike price (not applicable if the unadjusted end date of a given schedule's period is back-to-back with the unadjusted 
          effective date of the subsequent period).#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    endDateOfTheStrikePrice : date
+        endDateOfTheStrikePrice : date
 
     /# Field 2.137 - Strike price in effect between the unadjusted effective date and unadjusted end date inclusive.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    strikePriceInEffectOnAssociatedEffectiveDate : decimal(18,13)
+        strikePriceInEffectOnAssociatedEffectiveDate : decimal(18,13)
 
     /# Field 2.138 - For equity options, commodity options, and similar products, currency in which the strike price is denominated.
          For foreign exchange options: Currency pair and order in which the strike price is expressed. It is expressed as unit currency/quoted currency.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    strikePriceCurrencyCurrencyPair : string (0,7) #TO DO
+        strikePriceCurrencyCurrencyPair : string (0,7) #TO DO
 
     /# Field 2.139 - For options and swaptions of all asset classes, monetary amount paid by the option buyer.
          This data element is not applicable if the instrument is not an option or does not embed any optionality. #/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    optionPremiumAmount : decimal(25,5)
+        optionPremiumAmount : decimal(25,5)
 
     /# Field 2.140 - For options and swaptions of all asset classes, currency in which the option premium amount is denominated. This data element is not applicable
          if the instrument is not an option or does not embed any optionality.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    optionPremiumCurrency : isoCcy
+        optionPremiumCurrency : isoCcy
 
     /# Field 2.141 - Unadjusted date on which the option premium is paid. #/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    optionPremiumPaymentDate : date
+        optionPremiumPaymentDate : date
 
     /# Field 2.242 - In case of swaptions, maturity date of the underlying swap.#/
-    @FieldClassification(Classification=FieldClassificationType.CDE)
-    maturityDateOfTheUnderlying : date
+        maturityDateOfTheUnderlying : date
 
    #Section 2n - Modifications to the derivative
 
    /# Field 2.151 - Trade or Position status (New, Modify, Correct, Terminate, Error, Revive, Valuation, Position Component) #/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   actionType : ActionType
+      actionType : ActionType
 
    /# Field 2.152
       • Trade: Conclusion of a derivative or renegotiation of its terms that does not result in change of a counterparty
@@ -613,17 +516,14 @@ trait DerivativesTradeReport {
       • Corporate event: A corporate action on equity underlying that impacts the derivatives on that equity
       • Inclusion in position: Inclusion of CCP-cleared derivative or CFO into a position, where an existing derivative is terminated and either a new position is 
          created or the notional of an existing position is modified. Update - Update of an outstanding derivative performed during the transition period in order to ensure its conformity with the amended reporting requirements.#/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT>?
+      eventType : enum<TRAD, NOVA, COMP, ETRM, CLRG, EXER, ALOC, CREV, CORP, INCP, UPDT>?
 
    /# Field 2.153 - Date on which the reportable event relating to the derivative contract and captured by the report took place or, in case of a modification when the modification become effective.#/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   eventDate : date
+      eventDate : date
 
    /# Field 2.154 - Indication whether the report is done at trade or position level.
       Position level report can be used only as a supplement to trade level reporting to report post- trade events and only if individual 
       trades in fungible products have been replaced by the position.#/
-   @FieldClassification(Classification=FieldClassificationType.Other)
-   level : enum < TCTN, PSTN> 
+      level : enum < TCTN, PSTN> 
 
 }
